@@ -1,86 +1,278 @@
 /**
- * Dan Classic Furniture - Header Component
+ * Dan Classic Furniture - Responsive Header with Desktop Nav
  */
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
-import Sidebar from './Sidebar';
 
-export default function Header({ title, showBack = false, showMenu = true }) {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-    const { isAuthenticated, isAdmin } = useAuth();
+export default function Header({ title, showBack = false }) {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const { user, isAuthenticated, isAdmin, logout } = useAuth();
     const { itemCount } = useCart();
     const navigate = useNavigate();
 
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
+
     return (
-        <>
-            <header className="page-header">
-                <div className="container-app">
-                    <div className="flex items-center justify-between h-14">
-                        {/* Left Side */}
-                        <div className="flex items-center gap-3">
-                            {showBack ? (
-                                <button
-                                    onClick={() => navigate(-1)}
-                                    className="w-10 h-10 flex items-center justify-center rounded-xl text-gray-600 hover:bg-gray-100 transition-colors"
-                                >
-                                    <i className="fas fa-arrow-left"></i>
-                                </button>
-                            ) : showMenu ? (
-                                <button
-                                    onClick={() => setSidebarOpen(true)}
-                                    className="w-10 h-10 flex items-center justify-center rounded-xl text-gray-600 hover:bg-gray-100 transition-colors lg:hidden"
-                                >
-                                    <i className="fas fa-bars"></i>
-                                </button>
-                            ) : null}
-
-                            {title ? (
-                                <h1 className="text-lg font-semibold text-gray-900 truncate">{title}</h1>
-                            ) : (
-                                <Link to="/" className="flex items-center gap-2">
-                                    <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-                                        <i className="fas fa-couch text-white text-sm"></i>
-                                    </div>
-                                    <span className="font-display font-bold text-gray-900 hidden sm:block">
-                                        Dan Classic
-                                    </span>
-                                </Link>
-                            )}
-                        </div>
-
-                        {/* Right Side */}
-                        <div className="flex items-center gap-2">
-                            {/* Search Button */}
-                            <Link
-                                to="/products?search=true"
-                                className="w-10 h-10 flex items-center justify-center rounded-xl text-gray-600 hover:bg-gray-100 transition-colors"
+        <header className="sticky top-0 z-50 bg-white shadow-sm">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16">
+                    {/* Left: Logo & Back */}
+                    <div className="flex items-center gap-4">
+                        {showBack && (
+                            <button
+                                onClick={() => navigate(-1)}
+                                className="p-2 -ml-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors lg:hidden"
                             >
-                                <i className="fas fa-search"></i>
-                            </Link>
+                                <i className="fas fa-arrow-left text-lg"></i>
+                            </button>
+                        )}
 
-                            {/* Cart (only for customers) */}
-                            {!isAdmin && (
-                                <Link
-                                    to="/cart"
-                                    className="w-10 h-10 flex items-center justify-center rounded-xl text-gray-600 hover:bg-gray-100 transition-colors relative"
-                                >
-                                    <i className="fas fa-shopping-cart"></i>
-                                    {itemCount > 0 && (
-                                        <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                                            {itemCount > 99 ? '99+' : itemCount}
+                        {title ? (
+                            <h1 className="text-lg font-bold text-gray-900 lg:hidden">{title}</h1>
+                        ) : null}
+
+                        <Link to="/" className="flex items-center gap-3">
+                            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-lg">
+                                <i className="fas fa-couch text-white text-lg"></i>
+                            </div>
+                            <div className="hidden sm:block">
+                                <span className="font-bold text-xl text-gray-900">Dan Classic</span>
+                                <span className="text-primary-600 font-semibold ml-1">Furniture</span>
+                            </div>
+                        </Link>
+                    </div>
+
+                    {/* Center: Desktop Navigation */}
+                    <nav className="hidden lg:flex items-center gap-1">
+                        <NavLink
+                            to="/"
+                            end
+                            className={({ isActive }) =>
+                                `px-4 py-2 rounded-lg font-medium transition-colors ${isActive
+                                    ? 'bg-primary-50 text-primary-700'
+                                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                }`
+                            }
+                        >
+                            Home
+                        </NavLink>
+                        <NavLink
+                            to="/products"
+                            className={({ isActive }) =>
+                                `px-4 py-2 rounded-lg font-medium transition-colors ${isActive
+                                    ? 'bg-primary-50 text-primary-700'
+                                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                }`
+                            }
+                        >
+                            Products
+                        </NavLink>
+                        <NavLink
+                            to="/products?category=sofasets"
+                            className="px-4 py-2 rounded-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+                        >
+                            Sofasets
+                        </NavLink>
+                        <NavLink
+                            to="/products?category=chairs"
+                            className="px-4 py-2 rounded-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+                        >
+                            Chairs
+                        </NavLink>
+                        {isAdmin && (
+                            <NavLink
+                                to="/admin"
+                                className={({ isActive }) =>
+                                    `px-4 py-2 rounded-lg font-medium transition-colors ${isActive
+                                        ? 'bg-primary-50 text-primary-700'
+                                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                    }`
+                                }
+                            >
+                                Admin
+                            </NavLink>
+                        )}
+                    </nav>
+
+                    {/* Right: Actions */}
+                    <div className="flex items-center gap-2">
+                        {/* Search - Desktop */}
+                        <Link
+                            to="/products?search=true"
+                            className="hidden sm:flex p-2.5 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                        >
+                            <i className="fas fa-search text-lg"></i>
+                        </Link>
+
+                        {/* Cart */}
+                        {!isAdmin && (
+                            <Link
+                                to="/cart"
+                                className="relative p-2.5 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                            >
+                                <i className="fas fa-shopping-cart text-lg"></i>
+                                {itemCount > 0 && (
+                                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                                        {itemCount > 9 ? '9+' : itemCount}
+                                    </span>
+                                )}
+                            </Link>
+                        )}
+
+                        {/* User Menu - Desktop */}
+                        <div className="hidden lg:flex items-center gap-2 ml-2">
+                            {isAuthenticated ? (
+                                <div className="relative group">
+                                    <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                                        <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                            <i className="fas fa-user text-primary-600 text-sm"></i>
+                                        </div>
+                                        <span className="font-medium text-gray-700 max-w-[120px] truncate">
+                                            {user?.full_name?.split(' ')[0]}
                                         </span>
-                                    )}
-                                </Link>
+                                        <i className="fas fa-chevron-down text-xs text-gray-400"></i>
+                                    </button>
+
+                                    {/* Dropdown */}
+                                    <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                                        <Link to="/profile" className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50">
+                                            <i className="fas fa-user w-4"></i>
+                                            Profile
+                                        </Link>
+                                        {!isAdmin && (
+                                            <Link to="/orders" className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50">
+                                                <i className="fas fa-box w-4"></i>
+                                                My Orders
+                                            </Link>
+                                        )}
+                                        <hr className="my-2 border-gray-100" />
+                                        <button
+                                            onClick={handleLogout}
+                                            className="flex items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-50 w-full"
+                                        >
+                                            <i className="fas fa-sign-out-alt w-4"></i>
+                                            Logout
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <>
+                                    <Link
+                                        to="/login"
+                                        className="px-4 py-2 font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                                    >
+                                        Login
+                                    </Link>
+                                    <Link
+                                        to="/register"
+                                        className="px-4 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
+                                    >
+                                        Sign Up
+                                    </Link>
+                                </>
                             )}
                         </div>
+
+                        {/* Mobile Menu Button */}
+                        <button
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            className="lg:hidden p-2.5 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                        >
+                            <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'} text-lg`}></i>
+                        </button>
                     </div>
                 </div>
-            </header>
+            </div>
 
-            {/* Sidebar */}
-            <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-        </>
+            {/* Mobile Menu */}
+            {mobileMenuOpen && (
+                <div className="lg:hidden bg-white border-t border-gray-100">
+                    <div className="px-4 py-3 space-y-1">
+                        <Link
+                            to="/"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
+                        >
+                            Home
+                        </Link>
+                        <Link
+                            to="/products"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
+                        >
+                            All Products
+                        </Link>
+                        <Link
+                            to="/products?category=sofasets"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
+                        >
+                            Sofasets
+                        </Link>
+                        <Link
+                            to="/products?category=chairs"
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
+                        >
+                            Chairs
+                        </Link>
+
+                        <hr className="my-2 border-gray-100" />
+
+                        {isAuthenticated ? (
+                            <>
+                                <Link
+                                    to="/profile"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
+                                >
+                                    <i className="fas fa-user mr-2"></i>
+                                    Profile
+                                </Link>
+                                {isAdmin && (
+                                    <Link
+                                        to="/admin"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                        className="block px-3 py-2 rounded-lg text-primary-600 hover:bg-primary-50 font-medium"
+                                    >
+                                        <i className="fas fa-cog mr-2"></i>
+                                        Admin Dashboard
+                                    </Link>
+                                )}
+                                <button
+                                    onClick={() => { handleLogout(); setMobileMenuOpen(false); }}
+                                    className="block w-full text-left px-3 py-2 rounded-lg text-red-600 hover:bg-red-50 font-medium"
+                                >
+                                    <i className="fas fa-sign-out-alt mr-2"></i>
+                                    Logout
+                                </button>
+                            </>
+                        ) : (
+                            <div className="flex gap-2 pt-2">
+                                <Link
+                                    to="/login"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="flex-1 text-center px-4 py-2.5 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50"
+                                >
+                                    Login
+                                </Link>
+                                <Link
+                                    to="/register"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="flex-1 text-center px-4 py-2.5 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700"
+                                >
+                                    Sign Up
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+        </header>
     );
 }
