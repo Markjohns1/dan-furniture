@@ -12,8 +12,8 @@ from app.models.user import User, UserRole
 from app.models.product import Product, Category
 from app.models.order import Order, OrderItem, OrderStatus
 from app.schemas.order import DashboardStats, RevenueByCategory, TopProduct
-from app.schemas.user import UserResponse, UserListResponse
-from app.utils.auth import get_admin_user
+from app.schemas.user import UserResponse, UserListResponse, AdminUserCreate
+from app.utils.auth import get_admin_user, get_password_hash
 
 router = APIRouter(prefix="/admin", tags=["Admin Dashboard"])
 
@@ -267,3 +267,41 @@ async def get_customer_details(
     }
 
 
+# ============== Admin User Management ==============
+
+@router.post("/users", response_model=UserResponse, status_code=201)
+async def create_admin_user(
+    user_data: AdminUserCreate,
+    admin: User = Depends(get_admin_user),
+    db: Session = Depends(get_db)
+):
+    """Create a new admin or customer user (Admin only)"""
+    
+    # Check if email exists
+    if db.query(User).filter(User.email == user_data.email).first():
+        raise HTTPException(
+            status_code=400,
+            detail="Email already registered"
+        )
+    
+    # Check if phone exists
+    if db.query(User).filter(User.phone == user_data.phone).first():
+        raise HTTPException(
+            status_code=400,
+            detail="Phone number already registered"
+        )
+    
+    # Create user
+    user = User(
+        email=user_data.email,
+        phone=user_data.phone,
+        password_hash=get_password_hash(user_data.password),
+        full_name=user_data.full_name,
+        address=user_data.address,
+        role=user_data.role
+    )
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    
+    return user

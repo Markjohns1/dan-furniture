@@ -10,7 +10,7 @@ from app.database import get_db
 from app.models.user import User, UserRole
 from app.schemas.user import (
     UserCreate, UserLogin, UserResponse, UserUpdate, 
-    Token, RefreshToken
+    Token, RefreshToken, PasswordChange
 )
 from app.utils.auth import (
     get_password_hash, verify_password, 
@@ -137,3 +137,25 @@ async def update_me(
     db.commit()
     db.refresh(current_user)
     return current_user
+
+
+@router.put("/me/password")
+async def change_password(
+    password_data: PasswordChange,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Change current user's password"""
+    
+    # Verify current password
+    if not verify_password(password_data.current_password, current_user.password_hash):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Current password is incorrect"
+        )
+    
+    # Update password
+    current_user.password_hash = get_password_hash(password_data.new_password)
+    db.commit()
+    
+    return {"message": "Password updated successfully"}

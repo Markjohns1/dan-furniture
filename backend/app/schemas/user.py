@@ -61,6 +61,11 @@ class UserUpdate(BaseModel):
     address: Optional[str] = None
 
 
+class PasswordChange(BaseModel):
+    current_password: str
+    new_password: str = Field(..., min_length=6)
+
+
 class UserInDB(UserResponse):
     password_hash: str
 
