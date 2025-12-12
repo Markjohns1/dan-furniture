@@ -30,7 +30,7 @@ export default function UserManagement() {
 
     const fetchUsers = async () => {
         try {
-            const res = await adminAPI.getCustomers({ limit: 100 });
+            const res = await adminAPI.getUsers({ limit: 100 });
             setUsers(res.data.users || []);
         } catch (err) {
             console.error('Error fetching users:', err);

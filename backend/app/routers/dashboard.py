@@ -269,6 +269,40 @@ async def get_customer_details(
 
 # ============== Admin User Management ==============
 
+@router.get("/users", response_model=UserListResponse)
+async def get_all_users(
+    page: int = Query(1, ge=1),
+    limit: int = Query(20, ge=1, le=100),
+    role: Optional[str] = None,
+    search: Optional[str] = None,
+    admin: User = Depends(get_admin_user),
+    db: Session = Depends(get_db)
+):
+    """Get all users (admins and customers) with optional role filter"""
+    
+    query = db.query(User)
+    
+    # Filter by role if specified
+    if role:
+        if role == "admin":
+            query = query.filter(User.role == UserRole.ADMIN)
+        elif role == "customer":
+            query = query.filter(User.role == UserRole.CUSTOMER)
+    
+    if search:
+        query = query.filter(
+            (User.full_name.ilike(f"%{search}%")) |
+            (User.email.ilike(f"%{search}%")) |
+            (User.phone.ilike(f"%{search}%"))
+        )
+    
+    total = query.count()
+    pages = (total + limit - 1) // limit
+    users = query.order_by(desc(User.created_at)).offset((page - 1) * limit).limit(limit).all()
+    
+    return UserListResponse(users=users, total=total, page=page, pages=pages)
+
+
 @router.post("/users", response_model=UserResponse, status_code=201)
 async def create_admin_user(
     user_data: AdminUserCreate,
