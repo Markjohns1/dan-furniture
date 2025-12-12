@@ -59,8 +59,8 @@ export default function Profile() {
         <div className="page pb-safe-nav bg-gray-50 min-h-[calc(100vh-64px)]">
             <Header title="Profile" />
 
-            {/* Added pt-8 to ensure distance from header, removed strict flex-centering that might conflict with fixed headers on mobile */}
-            <div className="container-app py-8 flex items-start justify-center">
+            {/* Added pt-8 AND mt-8 to ensure visual separation from fixed/sticky header */}
+            <div className="container-app py-8 mt-4 flex items-start justify-center">
                 <div className="w-full max-w-lg">
                     {/* Main Profile Card */}
                     <div className="card overflow-hidden shadow-xl border-t-4 border-primary-600">

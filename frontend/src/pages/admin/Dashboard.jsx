@@ -43,7 +43,7 @@ export default function Dashboard() {
         <div className="page pb-safe-nav bg-gray-50/50">
             <Header title="Dashboard" />
 
-            <div className="container-app py-8 space-y-6">
+            <div className="container-app py-8 mt-4 space-y-6">
                 {/* 1. Overview Section (Revenue & Orders) */}
                 <div>
                     <h2 className="text-lg font-bold text-gray-900 mb-3 px-1">Overview</h2>

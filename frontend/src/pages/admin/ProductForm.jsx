@@ -133,8 +133,8 @@ export default function ProductForm() {
         <div className="page pb-safe-nav">
             <Header title={isEditing ? 'Edit Product' : 'Add Product'} showBack />
 
-            <div className="container-app py-6">
-                <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="container-app py-8 mt-4">
+                <form onSubmit={handleSubmit} className="space-y-6">
                     {error && (
                         <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg">
                             <i className="fas fa-exclamation-circle mr-2"></i>
