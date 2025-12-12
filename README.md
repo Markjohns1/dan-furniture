@@ -61,6 +61,7 @@ Dan Classic Furniture is a mobile-first e-commerce platform designed for a furni
 - Product management (CRUD operations)
 - Category management
 - Order management with status updates
+- User management (create additional admin accounts)
 - Customer list
 - Low stock alerts
 - Revenue analytics
@@ -300,6 +301,7 @@ npm run dev
 | GET | /api/admin/analytics/low-stock | Low stock alerts |
 | GET | /api/admin/analytics/recent-orders | Recent orders list |
 | GET | /api/admin/customers | Customer list |
+| POST | /api/admin/users | Create new user (admin or customer) |
 
 ---
 
