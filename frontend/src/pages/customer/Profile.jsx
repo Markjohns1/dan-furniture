@@ -56,10 +56,11 @@ export default function Profile() {
     }
 
     return (
-        <div className="page pb-safe-nav bg-gray-50 min-h-screen">
+        <div className="page pb-safe-nav bg-gray-50 min-h-[calc(100vh-64px)]">
             <Header title="Profile" />
 
-            <div className="container-app py-10 flex items-center justify-center">
+            {/* Added pt-8 to ensure distance from header, removed strict flex-centering that might conflict with fixed headers on mobile */}
+            <div className="container-app py-8 flex items-start justify-center">
                 <div className="w-full max-w-lg">
                     {/* Main Profile Card */}
                     <div className="card overflow-hidden shadow-xl border-t-4 border-primary-600">
@@ -80,7 +81,7 @@ export default function Profile() {
                             <h2 className="text-2xl font-bold text-gray-900 mb-1">{user.full_name}</h2>
                             <p className="text-gray-500 text-sm mb-6">{user.email}</p>
 
-                            {/* Stats/Quick Info Row - Optional but adds density */}
+                            {/* Stats/Quick Info Row */}
                             {!isAdmin && (
                                 <div className="flex justify-center gap-8 border-t border-gray-100 pt-6">
                                     <div className="text-center">
@@ -109,39 +110,39 @@ export default function Profile() {
                                 <form onSubmit={handleSubmit} className="space-y-5 animate-fadeIn">
                                     <div className="space-y-4">
                                         <div>
-                                            <label className="label text-xs uppercase tracking-wider text-gray-500">Full Name</label>
+                                            <label className="label text-xs uppercase tracking-wider text-gray-500 mb-1 block">Full Name</label>
                                             <div className="relative">
-                                                <i className="fas fa-user absolute left-3 top-3 text-gray-400"></i>
+                                                <i className="fas fa-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
                                                 <input
                                                     type="text"
                                                     value={formData.full_name}
                                                     onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                                                    className="input pl-10"
+                                                    className="input pl-10 h-10 w-full"
                                                     placeholder="John Doe"
                                                 />
                                             </div>
                                         </div>
                                         <div>
-                                            <label className="label text-xs uppercase tracking-wider text-gray-500">Phone Number</label>
+                                            <label className="label text-xs uppercase tracking-wider text-gray-500 mb-1 block">Phone Number</label>
                                             <div className="relative">
-                                                <i className="fas fa-phone absolute left-3 top-3 text-gray-400"></i>
+                                                <i className="fas fa-phone absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
                                                 <input
                                                     type="tel"
                                                     value={formData.phone}
                                                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                                    className="input pl-10"
+                                                    className="input pl-10 h-10 w-full"
                                                     placeholder="07..."
                                                 />
                                             </div>
                                         </div>
                                         <div>
-                                            <label className="label text-xs uppercase tracking-wider text-gray-500">Delivery Address</label>
+                                            <label className="label text-xs uppercase tracking-wider text-gray-500 mb-1 block">Delivery Address</label>
                                             <div className="relative">
-                                                <i className="fas fa-map-marker-alt absolute left-3 top-3 text-gray-400"></i>
+                                                <i className="fas fa-map-marker-alt absolute left-3 top-3 text-gray-400 pointer-events-none"></i>
                                                 <textarea
                                                     value={formData.address}
                                                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                                                    className="input pl-10 min-h-[80px] py-3"
+                                                    className="input pl-10 min-h-[80px] py-2 w-full leading-relaxed"
                                                     placeholder="Your default delivery address"
                                                 />
                                             </div>
