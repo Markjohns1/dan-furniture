@@ -58,7 +58,7 @@ export default function ProductDetail() {
         : ['/placeholder-furniture.jpg'];
 
     return (
-        <div className="page pb-40 lg:pb-32 bg-white">
+        <div className="page pb-56 lg:pb-40 bg-white">
             <Header showBack title={product.name} />
 
             <div className="container-app py-8 mt-4 mx-auto max-w-5xl">
