@@ -10,7 +10,7 @@ export default function Sidebar({ isOpen, onClose }) {
 
     const menuItems = [
         { to: '/', icon: 'fa-home', label: 'Home' },
-        { to: '/products', icon: 'fa-couch', label: 'All Products' },
+        { to: '/products', icon: 'fa-th-large', label: 'All Products' },
         { divider: true, label: 'Categories' },
         { to: '/products?category=sofasets', icon: 'fa-couch', label: 'Sofasets' },
         { to: '/products?category=chairs', icon: 'fa-chair', label: 'Chairs' },
@@ -95,8 +95,8 @@ export default function Sidebar({ isOpen, onClose }) {
                                         to={item.to}
                                         onClick={onClose}
                                         className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors ${location.pathname === item.to
-                                                ? 'bg-primary-50 text-primary-600'
-                                                : 'text-gray-700 hover:bg-gray-100'
+                                            ? 'bg-primary-50 text-primary-600'
+                                            : 'text-gray-700 hover:bg-gray-100'
                                             }`}
                                     >
                                         <i className={`fas ${item.icon} w-5`}></i>

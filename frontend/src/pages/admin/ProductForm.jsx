@@ -23,7 +23,7 @@ export default function ProductForm() {
         compare_price: '',
         category_id: '',
         stock: '',
-        sku: '',
+
         dimensions: '',
         material: '',
         colors: '',
@@ -46,7 +46,6 @@ export default function ProductForm() {
                         compare_price: product.compare_price ? String(product.compare_price) : '',
                         category_id: String(product.category_id),
                         stock: String(product.stock),
-                        sku: product.sku || '',
                         dimensions: product.dimensions || '',
                         material: product.material || '',
                         colors: (product.colors || []).join(', '),
@@ -133,7 +132,7 @@ export default function ProductForm() {
         <div className="page pb-safe-nav">
             <Header title={isEditing ? 'Edit Product' : 'Add Product'} showBack />
 
-            <div className="container-app py-8 mt-4">
+            <div className="container-app py-6 mt-6">
                 <div className="max-w-3xl mx-auto">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {error && (
@@ -229,17 +228,6 @@ export default function ProductForm() {
                                         onChange={handleChange}
                                         className="input no-spinners"
                                         min="0"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="label">SKU</label>
-                                    <input
-                                        type="text"
-                                        name="sku"
-                                        value={formData.sku}
-                                        onChange={handleChange}
-                                        className="input"
-                                        placeholder="DCF-001"
                                     />
                                 </div>
                             </div>

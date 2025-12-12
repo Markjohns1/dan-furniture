@@ -23,7 +23,7 @@ export default function WhatsAppButton({ message, className = '' }) {
     return (
         <button
             onClick={handleClick}
-            className={`fixed z-50 w-14 h-14 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 ${className}`}
+            className={`fixed z-50 w-12 h-12 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 ${className}`}
             style={{
                 bottom: '100px',  /* Above mobile nav */
                 right: '16px',

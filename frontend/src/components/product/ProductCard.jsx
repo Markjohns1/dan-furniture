@@ -38,26 +38,31 @@ export default function ProductCard({ product }) {
 
                 {/* Badges - Floating consistently */}
                 <div className="absolute top-2 left-2 right-2 flex justify-between items-start">
-                    <div className="flex flex-col gap-1">
+                    {/* Left: Featured */}
+                    <div>
                         {product.featured && (
-                            <span className="px-2 py-0.5 bg-white/90 backdrop-blur-sm text-gray-900 text-[10px] font-bold uppercase tracking-wider rounded-sm shadow-sm border border-gray-100">
+                            <span className="px-1.5 py-0.5 bg-white/90 backdrop-blur-sm text-gray-900 text-[10px] font-bold uppercase tracking-wider rounded-sm shadow-sm border border-gray-100">
                                 Featured
                             </span>
                         )}
+                    </div>
+
+                    {/* Right: Discount */}
+                    <div>
                         {discount > 0 && (
-                            <span className="px-2 py-0.5 bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-sm shadow-sm">
+                            <span className="px-1.5 py-0.5 bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-sm shadow-sm">
                                 -{discount}%
                             </span>
                         )}
                     </div>
                 </div>
 
-                {/* Quick Add Overlay */}
-                <div className="absolute inset-x-0 bottom-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center pb-4 bg-gradient-to-t from-black/20 to-transparent">
+                {/* Quick Add Overlay - Slides up on hover */}
+                <div className="absolute inset-x-0 bottom-0 p-3 translate-y-full group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out">
                     <button
                         onClick={handleAddToCart}
                         disabled={product.stock === 0}
-                        className="w-full py-2 bg-white text-gray-900 font-semibold text-xs uppercase tracking-wide rounded shadow-md hover:bg-gray-50 border border-gray-100"
+                        className="w-full py-2 px-4 bg-primary-600 hover:bg-primary-700 text-white text-xs font-semibold uppercase tracking-wide rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
                         {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
                     </button>
@@ -65,22 +70,21 @@ export default function ProductCard({ product }) {
             </div>
 
             {/* Content */}
-            <div className="p-3 flex flex-col flex-1">
-                {/* Category */}
-                <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1">
-                    {product.category?.name || 'Furniture'}
-                </p>
+            <div className="p-3 flex flex-col flex-1 gap-2">
+                <div>
+                    {/* Category */}
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">
+                        {product.category?.name || 'Furniture'}
+                    </p>
 
-                {/* Name */}
-                <h3 className="font-medium text-gray-900 text-sm leading-snug mb-2 line-clamp-2 min-h-[2.5rem] group-hover:text-primary-600 transition-colors">
-                    {product.name}
-                </h3>
+                    {/* Name - Tighter spacing, dynamic height */}
+                    <h3 className="font-medium text-gray-900 text-sm leading-snug group-hover:text-primary-600 transition-colors">
+                        {product.name}
+                    </h3>
+                </div>
 
-                {/* Spacer */}
-                <div className="mt-auto"></div>
-
-                {/* Price Block - Stacked to prevent collision */}
-                <div className="flex flex-col items-start gap-0.5">
+                {/* Price Block - Immediate follow (No large gap) */}
+                <div className="flex flex-col items-start gap-0.5 mt-auto sm:mt-0">
                     {product.compare_price && product.compare_price > product.price && (
                         <span className="text-xs text-gray-400 line-through font-medium">
                             KSh {product.compare_price.toLocaleString()}

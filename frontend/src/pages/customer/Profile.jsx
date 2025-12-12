@@ -60,7 +60,7 @@ export default function Profile() {
             <Header title="Profile" />
 
             {/* Added pt-8 AND mt-8 to ensure visual separation from fixed/sticky header */}
-            <div className="container-app py-8 mt-4 flex items-start justify-center">
+            <div className="container-app py-6 mt-6 flex items-start justify-center">
                 <div className="w-full max-w-lg">
                     {/* Main Profile Card */}
                     <div className="card overflow-hidden shadow-xl border-t-4 border-primary-600">
@@ -117,7 +117,7 @@ export default function Profile() {
                                                     type="text"
                                                     value={formData.full_name}
                                                     onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                                                    className="input pl-10 h-10 w-full"
+                                                    className="input input-with-icon h-10 w-full"
                                                     placeholder="John Doe"
                                                 />
                                             </div>
@@ -130,7 +130,7 @@ export default function Profile() {
                                                     type="tel"
                                                     value={formData.phone}
                                                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                                    className="input pl-10 h-10 w-full"
+                                                    className="input input-with-icon h-10 w-full"
                                                     placeholder="07..."
                                                 />
                                             </div>
@@ -142,7 +142,7 @@ export default function Profile() {
                                                 <textarea
                                                     value={formData.address}
                                                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                                                    className="input pl-10 min-h-[80px] py-2 w-full leading-relaxed"
+                                                    className="input input-with-icon min-h-[80px] py-2 w-full leading-relaxed"
                                                     placeholder="Your default delivery address"
                                                 />
                                             </div>

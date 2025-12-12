@@ -19,7 +19,7 @@ export default function Header({ title, showBack = false }) {
     };
 
     return (
-        <header className="sticky top-0 z-50 bg-white shadow-sm">
+        <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Left: Logo & Back */}
@@ -117,7 +117,7 @@ export default function Header({ title, showBack = false }) {
                             >
                                 <i className="fas fa-shopping-cart text-lg"></i>
                                 {itemCount > 0 && (
-                                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-primary-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-cta-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-sm">
                                         {itemCount > 9 ? '9+' : itemCount}
                                     </span>
                                 )}
@@ -139,7 +139,7 @@ export default function Header({ title, showBack = false }) {
                                     </button>
 
                                     {/* Dropdown */}
-                                    <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                                    <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                                         <Link to="/profile" className="flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50">
                                             <i className="fas fa-user w-4"></i>
                                             Profile
@@ -164,13 +164,13 @@ export default function Header({ title, showBack = false }) {
                                 <>
                                     <Link
                                         to="/login"
-                                        className="px-4 py-2 font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                                        className="btn-secondary py-2 px-4 shadow-none border-transparent hover:bg-gray-50"
                                     >
                                         Login
                                     </Link>
                                     <Link
                                         to="/register"
-                                        className="px-4 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
+                                        className="btn-primary py-2 px-4 shadow-none"
                                     >
                                         Sign Up
                                     </Link>
@@ -196,29 +196,33 @@ export default function Header({ title, showBack = false }) {
                         <Link
                             to="/"
                             onClick={() => setMobileMenuOpen(false)}
-                            className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
+                            className="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
                         >
+                            <i className="fas fa-home w-6 text-center text-lg mr-2 text-gray-400"></i>
                             Home
                         </Link>
                         <Link
                             to="/products"
                             onClick={() => setMobileMenuOpen(false)}
-                            className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
+                            className="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
                         >
+                            <i className="fas fa-th-large w-6 text-center text-lg mr-2 text-gray-400"></i>
                             All Products
                         </Link>
                         <Link
                             to="/products?category=sofasets"
                             onClick={() => setMobileMenuOpen(false)}
-                            className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
+                            className="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
                         >
+                            <i className="fas fa-couch w-6 text-center text-lg mr-2 text-gray-400"></i>
                             Sofasets
                         </Link>
                         <Link
                             to="/products?category=chairs"
                             onClick={() => setMobileMenuOpen(false)}
-                            className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
+                            className="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
                         >
+                            <i className="fas fa-chair w-6 text-center text-lg mr-2 text-gray-400"></i>
                             Chairs
                         </Link>
 
@@ -229,26 +233,26 @@ export default function Header({ title, showBack = false }) {
                                 <Link
                                     to="/profile"
                                     onClick={() => setMobileMenuOpen(false)}
-                                    className="block px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
+                                    className="flex items-center px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-50 font-medium"
                                 >
-                                    <i className="fas fa-user mr-2"></i>
+                                    <i className="fas fa-user w-6 text-center text-lg mr-2 text-gray-400"></i>
                                     Profile
                                 </Link>
                                 {isAdmin && (
                                     <Link
                                         to="/admin"
                                         onClick={() => setMobileMenuOpen(false)}
-                                        className="block px-3 py-2 rounded-lg text-primary-600 hover:bg-primary-50 font-medium"
+                                        className="flex items-center px-3 py-2 rounded-lg text-primary-600 hover:bg-primary-50 font-medium"
                                     >
-                                        <i className="fas fa-cog mr-2"></i>
+                                        <i className="fas fa-cog w-6 text-center text-lg mr-2"></i>
                                         Admin Dashboard
                                     </Link>
                                 )}
                                 <button
                                     onClick={() => { handleLogout(); setMobileMenuOpen(false); }}
-                                    className="block w-full text-left px-3 py-2 rounded-lg text-red-600 hover:bg-red-50 font-medium"
+                                    className="flex items-center w-full text-left px-3 py-2 rounded-lg text-red-600 hover:bg-red-50 font-medium"
                                 >
-                                    <i className="fas fa-sign-out-alt mr-2"></i>
+                                    <i className="fas fa-sign-out-alt w-6 text-center text-lg mr-2"></i>
                                     Logout
                                 </button>
                             </>

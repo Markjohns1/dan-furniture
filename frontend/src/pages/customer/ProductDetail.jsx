@@ -58,7 +58,7 @@ export default function ProductDetail() {
         : ['/placeholder-furniture.jpg'];
 
     return (
-        <div className="page pb-32 bg-white">
+        <div className="page pb-40 lg:pb-32 bg-white">
             <Header showBack title={product.name} />
 
             <div className="container-app py-8 mt-4 mx-auto max-w-5xl">
@@ -113,17 +113,19 @@ export default function ProductDetail() {
                             >
                                 {product.category?.name}
                             </Link>
-                            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-2">
+                            {/* Refined Title Size */}
+                            <h1 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight mb-2">
                                 {product.name}
                             </h1>
 
                             <div className="flex items-center gap-3">
-                                <span className="text-2xl font-bold text-gray-900">
+                                {/* Price in Primary Color */}
+                                <span className="text-xl md:text-2xl font-bold text-primary-600">
                                     KSh {product.price.toLocaleString()}
                                 </span>
                                 {product.compare_price && product.compare_price > product.price && (
                                     <>
-                                        <span className="text-base text-gray-400 line-through font-medium">
+                                        <span className="text-sm text-gray-400 line-through font-medium">
                                             KSh {product.compare_price.toLocaleString()}
                                         </span>
                                         <span className="px-2 py-0.5 bg-green-50 text-green-700 text-[10px] font-bold uppercase tracking-wider rounded border border-green-100">
@@ -193,7 +195,7 @@ export default function ProductDetail() {
                             </div>
                         </div>
 
-                        {/* Specifications Grid */}
+                        {/* Specifications Grid - Removed SKU */}
                         <div className="pt-2">
                             <dl className="grid grid-cols-2 gap-x-4 gap-y-4 text-sm">
                                 {product.material && (
@@ -208,20 +210,14 @@ export default function ProductDetail() {
                                         <dd className="font-medium text-gray-900">{product.dimensions}</dd>
                                     </div>
                                 )}
-                                {product.sku && (
-                                    <div className="border border-gray-100 rounded-lg p-3 col-span-2 sm:col-span-1">
-                                        <dt className="text-gray-400 text-[10px] uppercase tracking-widest font-semibold mb-1">SKU</dt>
-                                        <dd className="font-medium text-gray-900">{product.sku}</dd>
-                                    </div>
-                                )}
                             </dl>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Sticky Add to Cart Bar */}
-            <div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-100 p-4 safe-area-pb shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+            {/* Sticky Add to Cart Bar - Adjusted for Mobile Bottom Nav */}
+            <div className="fixed bottom-[60px] lg:bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-100 p-2 safe-area-pb shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
                 <div className="container-app max-w-5xl mx-auto flex items-center justify-between gap-4">
                     <div className="hidden md:block">
                         <p className="text-sm font-medium text-gray-500">Total Price</p>
@@ -231,9 +227,9 @@ export default function ProductDetail() {
                     <button
                         onClick={handleAddToCart}
                         disabled={product.stock === 0}
-                        className={`flex-1 md:flex-none md:w-64 py-3.5 px-6 rounded-xl font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 ${addedToCart
+                        className={`flex-1 md:flex-none md:w-64 py-2 px-4 rounded-xl font-bold text-sm transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-1 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed ${addedToCart
                             ? 'bg-green-600 text-white'
-                            : 'bg-primary-600 text-white hover:bg-primary-700'}`}
+                            : 'bg-cta-600 text-white hover:bg-cta-500'}`}
                     >
                         {addedToCart ? (
                             <span className="flex items-center justify-center gap-2">
