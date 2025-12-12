@@ -9,6 +9,7 @@ import Header from '../../components/layout/Header';
 import ProductCard from '../../components/product/ProductCard';
 import { ProductGridSkeleton } from '../../components/ui/Loading';
 import WhatsAppButton from '../../components/ui/WhatsAppButton';
+import SEO from '../../components/ui/SEO';
 
 export default function Home() {
     const [featured, setFeatured] = useState([]);
@@ -40,6 +41,11 @@ export default function Home() {
 
     return (
         <div className="min-h-screen bg-gray-50 pb-20 lg:pb-8">
+            <SEO
+                title="Premium Sofasets, Chairs & Dining Sets"
+                description="Shop premium quality sofasets, chairs, dining sets, and office furniture in Kenya. Free delivery in Nairobi. Order via WhatsApp."
+                url="/"
+            />
             <Header />
 
             {/* Hero Section - Luxury & Minimal */}

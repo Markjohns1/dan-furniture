@@ -8,6 +8,7 @@ import { useCart } from '../../context/CartContext';
 import Header from '../../components/layout/Header';
 import { LoadingPage } from '../../components/ui/Loading';
 import WhatsAppButton from '../../components/ui/WhatsAppButton';
+import SEO from '../../components/ui/SEO';
 
 export default function ProductDetail() {
     const { id } = useParams();
@@ -59,6 +60,14 @@ export default function ProductDetail() {
 
     return (
         <div className="page pb-72 lg:pb-48 bg-white">
+            <SEO
+                title={product.name}
+                description={product.description || `Buy ${product.name} at KSh ${product.price.toLocaleString()}. Quality furniture with doorstep delivery in Kenya.`}
+                image={images[0]}
+                url={`/products/${product.id}`}
+                type="product"
+                product={product}
+            />
             <Header showBack title={product.name} />
 
             <div className="container-app py-8 mt-4 mx-auto max-w-5xl">

@@ -9,6 +9,7 @@ import Header from '../../components/layout/Header';
 import ProductCard from '../../components/product/ProductCard';
 import { ProductGridSkeleton } from '../../components/ui/Loading';
 import WhatsAppButton from '../../components/ui/WhatsAppButton';
+import SEO from '../../components/ui/SEO';
 
 export default function Products() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -82,8 +83,19 @@ export default function Products() {
         setShowFilters(false);
     };
 
+    const pageTitle = categorySlug
+        ? `${categories.find(c => c.slug === categorySlug)?.name || 'Products'} - Shop Now`
+        : featured === 'true'
+            ? 'Featured Products'
+            : 'All Furniture Products';
+
     return (
         <div className="min-h-screen bg-gray-50 pb-20 lg:pb-8">
+            <SEO
+                title={pageTitle}
+                description={`Browse ${pagination.total} quality ${categorySlug || 'furniture'} products. Affordable prices, doorstep delivery via WhatsApp in Kenya.`}
+                url={`/products${categorySlug ? `?category=${categorySlug}` : ''}`}
+            />
             <Header title="Products" showBack />
 
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -153,8 +165,8 @@ export default function Products() {
                                     <button
                                         onClick={() => handleCategoryChange(null)}
                                         className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${!categorySlug
-                                                ? 'bg-primary-50 text-primary-700 font-medium'
-                                                : 'text-gray-600 hover:bg-gray-50'
+                                            ? 'bg-primary-50 text-primary-700 font-medium'
+                                            : 'text-gray-600 hover:bg-gray-50'
                                             }`}
                                     >
                                         All Products
@@ -165,8 +177,8 @@ export default function Products() {
                                         <button
                                             onClick={() => handleCategoryChange(cat.slug)}
                                             className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${categorySlug === cat.slug
-                                                    ? 'bg-primary-50 text-primary-700 font-medium'
-                                                    : 'text-gray-600 hover:bg-gray-50'
+                                                ? 'bg-primary-50 text-primary-700 font-medium'
+                                                : 'text-gray-600 hover:bg-gray-50'
                                                 }`}
                                         >
                                             {cat.name}
@@ -298,8 +310,8 @@ export default function Products() {
                                     <button
                                         onClick={() => handleCategoryChange(null)}
                                         className={`w-full text-left px-4 py-3 rounded-xl transition-colors ${!categorySlug
-                                                ? 'bg-primary-100 text-primary-700 font-medium'
-                                                : 'bg-gray-100 text-gray-700'
+                                            ? 'bg-primary-100 text-primary-700 font-medium'
+                                            : 'bg-gray-100 text-gray-700'
                                             }`}
                                     >
                                         All Categories
@@ -309,8 +321,8 @@ export default function Products() {
                                             key={cat.id}
                                             onClick={() => handleCategoryChange(cat.slug)}
                                             className={`w-full text-left px-4 py-3 rounded-xl transition-colors ${categorySlug === cat.slug
-                                                    ? 'bg-primary-100 text-primary-700 font-medium'
-                                                    : 'bg-gray-100 text-gray-700'
+                                                ? 'bg-primary-100 text-primary-700 font-medium'
+                                                : 'bg-gray-100 text-gray-700'
                                                 }`}
                                         >
                                             {cat.name}

@@ -2,6 +2,7 @@
  * Dan Classic Furniture - Main App Component
  */
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import BottomNav from './components/layout/BottomNav';
@@ -133,13 +134,15 @@ function AppRoutes() {
 // Main App
 function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <CartProvider>
-          <AppRoutes />
-        </CartProvider>
-      </AuthProvider>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <AuthProvider>
+          <CartProvider>
+            <AppRoutes />
+          </CartProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 
