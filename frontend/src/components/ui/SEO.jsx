@@ -1,12 +1,12 @@
 /**
- * Dan Classic Furniture - SEO Component
+ * Daniel Furniture - SEO Component
  * Handles dynamic meta tags for each page
  */
 import { Helmet } from 'react-helmet-async';
 
-const SITE_NAME = 'Dan Classic Furniture';
-const SITE_URL = 'https://danclassicfurniture.co.ke';
-const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`;
+const SITE_NAME = 'Daniel Furniture';
+const SITE_URL = 'https://danielfurniture.co.ke';
+const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
 
 export default function SEO({
     title,
