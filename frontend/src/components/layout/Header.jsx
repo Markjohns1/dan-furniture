@@ -85,17 +85,30 @@ export default function Header({ title, showBack = false }) {
                         })}
 
                         {isAdmin && (
-                            <NavLink
-                                to="/admin"
-                                className={({ isActive }) =>
-                                    `px-4 py-2 rounded-lg font-medium transition-colors ${isActive
-                                        ? 'bg-primary-50 text-primary-700'
-                                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                                    }`
-                                }
-                            >
-                                Admin
-                            </NavLink>
+                            <>
+                                <NavLink
+                                    to="/admin"
+                                    className={({ isActive }) =>
+                                        `px-4 py-2 rounded-lg font-medium transition-colors ${isActive
+                                            ? 'bg-primary-50 text-primary-700'
+                                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                        }`
+                                    }
+                                >
+                                    Admin
+                                </NavLink>
+                                <NavLink
+                                    to="/admin/users"
+                                    className={({ isActive }) =>
+                                        `px-4 py-2 rounded-lg font-medium transition-colors ${isActive
+                                            ? 'bg-primary-50 text-primary-700'
+                                            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                        }`
+                                    }
+                                >
+                                    Users
+                                </NavLink>
+                            </>
                         )}
                     </nav>
 

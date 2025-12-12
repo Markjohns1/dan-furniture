@@ -292,6 +292,17 @@ export default function Dashboard() {
                                     </div>
                                     <i className="fas fa-chevron-right text-gray-300 text-xs group-hover:text-blue-500 group-hover:translate-x-1 transition-all"></i>
                                 </Link>
+
+                                <Link to="/admin/users" className="card p-4 flex items-center gap-4 hover:bg-purple-50/10 hover:border-purple-100 transition-all border border-gray-200 shadow-sm group">
+                                    <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-purple-600 border border-purple-100 group-hover:scale-110 transition-transform">
+                                        <i className="fas fa-users text-sm"></i>
+                                    </div>
+                                    <div className="flex-1">
+                                        <p className="font-bold text-gray-900 text-sm">Manage Users</p>
+                                        <p className="text-xs text-gray-500 mt-0.5">Add admins</p>
+                                    </div>
+                                    <i className="fas fa-chevron-right text-gray-300 text-xs group-hover:text-purple-500 group-hover:translate-x-1 transition-all"></i>
+                                </Link>
                             </div>
                         </div>
 
