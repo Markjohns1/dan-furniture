@@ -62,7 +62,7 @@ export default function ProductCard({ product }) {
                     <button
                         onClick={handleAddToCart}
                         disabled={product.stock === 0}
-                        className="w-full py-1.5 px-3 bg-gray-900 hover:bg-gray-800 text-white text-[11px] font-semibold uppercase tracking-wide rounded-md shadow-md transition-all duration-200 active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                        className="btn-primary w-full !py-1.5 !px-3 !text-[11px] !rounded-md"
                     >
                         {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
                     </button>
