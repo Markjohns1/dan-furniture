@@ -58,209 +58,192 @@ export default function ProductDetail() {
         : ['/placeholder-furniture.jpg'];
 
     return (
-        <div className="page pb-32">
-            <Header showBack />
+        <div className="page pb-32 bg-white">
+            <Header showBack title={product.name} />
 
-            {/* Image Gallery */}
-            <div className="relative bg-gray-100">
-                <div className="aspect-square">
-                    <img
-                        src={images[currentImageIndex]}
-                        alt={product.name}
-                        className="w-full h-full object-cover"
-                    />
-                </div>
-
-                {/* Image Navigation Dots */}
-                {images.length > 1 && (
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
-                        {images.map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setCurrentImageIndex(index)}
-                                className={`w-2 h-2 rounded-full transition-all ${index === currentImageIndex
-                                        ? 'bg-primary-600 w-6'
-                                        : 'bg-white/70'
-                                    }`}
+            <div className="container-app py-8 mt-4 mx-auto max-w-5xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    {/* Image Gallery */}
+                    <div className="space-y-4">
+                        <div className="aspect-square relative rounded-2xl overflow-hidden bg-gray-50 border border-gray-100">
+                            <img
+                                src={images[currentImageIndex]}
+                                alt={product.name}
+                                className="w-full h-full object-cover"
                             />
-                        ))}
+
+                            {/* Badges */}
+                            <div className="absolute top-4 left-4 flex flex-col gap-2">
+                                {product.featured && (
+                                    <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-gray-900 text-xs font-bold uppercase tracking-wider rounded-md shadow-sm border border-gray-100">
+                                        Featured
+                                    </span>
+                                )}
+                                {product.compare_price && product.compare_price > product.price && (
+                                    <span className="px-3 py-1 bg-red-600 text-white text-xs font-bold uppercase tracking-wider rounded-md shadow-sm">
+                                        -{Math.round(((product.compare_price - product.price) / product.compare_price) * 100)}%
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Thumbnail Strip */}
+                        {images.length > 1 && (
+                            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                                {images.map((img, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setCurrentImageIndex(index)}
+                                        className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${index === currentImageIndex ? 'border-primary-600 ring-2 ring-primary-100' : 'border-gray-100 hover:border-gray-200'
+                                            }`}
+                                    >
+                                        <img src={img} alt="" className="w-full h-full object-cover" />
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
-                )}
 
-                {/* Badges */}
-                <div className="absolute top-4 left-4 flex flex-col gap-2">
-                    {product.featured && (
-                        <span className="badge-primary">
-                            <i className="fas fa-star mr-1"></i> Featured
-                        </span>
-                    )}
-                    {product.compare_price && product.compare_price > product.price && (
-                        <span className="badge-danger">
-                            -{Math.round(((product.compare_price - product.price) / product.compare_price) * 100)}% OFF
-                        </span>
-                    )}
-                </div>
-            </div>
-
-            {/* Thumbnail Strip */}
-            {images.length > 1 && (
-                <div className="container-app py-3">
-                    <div className="flex gap-2 overflow-x-auto pb-2">
-                        {images.map((img, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setCurrentImageIndex(index)}
-                                className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-colors ${index === currentImageIndex ? 'border-primary-600' : 'border-transparent'
-                                    }`}
+                    {/* Product Info - Compact & Structured */}
+                    <div className="space-y-6">
+                        <div className="border-b border-gray-100 pb-4">
+                            <Link
+                                to={`/products?category=${product.category?.slug}`}
+                                className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 inline-block hover:text-primary-600 transition-colors"
                             >
-                                <img src={img} alt="" className="w-full h-full object-cover" />
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            )}
+                                {product.category?.name}
+                            </Link>
+                            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-2">
+                                {product.name}
+                            </h1>
 
-            {/* Product Info */}
-            <div className="container-app py-4">
-                {/* Category */}
-                <Link
-                    to={`/products?category=${product.category?.slug}`}
-                    className="text-sm text-primary-600 font-medium"
-                >
-                    {product.category?.name}
-                </Link>
+                            <div className="flex items-center gap-3">
+                                <span className="text-2xl font-bold text-gray-900">
+                                    KSh {product.price.toLocaleString()}
+                                </span>
+                                {product.compare_price && product.compare_price > product.price && (
+                                    <>
+                                        <span className="text-base text-gray-400 line-through font-medium">
+                                            KSh {product.compare_price.toLocaleString()}
+                                        </span>
+                                        <span className="px-2 py-0.5 bg-green-50 text-green-700 text-[10px] font-bold uppercase tracking-wider rounded border border-green-100">
+                                            Save KSh {(product.compare_price - product.price).toLocaleString()}
+                                        </span>
+                                    </>
+                                )}
+                            </div>
+                        </div>
 
-                {/* Name */}
-                <h1 className="font-display text-2xl font-bold text-gray-900 mt-1 mb-3">
-                    {product.name}
-                </h1>
+                        {/* Description */}
+                        {product.description && (
+                            <div className="prose prose-sm text-gray-600 leading-relaxed text-sm">
+                                {product.description}
+                            </div>
+                        )}
 
-                {/* Price */}
-                <div className="flex items-center gap-3 mb-4">
-                    <span className="text-2xl font-bold text-primary-600">
-                        KSh {product.price.toLocaleString()}
-                    </span>
-                    {product.compare_price && product.compare_price > product.price && (
-                        <span className="text-lg text-gray-400 line-through">
-                            KSh {product.compare_price.toLocaleString()}
-                        </span>
-                    )}
-                </div>
+                        {/* Control Panel */}
+                        <div className="bg-gray-50 rounded-xl p-4 border border-gray-200/60 space-y-4">
+                            {/* Colors */}
+                            {product.colors?.length > 0 && (
+                                <div>
+                                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest block mb-2">
+                                        Color: <span className="text-gray-900 font-medium capitalize">{selectedColor}</span>
+                                    </span>
+                                    <div className="flex flex-wrap gap-2">
+                                        {product.colors.map((color) => (
+                                            <button
+                                                key={color}
+                                                onClick={() => setSelectedColor(color)}
+                                                className={`w-8 h-8 rounded-full shadow-sm transition-all flex items-center justify-center ${selectedColor === color
+                                                    ? 'ring-2 ring-offset-2 ring-gray-900 scale-110'
+                                                    : 'hover:scale-105 ring-1 ring-gray-200 hover:ring-gray-300'
+                                                    }`}
+                                                style={{ backgroundColor: color.toLowerCase() }}
+                                                title={color}
+                                            >
+                                                {selectedColor === color && (
+                                                    <i className={`fas fa-check text-[10px] ${['white', 'cream', 'yellow'].includes(color.toLowerCase()) ? 'text-gray-900' : 'text-white'}`}></i>
+                                                )}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
 
-                {/* Stock Status */}
-                <div className="flex items-center gap-2 mb-6">
-                    {product.stock > 0 ? (
-                        <>
-                            <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                            <span className="text-sm text-green-600 font-medium">
-                                In Stock ({product.stock} available)
-                            </span>
-                        </>
-                    ) : (
-                        <>
-                            <span className="w-2 h-2 rounded-full bg-red-500"></span>
-                            <span className="text-sm text-red-600 font-medium">Out of Stock</span>
-                        </>
-                    )}
-                </div>
+                            {/* Quantity */}
+                            <div>
+                                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest block mb-2">Quantity</span>
+                                <div className="flex items-center gap-0 w-32 bg-white rounded-lg border border-gray-200 shadow-sm">
+                                    <button
+                                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                        className="w-10 h-9 flex items-center justify-center text-gray-500 hover:text-gray-900 transition-colors border-r border-gray-100 hover:bg-gray-50"
+                                        disabled={quantity <= 1}
+                                    >
+                                        <i className="fas fa-minus text-[10px]"></i>
+                                    </button>
+                                    <span className="flex-1 text-center font-semibold text-sm text-gray-900">{quantity}</span>
+                                    <button
+                                        onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+                                        className="w-10 h-9 flex items-center justify-center text-gray-500 hover:text-gray-900 transition-colors border-l border-gray-100 hover:bg-gray-50"
+                                        disabled={quantity >= product.stock}
+                                    >
+                                        <i className="fas fa-plus text-[10px]"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
-                {/* Colors */}
-                {product.colors?.length > 0 && (
-                    <div className="mb-6">
-                        <h3 className="text-sm font-semibold text-gray-900 mb-2">
-                            Color: <span className="font-normal text-gray-600">{selectedColor}</span>
-                        </h3>
-                        <div className="flex gap-2">
-                            {product.colors.map((color) => (
-                                <button
-                                    key={color}
-                                    onClick={() => setSelectedColor(color)}
-                                    className={`w-10 h-10 rounded-full border-2 transition-all ${selectedColor === color
-                                            ? 'border-primary-600 ring-2 ring-primary-200'
-                                            : 'border-gray-200'
-                                        }`}
-                                    style={{ backgroundColor: color.toLowerCase() }}
-                                    title={color}
-                                />
-                            ))}
+                        {/* Specifications Grid */}
+                        <div className="pt-2">
+                            <dl className="grid grid-cols-2 gap-x-4 gap-y-4 text-sm">
+                                {product.material && (
+                                    <div className="border border-gray-100 rounded-lg p-3">
+                                        <dt className="text-gray-400 text-[10px] uppercase tracking-widest font-semibold mb-1">Material</dt>
+                                        <dd className="font-medium text-gray-900">{product.material}</dd>
+                                    </div>
+                                )}
+                                {product.dimensions && (
+                                    <div className="border border-gray-100 rounded-lg p-3">
+                                        <dt className="text-gray-400 text-[10px] uppercase tracking-widest font-semibold mb-1">Dimensions</dt>
+                                        <dd className="font-medium text-gray-900">{product.dimensions}</dd>
+                                    </div>
+                                )}
+                                {product.sku && (
+                                    <div className="border border-gray-100 rounded-lg p-3 col-span-2 sm:col-span-1">
+                                        <dt className="text-gray-400 text-[10px] uppercase tracking-widest font-semibold mb-1">SKU</dt>
+                                        <dd className="font-medium text-gray-900">{product.sku}</dd>
+                                    </div>
+                                )}
+                            </dl>
                         </div>
                     </div>
-                )}
-
-                {/* Quantity */}
-                <div className="mb-6">
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2">Quantity</h3>
-                    <div className="flex items-center gap-3">
-                        <button
-                            onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                            className="btn-outline btn-icon"
-                            disabled={quantity <= 1}
-                        >
-                            <i className="fas fa-minus"></i>
-                        </button>
-                        <span className="w-12 text-center font-semibold text-lg">{quantity}</span>
-                        <button
-                            onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                            className="btn-outline btn-icon"
-                            disabled={quantity >= product.stock}
-                        >
-                            <i className="fas fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
-
-                {/* Description */}
-                {product.description && (
-                    <div className="mb-6">
-                        <h3 className="text-sm font-semibold text-gray-900 mb-2">Description</h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">{product.description}</p>
-                    </div>
-                )}
-
-                {/* Details */}
-                <div className="mb-6">
-                    <h3 className="text-sm font-semibold text-gray-900 mb-2">Details</h3>
-                    <div className="space-y-2 text-sm">
-                        {product.material && (
-                            <div className="flex justify-between py-2 border-b border-gray-100">
-                                <span className="text-gray-500">Material</span>
-                                <span className="font-medium text-gray-900">{product.material}</span>
-                            </div>
-                        )}
-                        {product.dimensions && (
-                            <div className="flex justify-between py-2 border-b border-gray-100">
-                                <span className="text-gray-500">Dimensions</span>
-                                <span className="font-medium text-gray-900">{product.dimensions}</span>
-                            </div>
-                        )}
-                        {product.sku && (
-                            <div className="flex justify-between py-2 border-b border-gray-100">
-                                <span className="text-gray-500">SKU</span>
-                                <span className="font-medium text-gray-900">{product.sku}</span>
-                            </div>
-                        )}
-                    </div>
                 </div>
             </div>
 
-            {/* Sticky Add to Cart */}
-            <div className="fixed bottom-16 left-0 right-0 z-40 bg-white border-t border-gray-100 p-4 safe-area-pb">
-                <div className="container-app max-w-lg mx-auto">
+            {/* Sticky Add to Cart Bar */}
+            <div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-100 p-4 safe-area-pb shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+                <div className="container-app max-w-5xl mx-auto flex items-center justify-between gap-4">
+                    <div className="hidden md:block">
+                        <p className="text-sm font-medium text-gray-500">Total Price</p>
+                        <p className="text-xl font-bold text-gray-900">KSh {(product.price * quantity).toLocaleString()}</p>
+                    </div>
+
                     <button
                         onClick={handleAddToCart}
                         disabled={product.stock === 0}
-                        className={`w-full ${addedToCart ? 'btn-success' : 'btn-primary'} btn-lg`}
+                        className={`flex-1 md:flex-none md:w-64 py-3.5 px-6 rounded-xl font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 ${addedToCart
+                            ? 'bg-green-600 text-white'
+                            : 'bg-primary-600 text-white hover:bg-primary-700'}`}
                     >
                         {addedToCart ? (
-                            <>
-                                <i className="fas fa-check"></i>
-                                Added to Cart!
-                            </>
+                            <span className="flex items-center justify-center gap-2">
+                                <i className="fas fa-check-circle"></i> Added to Cart
+                            </span>
                         ) : (
-                            <>
-                                <i className="fas fa-shopping-cart"></i>
-                                Add to Cart - KSh {(product.price * quantity).toLocaleString()}
-                            </>
+                            <span className="flex items-center justify-center gap-2">
+                                <i className="fas fa-shopping-bag"></i>
+                                {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                            </span>
                         )}
                     </button>
                 </div>
