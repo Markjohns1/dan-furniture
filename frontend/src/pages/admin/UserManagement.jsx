@@ -220,7 +220,7 @@ export default function UserManagement() {
                     </div>
                 ) : (
                     <div className="space-y-6">
-                        {/* Admin Users */}
+                        {/* Admin Users Only */}
                         <div className="card overflow-hidden">
                             <div className="p-4 bg-primary-50 border-b border-primary-100">
                                 <h2 className="font-semibold text-primary-900 flex items-center gap-2">
@@ -229,8 +229,10 @@ export default function UserManagement() {
                                 </h2>
                             </div>
                             {adminUsers.length === 0 ? (
-                                <div className="p-6 text-center text-gray-500">
-                                    No admin users yet
+                                <div className="p-8 text-center">
+                                    <i className="fas fa-users text-4xl text-gray-200 mb-3"></i>
+                                    <p className="text-gray-500">No admin users yet</p>
+                                    <p className="text-sm text-gray-400 mt-1">Click "Add User" to create one</p>
                                 </div>
                             ) : (
                                 <div className="divide-y divide-gray-100">
@@ -250,45 +252,6 @@ export default function UserManagement() {
                                             </div>
                                         </div>
                                     ))}
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Customer Users */}
-                        <div className="card overflow-hidden">
-                            <div className="p-4 bg-gray-50 border-b border-gray-100">
-                                <h2 className="font-semibold text-gray-900 flex items-center gap-2">
-                                    <i className="fas fa-users"></i>
-                                    Customers ({customerUsers.length})
-                                </h2>
-                            </div>
-                            {customerUsers.length === 0 ? (
-                                <div className="p-6 text-center text-gray-500">
-                                    No customers yet
-                                </div>
-                            ) : (
-                                <div className="divide-y divide-gray-100">
-                                    {customerUsers.slice(0, 10).map((user) => (
-                                        <div key={user.id} className="p-4 flex items-center gap-4">
-                                            <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                                                <i className="fas fa-user text-gray-500"></i>
-                                            </div>
-                                            <div className="flex-1">
-                                                <p className="font-medium text-gray-900">{user.full_name}</p>
-                                                <p className="text-sm text-gray-500">{user.email}</p>
-                                            </div>
-                                            <div className="text-right">
-                                                <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded uppercase">
-                                                    Customer
-                                                </span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                    {customerUsers.length > 10 && (
-                                        <div className="p-4 text-center text-gray-500 text-sm">
-                                            And {customerUsers.length - 10} more customers...
-                                        </div>
-                                    )}
                                 </div>
                             )}
                         </div>
