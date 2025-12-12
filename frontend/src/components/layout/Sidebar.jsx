@@ -1,5 +1,5 @@
 /**
- * Dan Classic Furniture - Sidebar Navigation
+ * Daniel Furniture - Sidebar Navigation
  */
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -38,15 +38,11 @@ export default function Sidebar({ isOpen, onClose }) {
             <aside className="fixed top-0 left-0 z-50 w-72 h-full bg-white shadow-xl animate-slide-up">
                 {/* Header */}
                 <div className="flex items-center justify-between p-4 border-b border-gray-100">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-primary-600 rounded-xl flex items-center justify-center">
-                            <i className="fas fa-couch text-white"></i>
-                        </div>
-                        <div>
-                            <h2 className="font-display font-bold text-gray-900">Daniel</h2>
-                            <p className="text-xs text-gray-500">Furniture</p>
-                        </div>
-                    </div>
+                    <img
+                        src="/logo.svg"
+                        alt="Daniel Furniture"
+                        className="h-10 w-auto"
+                    />
                     <button
                         onClick={onClose}
                         className="w-10 h-10 flex items-center justify-center rounded-xl text-gray-500 hover:bg-gray-100"

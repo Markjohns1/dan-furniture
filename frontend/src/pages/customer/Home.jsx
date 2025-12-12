@@ -270,11 +270,12 @@ export default function Home() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                         <div className="col-span-2 lg:col-span-1">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="w-10 h-10 bg-primary-600 rounded-xl flex items-center justify-center">
-                                    <i className="fas fa-couch text-white"></i>
-                                </div>
-                                <span className="font-bold text-white text-lg">Daniel</span>
+                            <div className="mb-4">
+                                <img
+                                    src="/logo.svg"
+                                    alt="Daniel Furniture"
+                                    className="h-12 w-auto brightness-0 invert"
+                                />
                             </div>
                             <p className="text-sm">Premium furniture for your home. Quality craftsmanship meets timeless design.</p>
                         </div>
