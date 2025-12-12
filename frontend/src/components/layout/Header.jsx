@@ -41,7 +41,7 @@ export default function Header({ title, showBack = false }) {
                             <img
                                 src="/logo.svg"
                                 alt="Daniel Furniture"
-                                className="h-10 sm:h-12 w-auto"
+                                className="h-14 sm:h-16 w-auto"
                             />
                         </Link>
                     </div>

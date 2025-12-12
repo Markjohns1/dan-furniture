@@ -14,6 +14,7 @@ import Products from './pages/customer/Products';
 import ProductDetail from './pages/customer/ProductDetail';
 import Cart from './pages/customer/Cart';
 import Profile from './pages/customer/Profile';
+import Orders from './pages/customer/Orders';
 
 // Auth Pages
 import Login from './pages/auth/Login';
@@ -64,6 +65,11 @@ function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/orders" element={
+          <ProtectedRoute>
+            <Orders />
+          </ProtectedRoute>
+        } />
 
         {/* Admin Routes */}
         <Route
