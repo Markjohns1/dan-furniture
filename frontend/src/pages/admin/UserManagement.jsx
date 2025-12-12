@@ -237,15 +237,15 @@ export default function UserManagement() {
                             ) : (
                                 <div className="divide-y divide-gray-100">
                                     {adminUsers.map((user) => (
-                                        <div key={user.id} className="p-4 flex items-center gap-4">
-                                            <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
+                                        <div key={user.id} className="p-4 flex items-center gap-3">
+                                            <div className="w-10 h-10 flex-shrink-0 rounded-full bg-primary-100 flex items-center justify-center">
                                                 <i className="fas fa-user-shield text-primary-600"></i>
                                             </div>
-                                            <div className="flex-1">
-                                                <p className="font-medium text-gray-900">{user.full_name}</p>
-                                                <p className="text-sm text-gray-500">{user.email}</p>
+                                            <div className="flex-1 min-w-0">
+                                                <p className="font-medium text-gray-900 truncate">{user.full_name}</p>
+                                                <p className="text-sm text-gray-500 truncate">{user.email}</p>
                                             </div>
-                                            <div className="text-right">
+                                            <div className="flex-shrink-0">
                                                 <span className="px-2 py-1 bg-primary-100 text-primary-700 text-xs font-semibold rounded uppercase">
                                                     Admin
                                                 </span>
