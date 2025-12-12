@@ -1,6 +1,6 @@
-# Dan Classic Furniture - E-commerce System
+# Daniel Furniture - E-commerce System
 
-A complete mobile-first e-commerce management system for Dan Classic Furniture, specializing in sofasets, chairs, dining sets, and office chairs.
+A complete mobile-first e-commerce management system for Daniel Furniture, specializing in sofasets, chairs, dining sets, and office chairs. Located on Kenyatta Road, Nairobi.
 
 ---
 
@@ -378,12 +378,12 @@ Example for Railway:
 2. Set build directory to `frontend`
 3. Set build command: `npm run build`
 4. Set output directory: `dist`
-5. Add environment variable: `VITE_API_URL` = your backend URL
+5. Add environment variable: `VITE_API_HOST` = your backend URL (without /api)
 
 ### Post-Deployment Steps
 
 1. Update backend FRONTEND_URL in environment variables
-2. Update frontend API base URL
+2. Update frontend VITE_API_HOST in environment variables
 3. Test all functionality
 4. Set up domain and SSL
 
@@ -404,12 +404,78 @@ The seeder creates these categories:
 
 ---
 
+## Frontend Environment Variables
+
+Create a `.env` file in the `frontend/` directory (see `.env.example`):
+
+```env
+# API Host for image URLs (without /api suffix)
+VITE_API_HOST=http://localhost:8000
+
+# API Base URL for endpoints (optional - defaults to API_HOST/api)
+# VITE_API_URL=http://localhost:8000/api
+```
+
+For production deployment:
+```env
+VITE_API_HOST=https://api.danielfurniture.co.ke
+```
+
+---
+
+## Troubleshooting
+
+### Common Issues and Solutions
+
+#### Images Not Loading
+**Problem:** Product images show as broken or 404 errors.
+**Cause:** Hardcoded `localhost:8000` URLs in production.
+**Solution:** Set `VITE_API_HOST` environment variable to your backend URL.
+
+#### Admin Login Issues (Password Not Working)
+**Problem:** Default admin password `admin123` not working after bcrypt update.
+**Cause:** bcrypt version mismatch between password hash creation and verification.
+**Solution:** Run `python force_seed.py` to reset admin password with correct hash.
+
+#### JWT Token Expiry / Unexpected Logout
+**Problem:** Users logged out unexpectedly.
+**Cause:** Access token expires after 30 minutes.
+**Solution:** This is expected behavior. Refresh tokens handle re-authentication automatically.
+
+#### CORS Errors
+**Problem:** API requests blocked by CORS policy.
+**Cause:** Frontend URL not in backend's allowed origins.
+**Solution:** Update `FRONTEND_URL` in backend `.env` to match your frontend domain.
+
+#### Rate Limiting (429 Errors)
+**Problem:** Too many requests error.
+**Cause:** API rate limiting is set to 30 requests/minute per IP.
+**Solution:** Wait and retry, or adjust rate limits in `backend/app/main.py` for development.
+
+---
+
+## Development Changelog
+
+### Critical Issues Resolved
+
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| Hardcoded localhost URLs | Direct `http://localhost:8000` strings | Replaced with `VITE_API_HOST` env variable |
+| Admin password hash incompatibility | bcrypt version mismatch | Created `force_seed.py` to regenerate admin password |
+| WhatsApp CTA issues | Hardcoded placeholder number | Updated to configurable `WHATSAPP_NUMBER` |
+| Bottom nav hiding on desktop | Missing responsive breakpoints | Added `lg:hidden` to mobile-only components |
+| Product detail content cutoff | Sticky bar overlapping content | Added bottom margin `mb-32` to content |
+| Logo not showing | Using text instead of SVG | Updated Header to use `/logo.svg` image |
+
+---
+
 ## License
 
-This project is proprietary software developed for Dan Classic Furniture.
+This project is proprietary software developed for Daniel Furniture.
 
 ---
 
 ## Support
 
 For technical support or questions, contact the development team.
+
