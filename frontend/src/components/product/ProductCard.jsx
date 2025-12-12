@@ -11,7 +11,7 @@ export default function ProductCard({ product }) {
 
     const imageUrl = product.images?.length
         ? `${API_HOST}${product.images[0]}`
-        : 'https://via.placeholder.com/400x400?text=No+Image';
+        : null; // No image - will show icon placeholder
 
     const handleAddToCart = (e) => {
         e.preventDefault();
@@ -29,13 +29,19 @@ export default function ProductCard({ product }) {
             className="group bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 flex flex-col h-full"
         >
             {/* Image */}
-            <div className="relative aspect-square overflow-hidden bg-gray-50">
-                <img
-                    src={imageUrl}
-                    alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                />
+            <div className="relative aspect-square overflow-hidden bg-gray-100">
+                {imageUrl ? (
+                    <img
+                        src={imageUrl}
+                        alt={product.name}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        loading="lazy"
+                    />
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+                        <i className="fas fa-couch text-4xl text-gray-300"></i>
+                    </div>
+                )}
 
                 {/* Badges - Floating consistently */}
                 <div className="absolute top-2 left-2 right-2 flex justify-between items-start">

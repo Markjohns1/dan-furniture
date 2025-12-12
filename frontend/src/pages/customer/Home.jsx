@@ -49,16 +49,14 @@ export default function Home() {
             <Header />
 
             {/* Hero Section - Luxury & Minimal */}
-            <section className="relative px-4 pt-24 pb-16 sm:py-32 lg:py-40 bg-primary-950 overflow-hidden">
-                {/* Background Image Overlay */}
-                <div className="absolute inset-0 z-0 opacity-40">
-                    <img
-                        src="https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-                        alt="Background"
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary-950 via-primary-950/80 to-primary-900/60 mix-blend-multiply"></div>
+            <section className="relative px-4 pt-24 pb-16 sm:py-32 lg:py-40 bg-gradient-to-br from-primary-950 via-primary-900 to-primary-800 overflow-hidden">
+                {/* Decorative Pattern Background */}
+                <div className="absolute inset-0 z-0 opacity-10">
+                    <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '60px 60px' }}></div>
                 </div>
+                {/* Decorative Shapes */}
+                <div className="absolute top-20 right-10 w-72 h-72 bg-accent-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-10 left-10 w-96 h-96 bg-primary-400/10 rounded-full blur-3xl"></div>
 
                 <div className="relative z-10 max-w-7xl mx-auto text-center">
                     <span className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-accent-200 text-xs font-bold tracking-[0.2em] uppercase mb-6">
@@ -125,23 +123,22 @@ export default function Home() {
                 </div>
 
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                    {/* Placeholder Images for categories - In prod these should come from API or mapping */}
+                    {/* Category cards with icons instead of external images */}
                     {[
-                        { id: 'sofasets', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80', label: 'Sofasets' },
-                        { id: 'dining-sets', img: 'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=800&q=80', label: 'Dining Sets' },
-                        { id: 'beds', img: 'https://images.unsplash.com/photo-1505693416383-877fe921226e?auto=format&fit=crop&w=800&q=80', label: 'Beds' },
-                        { id: 'chairs', img: 'https://images.unsplash.com/photo-1580480055273-228ff5388ef8?auto=format&fit=crop&w=800&q=80', label: 'Accent Chairs' }
+                        { id: 'sofasets', icon: 'fa-couch', color: 'from-amber-800 to-amber-950', label: 'Sofasets' },
+                        { id: 'dining-sets', icon: 'fa-utensils', color: 'from-emerald-800 to-emerald-950', label: 'Dining Sets' },
+                        { id: 'beds', icon: 'fa-bed', color: 'from-indigo-800 to-indigo-950', label: 'Beds' },
+                        { id: 'chairs', icon: 'fa-chair', color: 'from-rose-800 to-rose-950', label: 'Accent Chairs' }
                     ].map((item) => (
                         <Link
                             key={item.id}
                             to={`/products?category=${item.id}`}
                             className="group relative h-64 sm:h-96 rounded-2xl overflow-hidden cursor-pointer"
                         >
-                            <img
-                                src={item.img}
-                                alt={item.label}
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
+                            <div className={`absolute inset-0 bg-gradient-to-br ${item.color} transition-all duration-500 group-hover:scale-105`}></div>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <i className={`fas ${item.icon} text-6xl sm:text-8xl text-white/20 group-hover:text-white/30 transition-all duration-500 group-hover:scale-110`}></i>
+                            </div>
                             <div className="absolute inset-0 bg-gradient-to-t from-primary-950/80 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
                             <div className="absolute bottom-0 left-0 p-6 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                                 <h3 className="text-xl font-display font-medium text-white mb-1">{item.label}</h3>
