@@ -26,9 +26,14 @@ export function AuthProvider({ children }) {
             const response = await authAPI.getMe();
             setUser(response.data);
         } catch (err) {
-            localStorage.removeItem('access_token');
-            localStorage.removeItem('refresh_token');
-            setUser(null);
+            console.error('Error fetching user:', err);
+            // Only logout if it's an authentication error (401)
+            if (err.response?.status === 401) {
+                localStorage.removeItem('access_token');
+                localStorage.removeItem('refresh_token');
+                setUser(null);
+            }
+            // For other errors, we keep the token but user state might be incomplete
         } finally {
             setLoading(false);
         }
