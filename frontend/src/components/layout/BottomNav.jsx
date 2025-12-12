@@ -21,7 +21,7 @@ export default function BottomNav() {
         { to: '/admin', icon: 'fa-chart-line', label: 'Dashboard', exact: true },
         { to: '/admin/products', icon: 'fa-couch', label: 'Products' },
         { to: '/admin/orders', icon: 'fa-box', label: 'Orders' },
-        { to: '/profile', icon: 'fa-user', label: 'Profile' },
+        { to: '/admin/users', icon: 'fa-users', label: 'Users' },
     ];
 
     // Customer navigation  

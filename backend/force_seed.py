@@ -19,10 +19,10 @@ def force_seed():
         new_hash = get_password_hash("admin123")
         
         if admin:
-            print("🔄 Updating existing admin password...")
+            print("[UPDATE] Updating existing admin password...")
             admin.password_hash = new_hash
         else:
-            print("➕ Creating new admin user...")
+            print("[NEW] Creating new admin user...")
             admin = User(
                 email="admin@danfurniture.co.ke",
                 phone="254700000000",
@@ -33,11 +33,11 @@ def force_seed():
             db.add(admin)
         
         db.commit()
-        print("✅ Admin user updated: admin@danfurniture.co.ke / admin123")
+        print("[OK] Admin user updated: admin@danfurniture.co.ke / admin123")
         
     except Exception as e:
         db.rollback()
-        print(f"❌ Error: {e}")
+        print(f"[ERROR] Error: {e}")
     finally:
         db.close()
 

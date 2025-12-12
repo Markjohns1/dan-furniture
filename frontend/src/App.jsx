@@ -23,6 +23,7 @@ import Dashboard from './pages/admin/Dashboard';
 import ProductManagement from './pages/admin/ProductManagement';
 import ProductForm from './pages/admin/ProductForm';
 import OrderManagement from './pages/admin/OrderManagement';
+import UserManagement from './pages/admin/UserManagement';
 
 // Protected Route Component
 function ProtectedRoute({ children, adminOnly = false }) {
@@ -105,10 +106,18 @@ function AppRoutes() {
           }
         />
         <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute adminOnly>
+              <UserManagement />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/admin/customers"
           element={
             <ProtectedRoute adminOnly>
-              <Dashboard />
+              <UserManagement />
             </ProtectedRoute>
           }
         />

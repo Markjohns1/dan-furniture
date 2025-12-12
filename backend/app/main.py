@@ -58,9 +58,9 @@ app.include_router(dashboard.router, prefix="/api")
 async def startup():
     """Initialize database on startup"""
     init_db()
-    print("✅ Database initialized")
-    print("🚀 Dan Classic Furniture API is running!")
-    print(f"📖 API Documentation: http://localhost:8000/docs")
+    print("[OK] Database initialized")
+    print("Dan Classic Furniture API is running!")
+    print(f"API Documentation: http://localhost:8000/docs")
 
 
 @app.get("/")

@@ -110,6 +110,7 @@ export const adminAPI = {
     getRecentOrders: (limit = 10) => api.get('/admin/analytics/recent-orders', { params: { limit } }),
     getCustomers: (params) => api.get('/admin/customers', { params }),
     getCustomerDetails: (id) => api.get(`/admin/customers/${id}`),
+    createUser: (data) => api.post('/admin/users', data),
 };
 
 // ============== Config API ==============

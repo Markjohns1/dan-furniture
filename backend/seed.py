@@ -29,9 +29,9 @@ def seed_database():
                 role=UserRole.ADMIN
             )
             db.add(admin)
-            print("✅ Admin user created: admin@danfurniture.co.ke / admin123")
+            print("[OK] Admin user created: admin@danfurniture.co.ke / admin123")
         else:
-            print("ℹ️  Admin user already exists")
+            print("[INFO] Admin user already exists")
         
         # Create categories
         categories_data = [
@@ -46,16 +46,16 @@ def seed_database():
             if not existing:
                 category = Category(**cat_data)
                 db.add(category)
-                print(f"✅ Category created: {cat_data['name']}")
+                print(f"[OK] Category created: {cat_data['name']}")
             else:
-                print(f"ℹ️  Category already exists: {cat_data['name']}")
+                print(f"[INFO] Category already exists: {cat_data['name']}")
         
         db.commit()
-        print("\n🎉 Database seeding complete!")
+        print("\nDatabase seeding complete!")
         
     except Exception as e:
         db.rollback()
-        print(f"❌ Error seeding database: {e}")
+        print(f"[ERROR] Error seeding database: {e}")
         raise
     finally:
         db.close()
