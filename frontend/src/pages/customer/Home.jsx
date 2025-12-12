@@ -76,7 +76,7 @@ export default function Home() {
                             href="https://wa.me/254700000000"
                             className="btn-secondary min-w-[180px] text-lg py-4 border-white/10 bg-white/5 text-white hover:bg-white hover:text-primary-900 backdrop-blur-sm"
                         >
-                            <i className="fab fa-whatsapp mr-2"></i> Concierge
+                            <i className="fab fa-whatsapp mr-2"></i> WhatsApp Us
                         </a>
                     </div>
                 </div>
