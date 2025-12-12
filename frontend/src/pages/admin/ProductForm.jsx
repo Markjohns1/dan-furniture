@@ -134,230 +134,232 @@ export default function ProductForm() {
             <Header title={isEditing ? 'Edit Product' : 'Add Product'} showBack />
 
             <div className="container-app py-8 mt-4">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    {error && (
-                        <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg">
-                            <i className="fas fa-exclamation-circle mr-2"></i>
-                            {error}
-                        </div>
-                    )}
+                <div className="max-w-3xl mx-auto">
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        {error && (
+                            <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg">
+                                <i className="fas fa-exclamation-circle mr-2"></i>
+                                {error}
+                            </div>
+                        )}
 
-                    {/* Basic Info */}
-                    <div className="card p-4 space-y-4">
-                        <h3 className="font-semibold text-gray-900">Basic Information</h3>
+                        {/* Basic Info */}
+                        <div className="card p-4 space-y-4">
+                            <h3 className="font-semibold text-gray-900">Basic Information</h3>
 
-                        <div>
-                            <label className="label">Product Name *</label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                className="input"
-                                required
-                            />
-                        </div>
-
-                        <div>
-                            <label className="label">Description</label>
-                            <textarea
-                                name="description"
-                                value={formData.description}
-                                onChange={handleChange}
-                                className="input min-h-[100px]"
-                            />
-                        </div>
-
-                        <div>
-                            <label className="label">Category *</label>
-                            <select
-                                name="category_id"
-                                value={formData.category_id}
-                                onChange={handleChange}
-                                className="input"
-                                required
-                            >
-                                <option value="">Select Category</option>
-                                {categories.map((cat) => (
-                                    <option key={cat.id} value={cat.id}>{cat.name}</option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
-
-                    {/* Pricing */}
-                    <div className="card p-4 space-y-4">
-                        <h3 className="font-semibold text-gray-900">Pricing</h3>
-
-                        <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <label className="label">Price (KSh) *</label>
+                                <label className="label">Product Name *</label>
                                 <input
-                                    type="number"
-                                    name="price"
-                                    value={formData.price}
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
                                     onChange={handleChange}
-                                    className="input no-spinners"
-                                    min="0"
-                                    step="0.01"
+                                    className="input"
                                     required
                                 />
                             </div>
-                            <div>
-                                <label className="label">Compare Price</label>
-                                <input
-                                    type="number"
-                                    name="compare_price"
-                                    value={formData.compare_price}
-                                    onChange={handleChange}
-                                    className="input no-spinners"
-                                    min="0"
-                                    step="0.01"
-                                    placeholder="Original price"
-                                />
-                            </div>
-                        </div>
 
-                        <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <label className="label">Stock</label>
-                                <input
-                                    type="number"
-                                    name="stock"
-                                    value={formData.stock}
+                                <label className="label">Description</label>
+                                <textarea
+                                    name="description"
+                                    value={formData.description}
                                     onChange={handleChange}
-                                    className="input no-spinners"
-                                    min="0"
+                                    className="input min-h-[100px]"
                                 />
                             </div>
+
                             <div>
-                                <label className="label">SKU</label>
-                                <input
-                                    type="text"
-                                    name="sku"
-                                    value={formData.sku}
+                                <label className="label">Category *</label>
+                                <select
+                                    name="category_id"
+                                    value={formData.category_id}
                                     onChange={handleChange}
                                     className="input"
-                                    placeholder="DCF-001"
+                                    required
+                                >
+                                    <option value="">Select Category</option>
+                                    {categories.map((cat) => (
+                                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+
+                        {/* Pricing */}
+                        <div className="card p-4 space-y-4">
+                            <h3 className="font-semibold text-gray-900">Pricing</h3>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="label">Price (KSh) *</label>
+                                    <input
+                                        type="number"
+                                        name="price"
+                                        value={formData.price}
+                                        onChange={handleChange}
+                                        className="input no-spinners"
+                                        min="0"
+                                        step="0.01"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label className="label">Compare Price</label>
+                                    <input
+                                        type="number"
+                                        name="compare_price"
+                                        value={formData.compare_price}
+                                        onChange={handleChange}
+                                        className="input no-spinners"
+                                        min="0"
+                                        step="0.01"
+                                        placeholder="Original price"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="label">Stock</label>
+                                    <input
+                                        type="number"
+                                        name="stock"
+                                        value={formData.stock}
+                                        onChange={handleChange}
+                                        className="input no-spinners"
+                                        min="0"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="label">SKU</label>
+                                    <input
+                                        type="text"
+                                        name="sku"
+                                        value={formData.sku}
+                                        onChange={handleChange}
+                                        className="input"
+                                        placeholder="DCF-001"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Details */}
+                        <div className="card p-4 space-y-4">
+                            <h3 className="font-semibold text-gray-900">Details</h3>
+
+                            <div>
+                                <label className="label">Dimensions</label>
+                                <input
+                                    type="text"
+                                    name="dimensions"
+                                    value={formData.dimensions}
+                                    onChange={handleChange}
+                                    className="input"
+                                    placeholder="e.g., 200x90x85 cm"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="label">Material</label>
+                                <input
+                                    type="text"
+                                    name="material"
+                                    value={formData.material}
+                                    onChange={handleChange}
+                                    className="input"
+                                    placeholder="e.g., Genuine Leather"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="label">Colors (comma separated)</label>
+                                <input
+                                    type="text"
+                                    name="colors"
+                                    value={formData.colors}
+                                    onChange={handleChange}
+                                    className="input"
+                                    placeholder="e.g., Brown, Black, Grey"
                                 />
                             </div>
                         </div>
-                    </div>
 
-                    {/* Details */}
-                    <div className="card p-4 space-y-4">
-                        <h3 className="font-semibold text-gray-900">Details</h3>
+                        {/* Images */}
+                        <div className="card p-4 space-y-4">
+                            <h3 className="font-semibold text-gray-900">Images</h3>
 
-                        <div>
-                            <label className="label">Dimensions</label>
-                            <input
-                                type="text"
-                                name="dimensions"
-                                value={formData.dimensions}
-                                onChange={handleChange}
-                                className="input"
-                                placeholder="e.g., 200x90x85 cm"
-                            />
-                        </div>
+                            {existingImages.length > 0 && (
+                                <div className="flex gap-2 flex-wrap">
+                                    {existingImages.map((img, index) => (
+                                        <div key={index} className="relative w-20 h-20">
+                                            <img
+                                                src={`http://localhost:8000${img}`}
+                                                alt=""
+                                                className="w-full h-full object-cover rounded-lg"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setExistingImages(existingImages.filter((_, i) => i !== index))}
+                                                className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full text-xs"
+                                            >
+                                                <i className="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
 
-                        <div>
-                            <label className="label">Material</label>
-                            <input
-                                type="text"
-                                name="material"
-                                value={formData.material}
-                                onChange={handleChange}
-                                className="input"
-                                placeholder="e.g., Genuine Leather"
-                            />
-                        </div>
-
-                        <div>
-                            <label className="label">Colors (comma separated)</label>
-                            <input
-                                type="text"
-                                name="colors"
-                                value={formData.colors}
-                                onChange={handleChange}
-                                className="input"
-                                placeholder="e.g., Brown, Black, Grey"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Images */}
-                    <div className="card p-4 space-y-4">
-                        <h3 className="font-semibold text-gray-900">Images</h3>
-
-                        {existingImages.length > 0 && (
-                            <div className="flex gap-2 flex-wrap">
-                                {existingImages.map((img, index) => (
-                                    <div key={index} className="relative w-20 h-20">
-                                        <img
-                                            src={`http://localhost:8000${img}`}
-                                            alt=""
-                                            className="w-full h-full object-cover rounded-lg"
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() => setExistingImages(existingImages.filter((_, i) => i !== index))}
-                                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full text-xs"
-                                        >
-                                            <i className="fas fa-times"></i>
-                                        </button>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-
-                        <div>
-                            <label className="label">Add New Images</label>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                multiple
-                                onChange={handleImageChange}
-                                className="input"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Featured Toggle */}
-                    <div className="card p-4">
-                        <label className="flex items-center gap-3 cursor-pointer">
-                            <input
-                                type="checkbox"
-                                name="featured"
-                                checked={formData.featured}
-                                onChange={handleChange}
-                                className="w-5 h-5 text-primary-600 rounded"
-                            />
                             <div>
-                                <span className="font-medium text-gray-900">Featured Product</span>
-                                <p className="text-sm text-gray-500">Show on homepage</p>
+                                <label className="label">Add New Images</label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    multiple
+                                    onChange={handleImageChange}
+                                    className="input"
+                                />
                             </div>
-                        </label>
-                    </div>
+                        </div>
 
-                    {/* Submit */}
-                    <button
-                        type="submit"
-                        disabled={saving}
-                        className="btn-primary w-full btn-lg"
-                    >
-                        {saving ? (
-                            <>
-                                <i className="fas fa-spinner fa-spin"></i>
-                                Saving...
-                            </>
-                        ) : (
-                            <>
-                                <i className="fas fa-save"></i>
-                                {isEditing ? 'Update Product' : 'Create Product'}
-                            </>
-                        )}
-                    </button>
-                </form>
+                        {/* Featured Toggle */}
+                        <div className="card p-4">
+                            <label className="flex items-center gap-3 cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    name="featured"
+                                    checked={formData.featured}
+                                    onChange={handleChange}
+                                    className="w-5 h-5 text-primary-600 rounded"
+                                />
+                                <div>
+                                    <span className="font-medium text-gray-900">Featured Product</span>
+                                    <p className="text-sm text-gray-500">Show on homepage</p>
+                                </div>
+                            </label>
+                        </div>
+
+                        {/* Submit */}
+                        <button
+                            type="submit"
+                            disabled={saving}
+                            className="btn-primary w-full btn-lg"
+                        >
+                            {saving ? (
+                                <>
+                                    <i className="fas fa-spinner fa-spin"></i>
+                                    Saving...
+                                </>
+                            ) : (
+                                <>
+                                    <i className="fas fa-save"></i>
+                                    {isEditing ? 'Update Product' : 'Create Product'}
+                                </>
+                            )}
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     );
