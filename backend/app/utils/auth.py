@@ -72,32 +72,20 @@ async def get_current_user(
     )
     
     token = credentials.credentials
-    try:
-        payload = decode_token(token)
-    except Exception as e:
-        print(f"DEBUG: Token decode failed: {e}")
-        raise credentials_exception
-    
-    print(f"DEBUG: Token payload: {payload}")
+    payload = decode_token(token)
     
     if payload is None:
-        print("DEBUG: Payload is None")
         raise credentials_exception
     
     if payload.get("type") != "access":
-        print(f"DEBUG: Invalid token type: {payload.get('type')}")
         raise credentials_exception
     
     user_id = payload.get("sub")
-    print(f"DEBUG: User ID from token: {user_id} (type: {type(user_id)})")
-    
     if user_id is None:
-        print("DEBUG: User ID is None")
         raise credentials_exception
     
     user = db.query(User).filter(User.id == user_id).first()
     if user is None:
-        print(f"DEBUG: User not found for ID {user_id}")
         raise credentials_exception
     
     return user
