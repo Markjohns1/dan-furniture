@@ -1,6 +1,5 @@
 /**
- * Daniel Furniture - Cart Page
- * Professional checkout experience
+ * Cart Page
  */
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -206,15 +205,17 @@ export default function Cart() {
             {showCheckout && (
                 <>
                     <div className="fixed inset-0 bg-black/50 z-50" onClick={() => setShowCheckout(false)} />
-                    <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl z-50 max-h-[90vh] overflow-auto animate-slide-up">
-                        <div className="p-6">
-                            <div className="flex items-center justify-between mb-6">
-                                <h3 className="text-xl font-bold text-gray-900">Checkout Details</h3>
-                                <button onClick={() => setShowCheckout(false)} className="p-2 hover:bg-gray-100 rounded-lg">
-                                    <i className="fas fa-times text-gray-500"></i>
-                                </button>
-                            </div>
+                    <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl z-50 max-h-[85vh] flex flex-col animate-slide-up">
+                        {/* Header - Fixed */}
+                        <div className="p-4 border-b border-gray-100 flex items-center justify-between flex-shrink-0">
+                            <h3 className="text-xl font-bold text-gray-900">Checkout Details</h3>
+                            <button onClick={() => setShowCheckout(false)} className="p-2 hover:bg-gray-100 rounded-lg">
+                                <i className="fas fa-times text-gray-500"></i>
+                            </button>
+                        </div>
 
+                        {/* Scrollable Content */}
+                        <div className="flex-1 overflow-y-auto p-4 pb-24">
                             <div className="space-y-4">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
@@ -243,7 +244,7 @@ export default function Cart() {
                                     <textarea
                                         value={customerInfo.address}
                                         onChange={(e) => setCustomerInfo({ ...customerInfo, address: e.target.value })}
-                                        rows={3}
+                                        rows={2}
                                         className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
                                         placeholder="Enter your delivery address"
                                     />
@@ -260,17 +261,18 @@ export default function Cart() {
                                     />
                                 </div>
                             </div>
+                        </div>
 
-                            <div className="mt-6 pt-4 border-t border-gray-100">
-                                <div className="flex justify-between text-lg font-bold text-gray-900 mb-4">
-                                    <span>Total</span>
-                                    <span>KSh {subtotal.toLocaleString()}</span>
-                                </div>
-                                <WhatsAppOrderButton
-                                    message={getWhatsAppMessage(customerInfo)}
-                                    className="w-full"
-                                />
+                        {/* Footer - Fixed at bottom */}
+                        <div className="p-4 border-t border-gray-100 bg-white flex-shrink-0">
+                            <div className="flex justify-between text-lg font-bold text-gray-900 mb-3">
+                                <span>Total</span>
+                                <span>KSh {subtotal.toLocaleString()}</span>
                             </div>
+                            <WhatsAppOrderButton
+                                message={getWhatsAppMessage(customerInfo)}
+                                className="w-full"
+                            />
                         </div>
                     </div>
                 </>
