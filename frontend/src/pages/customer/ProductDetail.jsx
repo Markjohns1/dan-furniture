@@ -195,8 +195,8 @@ export default function ProductDetail() {
                             </div>
                         </div>
 
-                        {/* Specifications Grid - Removed SKU */}
-                        <div className="pt-2">
+                        {/* Specifications Grid */}
+                        <div className="pt-2 mb-32">
                             <dl className="grid grid-cols-2 gap-x-4 gap-y-4 text-sm">
                                 {product.material && (
                                     <div className="border border-gray-100 rounded-lg p-3">
