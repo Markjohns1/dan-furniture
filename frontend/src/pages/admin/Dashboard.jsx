@@ -43,99 +43,130 @@ export default function Dashboard() {
         <div className="page pb-safe-nav bg-gray-50/50">
             <Header title="Dashboard" />
 
-            <div className="container-app py-6 space-y-6">
-                {/* Welcome & Primary Stats */}
+            <div className="container-app py-8 space-y-6">
+                {/* 1. Overview Section (Revenue & Orders) */}
                 <div>
-                    <h2 className="text-xl font-bold text-gray-900 mb-4 px-1">Overview</h2>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="card p-5 bg-gradient-to-br from-primary-600 to-primary-700 text-white shadow-lg shadow-primary-200">
-                            <div className="flex justify-between items-start mb-4">
-                                <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
-                                    <i className="fas fa-money-bill-wave text-xl text-white"></i>
-                                </div>
-                                <span className="text-xs font-medium bg-white/20 px-2 py-1 rounded-full text-white/90">Today</span>
+                    <h2 className="text-lg font-bold text-gray-900 mb-3 px-1">Overview</h2>
+                    <div className="grid grid-cols-2 gap-3">
+                        {/* Revenue - Clean White Theme */}
+                        <div className="card p-4 border border-gray-100 shadow-sm relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <i className="fas fa-money-bill-wave text-4xl text-primary-600"></i>
                             </div>
-                            <p className="text-sm text-white/80 font-medium mb-1">Revenue</p>
-                            <p className="text-2xl font-bold tracking-tight">
-                                KSh {(stats?.revenue_today || 0).toLocaleString()}
+                            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Revenue</p>
+                            <p className="text-xl font-bold text-gray-900 tracking-tight">
+                                <span className="text-xs text-gray-500 font-normal mr-1">KSh</span>
+                                {(stats?.revenue_today || 0).toLocaleString()}
                             </p>
+                            <div className="mt-2 text-[10px] font-medium text-emerald-600 bg-emerald-50 inline-block px-1.5 py-0.5 rounded">
+                                <i className="fas fa-calendar-day mr-1"></i>
+                                Today
+                            </div>
                         </div>
 
-                        <div className="card p-5 bg-white shadow-md border border-gray-100">
-                            <div className="flex justify-between items-start mb-4">
-                                <div className="p-2 bg-accent-50 rounded-lg">
-                                    <i className="fas fa-shopping-bag text-xl text-accent-600"></i>
-                                </div>
-                                <span className="text-xs font-medium bg-gray-100 px-2 py-1 rounded-full text-gray-600">Today</span>
+                        {/* Orders - Clean White Theme */}
+                        <div className="card p-4 border border-gray-100 shadow-sm relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                                <i className="fas fa-shopping-bag text-4xl text-blue-600"></i>
                             </div>
-                            <p className="text-sm text-gray-500 font-medium mb-1">Orders</p>
-                            <p className="text-2xl font-bold text-gray-900 tracking-tight">
+                            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">Orders</p>
+                            <p className="text-xl font-bold text-gray-900 tracking-tight">
                                 {stats?.orders_today || 0}
                             </p>
+                            <div className="mt-2 text-[10px] font-medium text-blue-600 bg-blue-50 inline-block px-1.5 py-0.5 rounded">
+                                <i className="fas fa-clock mr-1"></i>
+                                Today
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {/* Secondary Quick Stats */}
-                <div className="grid grid-cols-3 gap-3">
-                    <div className="card p-3 text-center hover:bg-gray-50 transition-colors border border-gray-100">
-                        <p className="text-xs text-gray-400 font-medium uppercase tracking-wider mb-1">Products</p>
-                        <p className="text-lg font-bold text-gray-900">{stats?.total_products || 0}</p>
-                    </div>
-                    <div className="card p-3 text-center hover:bg-gray-50 transition-colors border border-gray-100">
-                        <p className="text-xs text-gray-400 font-medium uppercase tracking-wider mb-1">Customers</p>
-                        <p className="text-lg font-bold text-gray-900">{stats?.total_customers || 0}</p>
-                    </div>
-                    <div className="card p-3 text-center hover:bg-gray-50 transition-colors border border-gray-100">
-                        <p className="text-xs text-gray-400 font-medium uppercase tracking-wider mb-1">Pending</p>
-                        <p className={`text-lg font-bold ${stats?.pending_orders > 0 ? 'text-amber-600' : 'text-gray-900'}`}>
-                            {stats?.pending_orders || 0}
-                        </p>
+                {/* 2. Quick Actions (Horizontal List to save space) */}
+                <div>
+                    <h2 className="text-lg font-bold text-gray-900 mb-3 px-1">Actions</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <Link to="/admin/products/new" className="card p-3 flex items-center gap-4 hover:bg-gray-50 transition-colors border border-gray-100 shadow-sm">
+                            <div className="w-10 h-10 rounded-full bg-primary-50 flex items-center justify-center text-primary-600">
+                                <i className="fas fa-plus text-sm"></i>
+                            </div>
+                            <div className="flex-1">
+                                <p className="font-semibold text-gray-900 text-sm">Add Product</p>
+                                <p className="text-xs text-gray-500">Create listing</p>
+                            </div>
+                            <i className="fas fa-chevron-right text-gray-300 text-xs"></i>
+                        </Link>
+
+                        <Link to="/admin/orders" className="card p-3 flex items-center gap-4 hover:bg-gray-50 transition-colors border border-gray-100 shadow-sm">
+                            <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                                <i className="fas fa-box text-sm"></i>
+                            </div>
+                            <div className="flex-1">
+                                <p className="font-semibold text-gray-900 text-sm">Manage Orders</p>
+                                <p className="text-xs text-gray-500">View status</p>
+                            </div>
+                            <i className="fas fa-chevron-right text-gray-300 text-xs"></i>
+                        </Link>
                     </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="grid grid-cols-2 gap-4">
-                    <Link to="/admin/products/new" className="group relative overflow-hidden card p-0 border border-primary-100">
-                        <div className="absolute inset-0 bg-primary-50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div className="p-4 flex items-center gap-3 relative z-10">
-                            <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-600 group-hover:scale-110 transition-transform">
-                                <i className="fas fa-plus"></i>
+                {/* 3. Key Metrics (2-column grid to prevent text clipping) */}
+                <div>
+                    <h2 className="text-lg font-bold text-gray-900 mb-3 px-1">Store Status</h2>
+                    <div className="grid grid-cols-2 gap-3">
+                        {/* Products */}
+                        <div className="card p-3 flex items-center gap-3 border border-gray-100 shadow-sm">
+                            <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500">
+                                <i className="fas fa-couch text-xs"></i>
                             </div>
                             <div>
-                                <p className="font-semibold text-gray-900">Add Product</p>
-                                <p className="text-xs text-gray-500">Create new listing</p>
+                                <p className="text-xs text-gray-500 uppercase font-semibold">Products</p>
+                                <p className="text-lg font-bold text-gray-900 leading-none">{stats?.total_products || 0}</p>
                             </div>
                         </div>
-                    </Link>
 
-                    <Link to="/admin/orders" className="group relative overflow-hidden card p-0 border border-gray-100">
-                        <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div className="p-4 flex items-center gap-3 relative z-10">
-                            <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 group-hover:scale-110 transition-transform">
-                                <i className="fas fa-list-ul"></i>
+                        {/* Customers */}
+                        <div className="card p-3 flex items-center gap-3 border border-gray-100 shadow-sm">
+                            <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center text-gray-500">
+                                <i className="fas fa-users text-xs"></i>
                             </div>
                             <div>
-                                <p className="font-semibold text-gray-900">Manage Orders</p>
-                                <p className="text-xs text-gray-500">View all orders</p>
+                                <p className="text-xs text-gray-500 uppercase font-semibold">Customers</p>
+                                <p className="text-lg font-bold text-gray-900 leading-none">{stats?.total_customers || 0}</p>
                             </div>
                         </div>
-                    </Link>
+
+                        {/* Pending - Full width if odd number, or distinct style */}
+                        <div className="col-span-2 card p-3 flex items-center justify-between border border-gray-100 shadow-sm bg-gray-50">
+                            <div className="flex items-center gap-3">
+                                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${stats?.pending_orders > 0 ? 'bg-amber-100 text-amber-600' : 'bg-gray-200 text-gray-400'}`}>
+                                    <i className="fas fa-clock text-xs"></i>
+                                </div>
+                                <div>
+                                    <p className="text-xs text-gray-500 uppercase font-semibold">Pending Orders</p>
+                                    <p className={`text-lg font-bold leading-none ${stats?.pending_orders > 0 ? 'text-amber-600' : 'text-gray-900'}`}>
+                                        {stats?.pending_orders || 0}
+                                    </p>
+                                </div>
+                            </div>
+                            {stats?.pending_orders > 0 && (
+                                <Link to="/admin/orders?status=pending" className="text-xs font-semibold text-primary-600 hover:text-primary-700">
+                                    Review <i className="fas fa-arrow-right ml-1"></i>
+                                </Link>
+                            )}
+                        </div>
+                    </div>
                 </div>
 
                 {/* Performance Section */}
                 <div>
-                    <h3 className="text-sm font-semibold text-gray-900 mb-3 px-1 flex items-center justify-between">
-                        <span>Performance</span>
-                        <span className="text-xs font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded-full">This Month</span>
-                    </h3>
-                    <div className="card divide-y divide-gray-100 border border-gray-100">
+                    <h3 className="text-lg font-bold text-gray-900 mb-3 px-1">Performance</h3>
+                    <div className="card divide-y divide-gray-100 border border-gray-100 shadow-sm">
                         <div className="p-4 flex items-center justify-between">
                             <div className="flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600">
                                     <i className="fas fa-chart-line text-sm"></i>
                                 </div>
-                                <span className="text-sm font-medium text-gray-700">Total Revenue</span>
+                                <span className="text-sm font-medium text-gray-700">Total Revenue (This Month)</span>
                             </div>
                             <span className="font-bold text-gray-900">KSh {((stats?.revenue_this_month || 0) / 1000).toFixed(1)}K</span>
                         </div>
@@ -144,7 +175,7 @@ export default function Dashboard() {
                                 <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
                                     <i className="fas fa-shopping-cart text-sm"></i>
                                 </div>
-                                <span className="text-sm font-medium text-gray-700">Total Orders</span>
+                                <span className="text-sm font-medium text-gray-700">Total Orders (This Month)</span>
                             </div>
                             <span className="font-bold text-gray-900">{stats?.orders_this_month || 0}</span>
                         </div>
@@ -154,11 +185,11 @@ export default function Dashboard() {
                 {/* Recent Orders List */}
                 <div>
                     <div className="flex items-center justify-between mb-3 px-1">
-                        <h3 className="text-sm font-semibold text-gray-900">Recent Activity</h3>
-                        <Link to="/admin/orders" className="text-xs font-medium text-primary-600 hover:text-primary-700">View All</Link>
+                        <h3 className="text-lg font-bold text-gray-900">Recent Activity</h3>
+                        <Link to="/admin/orders" className="text-sm font-medium text-primary-600 hover:text-primary-700">View All</Link>
                     </div>
 
-                    <div className="card border border-gray-100 overflow-hidden">
+                    <div className="card border border-gray-100 overflow-hidden shadow-sm">
                         {recentOrders.length > 0 ? (
                             <div className="divide-y divide-gray-50">
                                 {recentOrders.map((order) => (
@@ -197,13 +228,13 @@ export default function Dashboard() {
 
                 {/* Low Stock Alert */}
                 {lowStock.length > 0 && (
-                    <div className="card border border-red-100 bg-red-50/50">
+                    <div className="card border border-red-100 bg-red-50/30 shadow-sm">
                         <div className="p-3 border-b border-red-100 flex items-center justify-between">
                             <div className="flex items-center gap-2 text-red-700">
                                 <i className="fas fa-exclamation-triangle text-sm"></i>
-                                <span className="text-sm font-semibold">Low Stock Items</span>
+                                <span className="text-sm font-semibold">Low Stock</span>
                             </div>
-                            <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded-full">{lowStock.length}</span>
+                            <span className="bg-red-100 text-red-700 text-[10px] font-bold px-2 py-0.5 rounded-full">{lowStock.length} items</span>
                         </div>
                         <div className="divide-y divide-red-100/50">
                             {lowStock.slice(0, 3).map((product) => (
@@ -212,7 +243,7 @@ export default function Dashboard() {
                                     to={`/admin/products/${product.id}`}
                                     className="flex items-center gap-3 p-3 hover:bg-red-50 transition-colors"
                                 >
-                                    <div className="w-10 h-10 bg-white rounded-lg overflow-hidden flex-shrink-0 border border-red-100">
+                                    <div className="w-8 h-8 bg-white rounded-md overflow-hidden flex-shrink-0 border border-red-100">
                                         {product.image ? (
                                             <img
                                                 src={`http://localhost:8000${product.image}`}
@@ -221,13 +252,13 @@ export default function Dashboard() {
                                             />
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center bg-gray-50">
-                                                <i className="fas fa-couch text-gray-300 text-xs"></i>
+                                                <i className="fas fa-couch text-gray-300 text-[10px]"></i>
                                             </div>
                                         )}
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <p className="text-sm font-medium text-gray-900 truncate">{product.name}</p>
-                                        <p className="text-xs text-red-600 font-medium">Only {product.stock} remaining</p>
+                                        <p className="text-xs text-red-600 font-medium">Qty: {product.stock}</p>
                                     </div>
                                     <i className="fas fa-chevron-right text-red-300 text-xs"></i>
                                 </Link>
