@@ -112,7 +112,7 @@ export function CartProvider({ children }) {
             )
             .join('\n');
 
-        return `🛋️ *NEW ORDER - Dan Classic Furniture*
+        return `🛋️ *NEW ORDER - Daniel Furniture*
 ━━━━━━━━━━━━━━━━━━
 👤 Customer: ${customerInfo.name}
 📱 Phone: ${customerInfo.phone}

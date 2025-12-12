@@ -277,7 +277,7 @@ export default function Home() {
                                 <div className="w-10 h-10 bg-primary-600 rounded-xl flex items-center justify-center">
                                     <i className="fas fa-couch text-white"></i>
                                 </div>
-                                <span className="font-bold text-white text-lg">Dan Classic</span>
+                                <span className="font-bold text-white text-lg">Daniel</span>
                             </div>
                             <p className="text-sm">Premium furniture for your home. Quality craftsmanship meets timeless design.</p>
                         </div>
@@ -320,7 +320,7 @@ export default function Home() {
                     </div>
 
                     <div className="border-t border-gray-800 mt-10 pt-8 text-center text-sm">
-                        <p>© 2024 Dan Classic Furniture. All rights reserved.</p>
+                        <p>© 2024 Daniel Furniture. All rights reserved.</p>
                     </div>
                 </div>
             </footer>

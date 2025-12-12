@@ -70,7 +70,7 @@ export default function Register() {
                             <i className="fas fa-couch text-white text-2xl"></i>
                         </div>
                         <h1 className="font-display text-2xl font-bold text-gray-900">Create Account</h1>
-                        <p className="text-gray-500 mt-1">Join Dan Classic Furniture</p>
+                        <p className="text-gray-500 mt-1">Join Daniel Furniture</p>
                     </div>
 
                     <div className="card p-6">

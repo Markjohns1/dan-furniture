@@ -42,7 +42,7 @@ export default function Header({ title, showBack = false }) {
                                 <i className="fas fa-couch text-white text-lg"></i>
                             </div>
                             <div className="hidden sm:block">
-                                <span className="font-bold text-xl text-gray-900">Dan Classic</span>
+                                <span className="font-bold text-xl text-gray-900">Daniel</span>
                                 <span className="text-primary-600 font-semibold ml-1">Furniture</span>
                             </div>
                         </Link>

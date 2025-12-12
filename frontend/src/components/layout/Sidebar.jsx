@@ -43,7 +43,7 @@ export default function Sidebar({ isOpen, onClose }) {
                             <i className="fas fa-couch text-white"></i>
                         </div>
                         <div>
-                            <h2 className="font-display font-bold text-gray-900">Dan Classic</h2>
+                            <h2 className="font-display font-bold text-gray-900">Daniel</h2>
                             <p className="text-xs text-gray-500">Furniture</p>
                         </div>
                     </div>
@@ -180,7 +180,7 @@ export default function Sidebar({ isOpen, onClose }) {
                         </a>
                     </div>
                     <p className="text-center text-xs text-gray-400 mt-2">
-                        © 2024 Dan Classic Furniture
+                        © 2024 Daniel Furniture
                     </p>
                 </div>
             </aside>
