@@ -2,7 +2,7 @@
  * Dan Classic Furniture - Responsive Header with Desktop Nav
  */
 import { useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
 
@@ -11,6 +11,7 @@ export default function Header({ title, showBack = false }) {
     const { user, isAuthenticated, isAdmin, logout } = useAuth();
     const { itemCount } = useCart();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleLogout = () => {
         logout();
@@ -61,29 +62,28 @@ export default function Header({ title, showBack = false }) {
                         >
                             Home
                         </NavLink>
-                        <NavLink
-                            to="/products"
-                            className={({ isActive }) =>
-                                `px-4 py-2 rounded-lg font-medium transition-colors ${isActive
-                                    ? 'bg-primary-50 text-primary-700'
-                                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                                }`
-                            }
-                        >
-                            Products
-                        </NavLink>
-                        <NavLink
-                            to="/products?category=sofasets"
-                            className="px-4 py-2 rounded-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors"
-                        >
-                            Sofasets
-                        </NavLink>
-                        <NavLink
-                            to="/products?category=chairs"
-                            className="px-4 py-2 rounded-lg font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors"
-                        >
-                            Chairs
-                        </NavLink>
+
+                        {/* Custom NavLink for Products/Categories to handle query params */}
+                        {[
+                            { to: '/products', label: 'Products', check: (loc) => loc.pathname === '/products' && !loc.search.includes('category=') },
+                            { to: '/products?category=sofasets', label: 'Sofasets', check: (loc) => loc.search.includes('category=sofasets') },
+                            { to: '/products?category=chairs', label: 'Chairs', check: (loc) => loc.search.includes('category=chairs') },
+                        ].map((item) => {
+                            const isActive = item.check(location); // using useLocation hook from parent
+                            return (
+                                <Link
+                                    key={item.label}
+                                    to={item.to}
+                                    className={`px-4 py-2 rounded-lg font-medium transition-colors ${isActive
+                                        ? 'bg-primary-50 text-primary-700'
+                                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                        }`}
+                                >
+                                    {item.label}
+                                </Link>
+                            );
+                        })}
+
                         {isAdmin && (
                             <NavLink
                                 to="/admin"

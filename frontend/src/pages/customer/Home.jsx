@@ -50,7 +50,7 @@ export default function Home() {
                     <div className="absolute bottom-0 right-0 w-80 h-80 bg-accent-400 rounded-full blur-3xl"></div>
                 </div>
 
-                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28">
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-20 lg:py-28">
                     <div className="max-w-2xl">
                         <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur rounded-full text-white text-sm font-medium mb-6">
                             <i className="fas fa-star text-yellow-300"></i>
@@ -66,7 +66,7 @@ export default function Home() {
                         <div className="flex flex-col sm:flex-row gap-4">
                             <Link
                                 to="/products"
-                                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary-700 font-semibold rounded-xl shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all"
+                                className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-white text-primary-700 font-semibold rounded-xl shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all"
                             >
                                 Shop Now
                                 <i className="fas fa-arrow-right"></i>
@@ -75,7 +75,7 @@ export default function Home() {
                                 href="https://wa.me/254700000000"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition-colors"
+                                className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition-colors"
                             >
                                 <i className="fab fa-whatsapp text-xl"></i>
                                 Contact Us
@@ -86,33 +86,33 @@ export default function Home() {
             </section>
 
             {/* Categories Section */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-                <div className="text-center mb-10">
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
+                <div className="text-center mb-8 sm:mb-10">
                     <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Shop by Category</h2>
                     <p className="text-gray-600 max-w-md mx-auto">Find the perfect furniture for every room in your home</p>
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
                     {categories.map((cat) => (
                         <Link
                             key={cat.id}
                             to={`/products?category=${cat.slug}`}
-                            className="group relative bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-primary-200 transition-all duration-300"
+                            className="group relative bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-primary-200 transition-all duration-300"
                         >
-                            <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center group-hover:from-primary-600 group-hover:to-primary-500 transition-colors duration-300">
-                                <i className={`fas ${categoryIcons[cat.slug] || 'fa-couch'} text-2xl text-primary-600 group-hover:text-white transition-colors`}></i>
+                            <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 bg-gradient-to-br from-primary-100 to-primary-50 rounded-2xl flex items-center justify-center group-hover:from-primary-600 group-hover:to-primary-500 transition-colors duration-300">
+                                <i className={`fas ${categoryIcons[cat.slug] || 'fa-couch'} text-xl sm:text-2xl text-primary-600 group-hover:text-white transition-colors`}></i>
                             </div>
-                            <h3 className="text-center font-semibold text-gray-900 mb-1">{cat.name}</h3>
-                            <p className="text-center text-sm text-gray-500">{cat.product_count || 0} items</p>
+                            <h3 className="text-center font-semibold text-gray-900 mb-1 text-sm sm:text-base">{cat.name}</h3>
+                            <p className="text-center text-xs sm:text-sm text-gray-500">{cat.product_count || 0} items</p>
                         </Link>
                     ))}
                 </div>
             </section>
 
             {/* Featured Products */}
-            <section className="bg-white py-12 sm:py-16">
+            <section className="bg-white py-8 sm:py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center justify-between mb-6 sm:mb-8">
                         <div>
                             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Featured Products</h2>
                             <p className="text-gray-600 mt-1">Hand-picked favorites for your home</p>
@@ -130,7 +130,7 @@ export default function Home() {
                         <ProductGridSkeleton count={4} />
                     ) : featured.length > 0 ? (
                         <>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
                                 {featured.slice(0, 8).map((product) => (
                                     <ProductCard key={product.id} product={product} />
                                 ))}
@@ -158,7 +158,7 @@ export default function Home() {
             </section>
 
             {/* New Arrivals */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
                 <div className="flex items-center justify-between mb-8">
                     <div>
                         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">New Arrivals</h2>

@@ -1,7 +1,7 @@
 """
 Dan Classic Furniture - User Schemas
 """
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import Optional
 from datetime import datetime
 from app.models.user import UserRole
@@ -16,10 +16,18 @@ class UserCreate(BaseModel):
     full_name: str = Field(..., min_length=2, max_length=255)
     address: Optional[str] = None
 
+    @field_validator('email')
+    def validate_email(cls, v):
+        return v.strip().lower()
+
 
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
+
+    @field_validator('email')
+    def validate_email(cls, v):
+        return v.strip().lower()
 
 
 class Token(BaseModel):

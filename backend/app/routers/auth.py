@@ -53,8 +53,8 @@ async def register(user_data: UserCreate, db: Session = Depends(get_db)):
     db.refresh(user)
     
     # Generate tokens
-    access_token = create_access_token(data={"sub": user.id, "role": user.role.value})
-    refresh_token = create_refresh_token(data={"sub": user.id})
+    access_token = create_access_token(data={"sub": str(user.id), "role": user.role.value})
+    refresh_token = create_refresh_token(data={"sub": str(user.id)})
     
     return Token(access_token=access_token, refresh_token=refresh_token)
 
@@ -71,8 +71,8 @@ async def login(user_data: UserLogin, db: Session = Depends(get_db)):
         )
     
     # Generate tokens
-    access_token = create_access_token(data={"sub": user.id, "role": user.role.value})
-    refresh_token = create_refresh_token(data={"sub": user.id})
+    access_token = create_access_token(data={"sub": str(user.id), "role": user.role.value})
+    refresh_token = create_refresh_token(data={"sub": str(user.id)})
     
     return Token(access_token=access_token, refresh_token=refresh_token)
 
@@ -98,8 +98,8 @@ async def refresh_token(token_data: RefreshToken, db: Session = Depends(get_db))
         )
     
     # Generate new tokens
-    access_token = create_access_token(data={"sub": user.id, "role": user.role.value})
-    new_refresh_token = create_refresh_token(data={"sub": user.id})
+    access_token = create_access_token(data={"sub": str(user.id), "role": user.role.value})
+    new_refresh_token = create_refresh_token(data={"sub": str(user.id)})
     
     return Token(access_token=access_token, refresh_token=new_refresh_token)
 

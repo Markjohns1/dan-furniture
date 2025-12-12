@@ -39,7 +39,7 @@ export default function Register() {
         setLoading(true);
         const result = await register({
             full_name: formData.full_name,
-            email: formData.email,
+            email: formData.email.trim(),
             phone: formData.phone,
             password: formData.password,
         });
