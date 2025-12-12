@@ -58,11 +58,11 @@ export default function ProductCard({ product }) {
                 </div>
 
                 {/* Quick Add Overlay - Slides up on hover */}
-                <div className="absolute inset-x-0 bottom-0 p-3 translate-y-full group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out">
+                <div className="absolute inset-x-3 bottom-2 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out">
                     <button
                         onClick={handleAddToCart}
                         disabled={product.stock === 0}
-                        className="w-full py-2 px-4 bg-primary-600 hover:bg-primary-700 text-white text-xs font-semibold uppercase tracking-wide rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                        className="w-full py-1.5 px-3 bg-gray-900 hover:bg-gray-800 text-white text-[11px] font-semibold uppercase tracking-wide rounded-md shadow-md transition-all duration-200 active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed"
                     >
                         {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
                     </button>
