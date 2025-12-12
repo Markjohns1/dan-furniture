@@ -3,7 +3,7 @@
  */
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { productsAPI, categoriesAPI } from '../../api';
+import { productsAPI, categoriesAPI, API_HOST } from '../../api';
 import Header from '../../components/layout/Header';
 import { LoadingSpinner } from '../../components/ui/Loading';
 
@@ -74,7 +74,7 @@ export default function ProductManagement() {
                                     <div className="w-24 h-24 flex-shrink-0 bg-gray-100 rounded-xl overflow-hidden border border-gray-100">
                                         {product.images?.[0] ? (
                                             <img
-                                                src={`http://localhost:8000${product.images[0]}`}
+                                                src={`${API_HOST}${product.images[0]}`}
                                                 alt=""
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                             />

@@ -1,9 +1,9 @@
 /**
- * Dan Classic Furniture - Admin Add/Edit Product
+ * Daniel Furniture - Admin Add/Edit Product
  */
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { productsAPI, categoriesAPI } from '../../api';
+import { productsAPI, categoriesAPI, API_HOST } from '../../api';
 import Header from '../../components/layout/Header';
 import { LoadingSpinner } from '../../components/ui/Loading';
 
@@ -283,7 +283,7 @@ export default function ProductForm() {
                                     {existingImages.map((img, index) => (
                                         <div key={index} className="relative w-20 h-20">
                                             <img
-                                                src={`http://localhost:8000${img}`}
+                                                src={`${API_HOST}${img} `}
                                                 alt=""
                                                 className="w-full h-full object-cover rounded-lg"
                                             />

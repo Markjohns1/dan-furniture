@@ -1,9 +1,9 @@
 /**
- * Dan Classic Furniture - Admin Dashboard
+ * Daniel Furniture - Admin Dashboard
  */
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { adminAPI } from '../../api';
+import { adminAPI, API_HOST } from '../../api';
 import Header from '../../components/layout/Header';
 import { LoadingSpinner } from '../../components/ui/Loading';
 
@@ -231,15 +231,15 @@ export default function Dashboard() {
                                         {recentOrders.map((order) => (
                                             <Link
                                                 key={order.id}
-                                                to={`/admin/orders/${order.id}`}
+                                                to={`/ admin / orders / ${order.id} `}
                                                 className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
                                             >
                                                 <div className="flex items-center gap-4">
-                                                    <div className={`w-2.5 h-2.5 rounded-full shrink-0 ${order.status === 'pending' ? 'bg-accent-400 ring-4 ring-accent-50 group-hover:ring-accent-100' :
+                                                    <div className={`w - 2.5 h - 2.5 rounded - full shrink - 0 ${order.status === 'pending' ? 'bg-accent-400 ring-4 ring-accent-50 group-hover:ring-accent-100' :
                                                         order.status === 'confirmed' ? 'bg-blue-400 ring-4 ring-blue-50 group-hover:ring-blue-100' :
                                                             order.status === 'delivered' ? 'bg-green-400 ring-4 ring-green-50 group-hover:ring-green-100' :
                                                                 'bg-red-400 ring-4 ring-red-50 group-hover:ring-red-100'
-                                                        } transition-all`}></div>
+                                                        } transition - all`}></div>
                                                     <div className="min-w-0">
                                                         <p className="text-sm font-bold text-gray-900 truncate">{order.customer_name}</p>
                                                         <p className="text-xs text-gray-500 font-medium mt-0.5">{order.order_number}</p>
@@ -309,12 +309,12 @@ export default function Dashboard() {
                         {/* Pending Orders Widget */}
                         <div className="card p-4 flex items-center justify-between border border-gray-200 shadow-sm bg-gray-50">
                             <div className="flex items-center gap-4">
-                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center border shadow-sm ${stats?.pending_orders > 0 ? 'bg-accent-50 text-accent-700 border-accent-200' : 'bg-white text-gray-400 border-gray-200'}`}>
+                                <div className={`w - 10 h - 10 rounded - xl flex items - center justify - center border shadow - sm ${stats?.pending_orders > 0 ? 'bg-accent-50 text-accent-700 border-accent-200' : 'bg-white text-gray-400 border-gray-200'} `}>
                                     <i className="fas fa-clock text-sm"></i>
                                 </div>
                                 <div>
                                     <p className="text-xs text-gray-500 uppercase font-bold tracking-wide">Pending</p>
-                                    <p className={`text-xl font-bold leading-none mt-1 ${stats?.pending_orders > 0 ? 'text-accent-700' : 'text-gray-900'}`}>
+                                    <p className={`text - xl font - bold leading - none mt - 1 ${stats?.pending_orders > 0 ? 'text-accent-700' : 'text-gray-900'} `}>
                                         {stats?.pending_orders || 0}
                                     </p>
                                 </div>
@@ -340,13 +340,13 @@ export default function Dashboard() {
                                     {lowStock.slice(0, 3).map((product) => (
                                         <Link
                                             key={product.id}
-                                            to={`/admin/products/${product.id}`}
+                                            to={`/ admin / products / ${product.id} `}
                                             className="flex items-center gap-3 p-3 hover:bg-red-50 transition-colors group"
                                         >
                                             <div className="w-10 h-10 bg-gray-50 rounded-lg overflow-hidden shrink-0 border border-gray-200 group-hover:border-red-200 transition-colors">
                                                 {product.image ? (
                                                     <img
-                                                        src={`http://localhost:8000${product.image}`}
+                                                        src={`${API_HOST}${product.image}`}
                                                         alt=""
                                                         className="w-full h-full object-cover"
                                                     />
@@ -355,20 +355,20 @@ export default function Dashboard() {
                                                         <i className="fas fa-couch text-gray-300 text-xs"></i>
                                                     </div>
                                                 )}
-                                            </div>
+                                            </div >
                                             <div className="flex-1 min-w-0">
                                                 <p className="text-sm font-bold text-gray-900 truncate">{product.name}</p>
                                                 <p className="text-xs text-red-600 font-bold mt-0.5">Qty: {product.stock}</p>
                                             </div>
                                             <i className="fas fa-chevron-right text-red-200 text-xs group-hover:text-red-400 group-hover:translate-x-1 transition-all"></i>
-                                        </Link>
+                                        </Link >
                                     ))}
-                                </div>
-                            </div>
+                                </div >
+                            </div >
                         )}
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </div >
+                </div >
+            </div >
+        </div >
     );
 }

@@ -1,9 +1,9 @@
 /**
- * Dan Classic Furniture - Product Detail Page
+ * Daniel Furniture - Product Detail Page
  */
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { productsAPI } from '../../api';
+import { productsAPI, API_HOST } from '../../api';
 import { useCart } from '../../context/CartContext';
 import Header from '../../components/layout/Header';
 import { LoadingPage } from '../../components/ui/Loading';
@@ -55,7 +55,7 @@ export default function ProductDetail() {
     }
 
     const images = product.images?.length > 0
-        ? product.images.map((img) => `http://localhost:8000${img}`)
+        ? product.images.map((img) => `${API_HOST}${img}`)
         : ['/placeholder-furniture.jpg'];
 
     return (

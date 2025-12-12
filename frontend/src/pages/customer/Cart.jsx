@@ -1,11 +1,12 @@
 /**
- * Dan Classic Furniture - Cart Page
+ * Daniel Furniture - Cart Page
  * Professional checkout experience
  */
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
+import { API_HOST } from '../../api';
 import Header from '../../components/layout/Header';
 import { WhatsAppOrderButton } from '../../components/ui/WhatsAppButton';
 
@@ -73,7 +74,7 @@ export default function Cart() {
                                             <div className="w-24 h-24 flex-shrink-0 bg-gray-100 rounded-xl overflow-hidden">
                                                 {item.image ? (
                                                     <img
-                                                        src={`http://localhost:8000${item.image}`}
+                                                        src={`${API_HOST}${item.image}`}
                                                         alt={item.name}
                                                         className="w-full h-full object-cover"
                                                     />

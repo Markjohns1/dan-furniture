@@ -1,9 +1,13 @@
 /**
- * Dan Classic Furniture - API Service
+ * Daniel Furniture - API Service
  */
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+// API host for images (without /api suffix)
+export const API_HOST = import.meta.env.VITE_API_HOST || 'http://localhost:8000';
+
+// API base URL for endpoints
+const API_BASE_URL = import.meta.env.VITE_API_URL || `${API_HOST}/api`;
 
 // Create axios instance
 const api = axios.create({

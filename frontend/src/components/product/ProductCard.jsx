@@ -4,12 +4,13 @@
  */
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import { API_HOST } from '../../api';
 
 export default function ProductCard({ product }) {
     const { addItem } = useCart();
 
-    const imageUrl = product.images?.[0]
-        ? `http://localhost:8000${product.images[0]}`
+    const imageUrl = product.images?.length
+        ? `${API_HOST}${product.images[0]}`
         : 'https://via.placeholder.com/400x400?text=No+Image';
 
     const handleAddToCart = (e) => {
