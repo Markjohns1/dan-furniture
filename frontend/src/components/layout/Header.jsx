@@ -37,14 +37,12 @@ export default function Header({ title, showBack = false }) {
                             <h1 className="text-lg font-bold text-gray-900 lg:hidden">{title}</h1>
                         ) : null}
 
-                        <Link to="/" className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-lg">
-                                <i className="fas fa-couch text-white text-lg"></i>
-                            </div>
-                            <div className="hidden sm:block">
-                                <span className="font-bold text-xl text-gray-900">Daniel</span>
-                                <span className="text-primary-600 font-semibold ml-1">Furniture</span>
-                            </div>
+                        <Link to="/" className="flex items-center">
+                            <img
+                                src="/logo.svg"
+                                alt="Daniel Furniture"
+                                className="h-10 sm:h-12 w-auto"
+                            />
                         </Link>
                     </div>
 
