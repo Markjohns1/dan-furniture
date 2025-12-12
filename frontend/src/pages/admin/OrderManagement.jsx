@@ -60,7 +60,7 @@ export default function OrderManagement() {
         <div className="page pb-safe-nav">
             <Header title="Orders" />
 
-            <div className="container-app py-4">
+            <div className="container-app py-8">
                 {/* Status Filters */}
                 <div className="flex gap-2 overflow-x-auto pb-4">
                     {[
@@ -74,8 +74,8 @@ export default function OrderManagement() {
                             key={filter.value || 'all'}
                             onClick={() => handleStatusFilter(filter.value)}
                             className={`btn-sm whitespace-nowrap ${status === filter.value
-                                    ? 'btn-primary'
-                                    : 'btn-secondary'
+                                ? 'btn-primary'
+                                : 'btn-secondary'
                                 }`}
                         >
                             {filter.label}

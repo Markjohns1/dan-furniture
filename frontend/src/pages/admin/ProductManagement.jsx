@@ -55,7 +55,7 @@ export default function ProductManagement() {
         <div className="page pb-safe-nav">
             <Header title="Products" />
 
-            <div className="container-app py-4">
+            <div className="container-app py-8">
                 {/* Add Button */}
                 <Link to="/admin/products/new" className="btn-primary w-full mb-4">
                     <i className="fas fa-plus"></i>
