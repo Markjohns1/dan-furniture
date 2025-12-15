@@ -76,6 +76,7 @@ html {
      Header (4rem/64px) + Gap (2rem/32px) = 6rem spacing */
   scroll-padding-top: 6.5rem;
   -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden; /* Prevent horizontal scroll "swiping" */
 }
 
 body {
@@ -86,6 +87,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
+  overflow-x: hidden; /* Ensure no horizontal scroll on body too */
 }
 
 /* ============== Button Styles ============== */

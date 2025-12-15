@@ -38,17 +38,19 @@ export default function Profile() {
 
     if (!isAuthenticated) {
         return (
-            <div className="page pb-safe-nav bg-gray-50 flex items-center justify-center min-h-screen">
+            <div className="page pb-safe-nav bg-gray-50 min-h-screen flex flex-col">
                 <Header title="Account" />
-                <div className="w-full max-w-sm mx-auto p-8 card text-center shadow-lg">
-                    <div className="w-20 h-20 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
-                        <i className="fas fa-user text-3xl text-gray-400"></i>
-                    </div>
-                    <h2 className="text-xl font-bold text-gray-900 mb-2">Sign In</h2>
-                    <p className="text-gray-500 mb-8 text-sm">Access your profile, orders, and more.</p>
-                    <div className="flex flex-col gap-3">
-                        <Link to="/login" className="btn-primary w-full shadow-md">Sign In</Link>
-                        <Link to="/register" className="btn-outline w-full">Create Account</Link>
+                <div className="flex-1 flex items-center justify-center p-4">
+                    <div className="w-full max-w-sm mx-auto p-8 card text-center shadow-lg">
+                        <div className="w-20 h-20 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+                            <i className="fas fa-user text-3xl text-gray-400"></i>
+                        </div>
+                        <h2 className="text-xl font-bold text-gray-900 mb-2">Sign In</h2>
+                        <p className="text-gray-500 mb-8 text-sm">Access your profile, orders, and more.</p>
+                        <div className="flex flex-col gap-3">
+                            <Link to="/login" className="btn-primary w-full shadow-md">Sign In</Link>
+                            <Link to="/register" className="btn-outline w-full">Create Account</Link>
+                        </div>
                     </div>
                 </div>
             </div>
