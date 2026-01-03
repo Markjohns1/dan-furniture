@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { categoriesAPI } from '../../api';
 import Header from '../../components/layout/Header';
 import { LoadingPage } from '../../components/ui/Loading';
+import AdminNav from '../../components/admin/AdminNav';
 
 export default function CategoryManagement() {
     const [categories, setCategories] = useState([]);
@@ -86,6 +87,8 @@ export default function CategoryManagement() {
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
             <Header title="Manage Categories" showBack />
+
+            <AdminNav />
 
             <main className="max-w-4xl mx-auto px-4 py-8">
                 <div className="flex justify-between items-center mb-8">

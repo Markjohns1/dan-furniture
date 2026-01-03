@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { adminAPI, API_HOST } from '../../api';
 import Header from '../../components/layout/Header';
 import { LoadingSpinner } from '../../components/ui/Loading';
+import AdminNav from '../../components/admin/AdminNav';
 
 export default function Dashboard() {
     const [stats, setStats] = useState(null);
@@ -43,142 +44,104 @@ export default function Dashboard() {
         <div className="page pb-safe-nav bg-gray-50/50">
             <Header title="Dashboard" />
 
+            {/* Admin Quick Nav */}
+            <AdminNav />
+
             {/* Desktop: Grid layout for efficient space usage. Mobile: Stacked (space-y-5) */}
-            <div className="container-app py-6 mt-6">
+            <div className="container-app py-6">
 
                 {/* 1. Top Stats Row (Revenue, Orders, Products, Customers) */}
                 {/* 1. Mobile Stats (Combined Cards to save space) */}
-                <div className="grid grid-cols-1 gap-4 mb-6 lg:hidden">
-                    {/* Revenue & Orders Group */}
-                    <div className="card border border-gray-200 shadow-sm bg-white overflow-hidden rounded-xl">
-                        <div className="flex items-center p-4 border-b border-gray-100">
-                            <div className="p-2.5 bg-primary-50 rounded-xl shrink-0 mr-4">
-                                <i className="fas fa-money-bill-wave text-xl text-primary-600"></i>
-                            </div>
-                            <div>
-                                <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">Revenue</p>
-                                <p className="text-xl font-bold text-gray-900">
-                                    <span className="text-sm text-gray-400 font-normal mr-1">KSh</span>
-                                    {(stats?.revenue_today || 0).toLocaleString()}
-                                </p>
-                            </div>
-                        </div>
-                        <div className="flex items-center p-4">
-                            <div className="p-2.5 bg-blue-50 rounded-xl shrink-0 mr-4">
-                                <i className="fas fa-shopping-bag text-xl text-blue-600"></i>
-                            </div>
-                            <div>
-                                <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">Orders</p>
-                                <p className="text-xl font-bold text-gray-900">
-                                    {stats?.orders_today || 0}
-                                </p>
-                            </div>
-                        </div>
+                {/* 1. Smart Action Center (Dynamic Tasks) */}
+                {(stats?.pending_orders > 0 || stats?.low_stock_count > 0) && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 animate-fade-in-up">
+                        {stats?.pending_orders > 0 && (
+                            <Link to="/admin/orders?status=pending" className="flex items-center justify-between p-4 bg-accent-600 rounded-xl shadow-lg shadow-accent-600/20 group hover:scale-[1.02] transition-transform">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white backdrop-blur-sm">
+                                        <i className="fas fa-clock animate-pulse"></i>
+                                    </div>
+                                    <div className="text-white">
+                                        <p className="font-bold text-lg leading-tight">{stats.pending_orders} Pending Orders</p>
+                                        <p className="text-xs text-accent-100 font-medium">Requires immediate processing</p>
+                                    </div>
+                                </div>
+                                <div className="h-8 w-8 rounded-full bg-white text-accent-600 flex items-center justify-center group-hover:bg-accent-50 transition-colors">
+                                    <i className="fas fa-arrow-right text-sm"></i>
+                                </div>
+                            </Link>
+                        )}
+                        {stats?.low_stock_count > 0 && (
+                            <Link to="/admin/analytics/low-stock" className="flex items-center justify-between p-4 bg-red-600 rounded-xl shadow-lg shadow-red-600/20 group hover:scale-[1.02] transition-transform">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white backdrop-blur-sm">
+                                        <i className="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div className="text-white">
+                                        <p className="font-bold text-lg leading-tight">{stats.low_stock_count} Low Stock Items</p>
+                                        <p className="text-xs text-red-100 font-medium">Restock needed soon</p>
+                                    </div>
+                                </div>
+                                <div className="h-8 w-8 rounded-full bg-white text-red-600 flex items-center justify-center group-hover:bg-red-50 transition-colors">
+                                    <i className="fas fa-arrow-right text-sm"></i>
+                                </div>
+                            </Link>
+                        )}
                     </div>
+                )}
 
-                    {/* Products & Customers Group */}
-                    <div className="card border border-gray-200 shadow-sm bg-white overflow-hidden rounded-xl">
-                        <div className="flex items-center p-4 border-b border-gray-100">
-                            <div className="p-2.5 bg-gray-50 rounded-xl shrink-0 mr-4">
-                                <i className="fas fa-couch text-xl text-gray-500"></i>
-                            </div>
-                            <div>
-                                <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">Products</p>
-                                <p className="text-xl font-bold text-gray-900">
-                                    {stats?.total_products || 0}
-                                </p>
-                            </div>
-                        </div>
-                        <div className="flex items-center p-4">
-                            <div className="p-2.5 bg-gray-50 rounded-xl shrink-0 mr-4">
-                                <i className="fas fa-users text-xl text-gray-500"></i>
-                            </div>
-                            <div>
-                                <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">Customers</p>
-                                <p className="text-xl font-bold text-gray-900">
-                                    {stats?.total_customers || 0}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* 2. Desktop Stats Row (Restored "Icon Left" Layout) */}
-                <div className="hidden lg:grid lg:grid-cols-4 gap-4 mb-6">
+                {/* 2. Key Metrics Grid */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-8">
                     {/* Revenue */}
-                    <div className="card p-5 border border-gray-200 shadow-sm hover:shadow-md transition-all">
-                        <div className="flex justify-between items-start">
-                            <div className="flex-1 min-w-0 pr-2">
-                                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1 truncate">Revenue</p>
-                                <p className="text-2xl font-bold text-gray-900 tracking-tight">
-                                    <span className="text-sm text-gray-400 font-normal mr-1">KSh</span>
-                                    {(stats?.revenue_today || 0).toLocaleString()}
-                                </p>
-                            </div>
-                            <div className="p-2.5 bg-primary-50 rounded-xl shrink-0">
-                                <i className="fas fa-money-bill-wave text-2xl text-primary-600"></i>
+                    <div className="card p-4 md:p-5 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:shadow-md transition-all flex flex-col justify-between h-full bg-white">
+                        <div className="flex flex-col gap-1 mb-2">
+                            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Revenue</span>
+                            <div className="flex items-baseline gap-1">
+                                <span className="text-sm font-medium text-gray-400">KSh</span>
+                                <span className="text-2xl md:text-3xl font-black text-primary-900 tracking-tight">{(stats?.revenue_today || 0).toLocaleString()}</span>
                             </div>
                         </div>
-                        <div className="mt-3 text-xs font-medium text-emerald-700 bg-emerald-50 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-emerald-100">
-                            <i className="fas fa-calendar-day"></i>
-                            Today
+                        <div className="flex items-center gap-2 mt-auto pt-3 border-t border-gray-50">
+                            <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">+12% vs yest.</span>
+                            <span className="text-[10px] text-gray-400 ml-auto">Today</span>
                         </div>
                     </div>
 
                     {/* Orders */}
-                    <div className="card p-5 border border-gray-200 shadow-sm hover:shadow-md transition-all">
-                        <div className="flex justify-between items-start">
-                            <div className="flex-1 min-w-0 pr-2">
-                                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1 truncate">Orders</p>
-                                <p className="text-2xl font-bold text-gray-900 tracking-tight">
-                                    {stats?.orders_today || 0}
-                                </p>
-                            </div>
-                            <div className="p-2.5 bg-blue-50 rounded-xl shrink-0">
-                                <i className="fas fa-shopping-bag text-2xl text-blue-600"></i>
-                            </div>
+                    <Link to="/admin/orders" className="card p-4 md:p-5 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:shadow-md transition-all group bg-white">
+                        <div className="flex flex-col gap-1 mb-2">
+                            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider group-hover:text-blue-600 transition-colors">Orders</span>
+                            <span className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight group-hover:text-blue-600 transition-colors">{stats?.orders_today || 0}</span>
                         </div>
-                        <div className="mt-3 text-xs font-medium text-blue-700 bg-blue-50 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-blue-100">
-                            <i className="fas fa-clock"></i>
-                            Today
+                        <div className="flex items-center gap-2 mt-2 pt-3 border-t border-gray-50">
+                            <span className="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">New</span>
+                            <i className="fas fa-chevron-right ml-auto text-xs text-gray-300 group-hover:text-blue-500 transition-colors"></i>
                         </div>
-                    </div>
+                    </Link>
 
-                    {/* Products */}
-                    <div className="card p-5 border border-gray-200 shadow-sm hover:shadow-md transition-all">
-                        <div className="flex justify-between items-start">
-                            <div className="flex-1 min-w-0 pr-2">
-                                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1 truncate">Products</p>
-                                <p className="text-2xl font-bold text-gray-900 tracking-tight">
-                                    {stats?.total_products || 0}
-                                </p>
-                            </div>
-                            <div className="p-2.5 bg-gray-50 rounded-xl shrink-0">
-                                <i className="fas fa-couch text-2xl text-gray-400"></i>
-                            </div>
+                    {/* Inventory */}
+                    <Link to="/admin/products" className="card p-4 md:p-5 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:shadow-md transition-all group bg-white">
+                        <div className="flex flex-col gap-1 mb-2">
+                            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider group-hover:text-primary-600 transition-colors">Products</span>
+                            <span className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight group-hover:text-primary-600 transition-colors">{stats?.total_products || 0}</span>
                         </div>
-                        <div className="mt-3 text-xs font-medium text-gray-500 bg-gray-100 inline-block px-2.5 py-1 rounded-lg border border-gray-200">
-                            Total Inventory
+                        <div className="flex items-center gap-2 mt-2 pt-3 border-t border-gray-50">
+                            <span className="text-[10px] font-bold text-gray-600 bg-gray-100 px-2 py-0.5 rounded-full">Active</span>
+                            <i className="fas fa-chevron-right ml-auto text-xs text-gray-300 group-hover:text-primary-500 transition-colors"></i>
                         </div>
-                    </div>
+                    </Link>
 
                     {/* Customers */}
-                    <div className="card p-5 border border-gray-200 shadow-sm hover:shadow-md transition-all">
-                        <div className="flex justify-between items-start">
-                            <div className="flex-1 min-w-0 pr-2">
-                                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1 truncate">Customers</p>
-                                <p className="text-2xl font-bold text-gray-900 tracking-tight">
-                                    {stats?.total_customers || 0}
-                                </p>
-                            </div>
-                            <div className="p-2.5 bg-gray-50 rounded-xl shrink-0">
-                                <i className="fas fa-users text-2xl text-gray-400"></i>
-                            </div>
+                    <Link to="/admin/customers" className="card p-4 md:p-5 border border-gray-100 shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:shadow-md transition-all group bg-white">
+                        <div className="flex flex-col gap-1 mb-2">
+                            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider group-hover:text-purple-600 transition-colors">Customers</span>
+                            <span className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight group-hover:text-purple-600 transition-colors">{stats?.total_customers || 0}</span>
                         </div>
-                        <div className="mt-3 text-xs font-medium text-gray-500 bg-gray-100 inline-block px-2.5 py-1 rounded-lg border border-gray-200">
-                            Total Registered
+                        <div className="flex items-center gap-2 mt-2 pt-3 border-t border-gray-50">
+                            <span className="text-[10px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded-full">Total</span>
+                            <i className="fas fa-chevron-right ml-auto text-xs text-gray-300 group-hover:text-purple-500 transition-colors"></i>
                         </div>
-                    </div>
+                    </Link>
                 </div>
 
                 {/* Main Content Grid */}
@@ -317,66 +280,7 @@ export default function Dashboard() {
                             </div>
                         </div>
 
-                        {/* Pending Orders Widget */}
-                        <div className="card p-4 flex items-center justify-between border border-gray-200 shadow-sm bg-gray-50">
-                            <div className="flex items-center gap-4">
-                                <div className={`w - 10 h - 10 rounded - xl flex items - center justify - center border shadow - sm ${stats?.pending_orders > 0 ? 'bg-accent-50 text-accent-700 border-accent-200' : 'bg-white text-gray-400 border-gray-200'} `}>
-                                    <i className="fas fa-clock text-sm"></i>
-                                </div>
-                                <div>
-                                    <p className="text-xs text-gray-500 uppercase font-bold tracking-wide">Pending</p>
-                                    <p className={`text - xl font - bold leading - none mt - 1 ${stats?.pending_orders > 0 ? 'text-accent-700' : 'text-gray-900'} `}>
-                                        {stats?.pending_orders || 0}
-                                    </p>
-                                </div>
-                            </div>
-                            {stats?.pending_orders > 0 && (
-                                <Link to="/admin/orders?status=pending" className="text-xs font-bold text-primary-600 hover:text-primary-700 bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm hover:shadow transition-all">
-                                    Review
-                                </Link>
-                            )}
-                        </div>
-
-                        {/* Low Stock Widget */}
-                        {lowStock.length > 0 && (
-                            <div className="card border border-red-200 bg-red-50/30 shadow-sm overflow-hidden">
-                                <div className="p-3.5 border-b border-red-100 flex items-center justify-between bg-red-50/50">
-                                    <div className="flex items-center gap-2 text-red-800">
-                                        <i className="fas fa-exclamation-triangle text-sm"></i>
-                                        <span className="text-xs font-bold uppercase tracking-wide">Low Stock</span>
-                                    </div>
-                                    <span className="bg-white border border-red-200 text-red-700 text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">{lowStock.length} items</span>
-                                </div>
-                                <div className="divide-y divide-red-100/50 bg-white">
-                                    {lowStock.slice(0, 3).map((product) => (
-                                        <Link
-                                            key={product.id}
-                                            to={`/ admin / products / ${product.id} `}
-                                            className="flex items-center gap-3 p-3 hover:bg-red-50 transition-colors group"
-                                        >
-                                            <div className="w-10 h-10 bg-gray-50 rounded-lg overflow-hidden shrink-0 border border-gray-200 group-hover:border-red-200 transition-colors">
-                                                {product.image ? (
-                                                    <img
-                                                        src={`${API_HOST}${product.image}`}
-                                                        alt=""
-                                                        className="w-full h-full object-cover"
-                                                    />
-                                                ) : (
-                                                    <div className="w-full h-full flex items-center justify-center">
-                                                        <i className="fas fa-couch text-gray-300 text-xs"></i>
-                                                    </div>
-                                                )}
-                                            </div >
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-sm font-bold text-gray-900 truncate">{product.name}</p>
-                                                <p className="text-xs text-red-600 font-bold mt-0.5">Qty: {product.stock}</p>
-                                            </div>
-                                            <i className="fas fa-chevron-right text-red-200 text-xs group-hover:text-red-400 group-hover:translate-x-1 transition-all"></i>
-                                        </Link >
-                                    ))}
-                                </div >
-                            </div >
-                        )}
+                        {/* Widgets removed (Moved to Smart Action Center) */}
                     </div >
                 </div >
             </div >

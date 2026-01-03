@@ -10,6 +10,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const { login } = useAuth();
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
@@ -19,15 +20,22 @@ export default function Login() {
         e.preventDefault();
         setLoading(true);
         setError('');
+        setSuccessMessage('');
 
         const result = await login(email.trim(), password);
 
         if (result.success) {
-            navigate(redirect);
+            setSuccessMessage('Login successful! Redirecting...');
+
+            // Short delay to show success message
+            setTimeout(() => {
+                const targetPath = result.user.role === 'admin' ? '/admin' : redirect;
+                navigate(targetPath);
+            }, 800);
         } else {
             setError(result.error);
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     return (
@@ -53,9 +61,15 @@ export default function Login() {
 
                     <div className="card p-6">
                         <form onSubmit={handleSubmit} className="space-y-4">
+                            {successMessage && (
+                                <div className="p-3 bg-green-50 text-green-700 text-sm rounded-lg border border-green-200 flex items-center gap-2 animate-fade-in">
+                                    <i className="fas fa-check-circle"></i>
+                                    {successMessage}
+                                </div>
+                            )}
                             {error && (
-                                <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg">
-                                    <i className="fas fa-exclamation-circle mr-2"></i>
+                                <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg flex items-center gap-2">
+                                    <i className="fas fa-exclamation-circle"></i>
                                     {error}
                                 </div>
                             )}

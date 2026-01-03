@@ -79,18 +79,15 @@ export default function Header({ title, showBack = false }) {
 
                             {/* Hoverable Products Dropdown */}
                             <div className="relative group px-1">
-                                <NavLink
-                                    to="/products"
-                                    className={({ isActive }) =>
-                                        `flex items-center gap-1 px-4 py-2 rounded-lg font-medium transition-colors ${isActive
+                                <div
+                                    className={`flex items-center gap-1 px-4 py-2 rounded-lg font-medium transition-colors cursor-default ${location.pathname.startsWith('/products')
                                             ? 'bg-primary-950 text-white shadow-lg shadow-primary-900/20'
                                             : 'text-gray-500 hover:text-primary-900 hover:bg-gray-50'
-                                        }`
-                                    }
+                                        }`}
                                 >
                                     Products
                                     <i className="fas fa-chevron-down text-[10px] opacity-50 group-hover:rotate-180 transition-transform duration-200"></i>
-                                </NavLink>
+                                </div>
 
                                 {/* Dropdown Menu */}
                                 <div className="absolute left-0 top-full pt-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 z-50">

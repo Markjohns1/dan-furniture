@@ -5,6 +5,7 @@
 import { useState, useEffect } from 'react';
 import { adminAPI } from '../../api';
 import Header from '../../components/layout/Header';
+import AdminNav from '../../components/admin/AdminNav';
 import BottomNav from '../../components/layout/BottomNav';
 import { LoadingSpinner } from '../../components/ui/Loading';
 
@@ -75,6 +76,8 @@ export default function UserManagement() {
     return (
         <div className="page pb-20 lg:pb-8">
             <Header title="User Management" showBack />
+
+            <AdminNav />
 
             <div className="container-app py-6 max-w-4xl mx-auto">
                 {/* Header */}

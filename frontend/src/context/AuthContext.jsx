@@ -48,8 +48,12 @@ export function AuthProvider({ children }) {
             localStorage.setItem('access_token', access_token);
             localStorage.setItem('refresh_token', refresh_token);
 
-            await fetchUser();
-            return { success: true };
+            // Fetch user immediately to get the role
+            const userResponse = await authAPI.getMe();
+            const user = userResponse.data;
+            setUser(user);
+
+            return { success: true, user }; // Return user object
         } catch (err) {
             const message = err.response?.data?.detail || 'Login failed';
             setError(message);

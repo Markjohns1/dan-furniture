@@ -2,12 +2,15 @@
  * Dan Classic Furniture - Product Card Component
  * Clean, professional design
  */
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { API_HOST } from '../../api';
 
 export default function ProductCard({ product }) {
     const { addItem, openCart } = useCart();
+    const [isAdding, setIsAdding] = useState(false);
+    const [isAdded, setIsAdded] = useState(false);
 
     const imageUrl = product.images?.length
         ? `${API_HOST}${product.images[0]}`
@@ -18,6 +21,25 @@ export default function ProductCard({ product }) {
         e.stopPropagation();
         addItem(product, 1, product.colors?.[0] || null);
         openCart();
+    };
+
+    const handleMobileAdd = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (isAdding || isAdded) return;
+
+        setIsAdding(true);
+        // Add to cart but don't open drawer immediately, let animation play
+        addItem(product, 1, product.colors?.[0] || null);
+
+        setTimeout(() => {
+            setIsAdding(false);
+            setIsAdded(true);
+        }, 800);
+
+        setTimeout(() => {
+            setIsAdded(false);
+        }, 2000);
     };
 
     const discount = product.compare_price && product.compare_price > product.price
@@ -63,8 +85,39 @@ export default function ProductCard({ product }) {
                     )}
                 </div>
 
-                {/* Quick Add Overlay */}
-                <div className="absolute inset-x-3 bottom-3 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out z-10">
+                {/* Mobile Add Button - Animated */}
+                <button
+                    onClick={handleMobileAdd}
+                    disabled={product.stock === 0}
+                    className={`lg:hidden absolute bottom-3 right-3 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full shadow-lg transition-all duration-300 transform active:scale-95 ${isAdded
+                        ? 'bg-green-600 text-white border-green-600'
+                        : isAdding
+                            ? 'bg-primary-700 text-white border-primary-700 pr-4'
+                            : 'bg-primary-950 text-white border-primary-950 hover:bg-primary-900'
+                        }`}
+                >
+                    {isAdded ? (
+                        <>
+                            <i className="fas fa-check text-[10px]"></i>
+                            <span className="text-[10px] font-bold uppercase tracking-wide">Added</span>
+                        </>
+                    ) : isAdding ? (
+                        <>
+                            <i className="fas fa-circle-notch fa-spin text-[10px]"></i>
+                            <span className="text-[10px] font-bold uppercase tracking-wide">Adding...</span>
+                        </>
+                    ) : (
+                        <>
+                            <i className="fas fa-plus text-[10px]"></i>
+                            <span className="text-[10px] font-bold uppercase tracking-wide">
+                                {product.stock === 0 ? 'Out' : 'ADD TO CART'}
+                            </span>
+                        </>
+                    )}
+                </button>
+
+                {/* Quick Add Overlay (Desktop) */}
+                <div className="hidden lg:block absolute inset-x-3 bottom-3 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out z-10">
                     <button
                         onClick={handleAddToCart}
                         disabled={product.stock === 0}

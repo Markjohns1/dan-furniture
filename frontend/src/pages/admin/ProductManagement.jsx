@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { productsAPI, categoriesAPI, API_HOST } from '../../api';
 import Header from '../../components/layout/Header';
 import { LoadingSpinner } from '../../components/ui/Loading';
+import AdminNav from '../../components/admin/AdminNav';
 
 export default function ProductManagement() {
     const [products, setProducts] = useState([]);
@@ -55,7 +56,9 @@ export default function ProductManagement() {
         <div className="page pb-safe-nav">
             <Header title="Products" />
 
-            <div className="container-app py-6 mt-6">
+            <AdminNav />
+
+            <div className="container-app py-6">
                 {/* Header Actions */}
                 <div className="flex justify-end mb-6">
                     <Link to="/admin/products/new" className="btn btn-primary shadow-lg w-full sm:w-auto px-6 py-2.5">

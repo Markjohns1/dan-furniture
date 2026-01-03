@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ordersAPI } from '../../api';
 import Header from '../../components/layout/Header';
+import AdminNav from '../../components/admin/AdminNav';
 import { LoadingSpinner } from '../../components/ui/Loading';
 
 const statusColors = {
@@ -60,7 +61,9 @@ export default function OrderManagement() {
         <div className="page pb-safe-nav">
             <Header title="Orders" />
 
-            <div className="container-app py-6 mt-6">
+            <AdminNav />
+
+            <div className="container-app py-6">
                 {/* Status Filters */}
                 <div className="flex gap-2 overflow-x-auto pb-4 scrollbar-hide">
                     {[

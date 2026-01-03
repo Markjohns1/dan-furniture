@@ -8,6 +8,7 @@ import { CartProvider, useCart } from './context/CartContext';
 import BottomNav from './components/layout/BottomNav';
 import CartDrawer from './components/cart/CartDrawer';
 import { LoadingPage } from './components/ui/Loading';
+import ScrollToTop from './components/ui/ScrollToTop';
 
 // Customer Pages
 import Home from './pages/customer/Home';
@@ -165,6 +166,7 @@ function App() {
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <AuthProvider>
           <CartProvider>
             <AppRoutes />
