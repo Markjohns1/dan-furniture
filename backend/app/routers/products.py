@@ -150,8 +150,10 @@ async def get_products(
     sort: Optional[str] = Query("newest", regex="^(newest|oldest|price_low|price_high|name)$"),
     db: Session = Depends(get_db)
 ):
-    """Get products with filters and pagination"""
-    query = db.query(Product).filter(Product.is_active == True)
+    """Get products with filters and pagination - Optimized with joinedload"""
+    from sqlalchemy.orm import joinedload
+    
+    query = db.query(Product).options(joinedload(Product.category)).filter(Product.is_active == True)
     
     # Apply filters
     if category_id:
@@ -193,10 +195,9 @@ async def get_products(
     pages = (total + limit - 1) // limit
     products = query.offset((page - 1) * limit).limit(limit).all()
     
-    # Include category info
+    # Mapping results using the already loaded category
     result = []
     for product in products:
-        category = db.query(Category).filter(Category.id == product.category_id).first()
         result.append(ProductWithCategory(
             id=product.id,
             name=product.name,
@@ -215,13 +216,13 @@ async def get_products(
             created_at=product.created_at,
             updated_at=product.updated_at,
             category=CategoryResponse(
-                id=category.id,
-                name=category.name,
-                slug=category.slug,
-                description=category.description,
-                image=category.image,
-                created_at=category.created_at
-            ) if category else None
+                id=product.category.id,
+                name=product.category.name,
+                slug=product.category.slug,
+                description=product.category.description,
+                image=product.category.image,
+                created_at=product.category.created_at
+            ) if product.category else None
         ))
     
     return ProductListResponse(products=result, total=total, page=page, pages=pages)
@@ -232,15 +233,15 @@ async def get_featured_products(
     limit: int = Query(8, ge=1, le=20),
     db: Session = Depends(get_db)
 ):
-    """Get featured products"""
-    products = db.query(Product).filter(
+    """Get featured products - Optimized"""
+    from sqlalchemy.orm import joinedload
+    products = db.query(Product).options(joinedload(Product.category)).filter(
         Product.is_active == True,
         Product.featured == True
     ).order_by(Product.created_at.desc()).limit(limit).all()
     
     result = []
     for product in products:
-        category = db.query(Category).filter(Category.id == product.category_id).first()
         result.append(ProductWithCategory(
             id=product.id,
             name=product.name,
@@ -259,13 +260,13 @@ async def get_featured_products(
             created_at=product.created_at,
             updated_at=product.updated_at,
             category=CategoryResponse(
-                id=category.id,
-                name=category.name,
-                slug=category.slug,
-                description=category.description,
-                image=category.image,
-                created_at=category.created_at
-            ) if category else None
+                id=product.category.id,
+                name=product.category.name,
+                slug=product.category.slug,
+                description=product.category.description,
+                image=product.category.image,
+                created_at=product.category.created_at
+            ) if product.category else None
         ))
     return result
 
@@ -275,14 +276,14 @@ async def get_new_arrivals(
     limit: int = Query(8, ge=1, le=20),
     db: Session = Depends(get_db)
 ):
-    """Get newest products"""
-    products = db.query(Product).filter(
+    """Get newest products - Optimized"""
+    from sqlalchemy.orm import joinedload
+    products = db.query(Product).options(joinedload(Product.category)).filter(
         Product.is_active == True
     ).order_by(Product.created_at.desc()).limit(limit).all()
     
     result = []
     for product in products:
-        category = db.query(Category).filter(Category.id == product.category_id).first()
         result.append(ProductWithCategory(
             id=product.id,
             name=product.name,
@@ -301,13 +302,13 @@ async def get_new_arrivals(
             created_at=product.created_at,
             updated_at=product.updated_at,
             category=CategoryResponse(
-                id=category.id,
-                name=category.name,
-                slug=category.slug,
-                description=category.description,
-                image=category.image,
-                created_at=category.created_at
-            ) if category else None
+                id=product.category.id,
+                name=product.category.name,
+                slug=product.category.slug,
+                description=product.category.description,
+                image=product.category.image,
+                created_at=product.category.created_at
+            ) if product.category else None
         ))
     return result
 

@@ -10,6 +10,7 @@ import ProductCard from '../../components/product/ProductCard';
 import { ProductGridSkeleton } from '../../components/ui/Loading';
 import WhatsAppButton from '../../components/ui/WhatsAppButton';
 import SEO from '../../components/ui/SEO';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
 
 export default function Products() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -98,7 +99,14 @@ export default function Products() {
             />
             <Header title="Products" showBack />
 
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-6">
+                <Breadcrumbs
+                    items={[
+                        { label: 'Products', to: categorySlug ? '/products' : null },
+                        ...(categorySlug ? [{ label: categories.find(c => c.slug === categorySlug)?.name || 'Category' }] : [])
+                    ]}
+                />
+
                 {/* Page Header */}
                 <div className="mb-6">
                     <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
@@ -224,7 +232,7 @@ export default function Products() {
                             <ProductGridSkeleton count={8} />
                         ) : products.length > 0 ? (
                             <>
-                                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                                     {products.map((product) => (
                                         <ProductCard key={product.id} product={product} />
                                     ))}

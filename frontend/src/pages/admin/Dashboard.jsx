@@ -282,6 +282,17 @@ export default function Dashboard() {
                                     <i className="fas fa-chevron-right text-gray-300 text-xs group-hover:text-primary-500 group-hover:translate-x-1 transition-all"></i>
                                 </Link>
 
+                                <Link to="/admin/categories" className="card p-4 flex items-center gap-4 hover:bg-accent-50/10 hover:border-accent-100 transition-all border border-gray-200 shadow-sm group">
+                                    <div className="w-10 h-10 rounded-xl bg-accent-50 flex items-center justify-center text-accent-700 border border-accent-100 group-hover:scale-110 transition-transform">
+                                        <i className="fas fa-tags text-sm"></i>
+                                    </div>
+                                    <div className="flex-1">
+                                        <p className="font-bold text-gray-900 text-sm">Manage Categories</p>
+                                        <p className="text-xs text-gray-500 mt-0.5">Organize items</p>
+                                    </div>
+                                    <i className="fas fa-chevron-right text-gray-300 text-xs group-hover:text-accent-700 group-hover:translate-x-1 transition-all"></i>
+                                </Link>
+
                                 <Link to="/admin/orders" className="card p-4 flex items-center gap-4 hover:bg-blue-50/10 hover:border-blue-100 transition-all border border-gray-200 shadow-sm group">
                                     <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-100 group-hover:scale-110 transition-transform">
                                         <i className="fas fa-box text-sm"></i>

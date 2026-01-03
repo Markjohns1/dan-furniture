@@ -6,13 +6,15 @@ import { useParams, Link } from 'react-router-dom';
 import { productsAPI, API_HOST } from '../../api';
 import { useCart } from '../../context/CartContext';
 import Header from '../../components/layout/Header';
+import ProductCard from '../../components/product/ProductCard';
 import { LoadingPage } from '../../components/ui/Loading';
 import WhatsAppButton from '../../components/ui/WhatsAppButton';
 import SEO from '../../components/ui/SEO';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
 
 export default function ProductDetail() {
     const { id } = useParams();
-    const { addItem } = useCart();
+    const { addItem, openCart } = useCart();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [selectedColor, setSelectedColor] = useState(null);
@@ -35,7 +37,10 @@ export default function ProductDetail() {
     const handleAddToCart = () => {
         addItem(product, quantity, selectedColor);
         setAddedToCart(true);
-        setTimeout(() => setAddedToCart(false), 2000);
+        setTimeout(() => {
+            setAddedToCart(false);
+            openCart();
+        }, 500);
     };
 
     if (loading) return <LoadingPage />;
@@ -71,14 +76,22 @@ export default function ProductDetail() {
             <Header showBack title={product.name} />
 
             <div className="container-app py-8 mt-4 mx-auto max-w-5xl">
+                <Breadcrumbs
+                    items={[
+                        { label: 'Products', to: '/products' },
+                        { label: product.category?.name || 'Category', to: `/products?category=${product.category?.slug}` },
+                        { label: product.name }
+                    ]}
+                />
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                     {/* Image Gallery */}
                     <div className="space-y-4">
-                        <div className="aspect-square relative rounded-2xl overflow-hidden bg-gray-50 border border-gray-100">
+                        <div className="aspect-square relative rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 cursor-zoom-in">
                             <img
                                 src={images[currentImageIndex]}
                                 alt={product.name}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                             />
 
                             {/* Badges */}
@@ -225,8 +238,8 @@ export default function ProductDetail() {
                 </div>
             </div>
 
-            {/* Sticky Add to Cart Bar - Adjusted for Mobile Bottom Nav */}
-            <div className="fixed bottom-[60px] lg:bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-100 p-2 safe-area-pb shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+            {/* Sticky Add to Cart Bar - Adjusted for Mobile Bottom Nav (64px) */}
+            <div className="fixed bottom-[64px] lg:bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-100 p-2 safe-area-pb shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
                 <div className="container-app max-w-5xl mx-auto flex items-center justify-between gap-4">
                     <div className="hidden md:block">
                         <p className="text-sm font-medium text-gray-500">Total Price</p>
@@ -253,6 +266,55 @@ export default function ProductDetail() {
             </div>
 
             <WhatsAppButton />
+
+            {/* Related Products */}
+            {product.category && (
+                <RelatedProducts categoryId={product.category_id} currentProductId={product.id} />
+            )}
         </div>
+    );
+}
+
+// Sub-component for Related Products
+function RelatedProducts({ categoryId, currentProductId }) {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        productsAPI.getAll({ category_id: categoryId, limit: 4 })
+            .then(res => {
+                setProducts(res.data.products.filter(p => p.id !== currentProductId).slice(0, 4));
+            })
+            .catch(console.error)
+            .finally(() => setLoading(false));
+    }, [categoryId, currentProductId]);
+
+    if (!loading && products.length === 0) return null;
+
+    return (
+        <section className="bg-gray-50 py-16 border-t border-gray-100">
+            <div className="container-app max-w-5xl mx-auto">
+                <div className="flex items-center justify-between mb-8 px-4">
+                    <h2 className="text-xl font-bold text-gray-900 font-display">You May Also Like</h2>
+                    <Link to={`/products?category=${categoryId}`} className="text-sm font-semibold text-primary-600 hover:text-primary-700">
+                        View More <i className="fas fa-arrow-right ml-1"></i>
+                    </Link>
+                </div>
+
+                {loading ? (
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
+                        {[1, 2, 3, 4].map(i => (
+                            <div key={i} className="aspect-[4/5] bg-gray-200 animate-pulse rounded-xl"></div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
+                        {products.map(p => (
+                            <ProductCard key={p.id} product={p} />
+                        ))}
+                    </div>
+                )}
+            </div>
+        </section>
     );
 }

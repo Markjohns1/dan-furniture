@@ -7,16 +7,17 @@ import { useCart } from '../../context/CartContext';
 import { API_HOST } from '../../api';
 
 export default function ProductCard({ product }) {
-    const { addItem } = useCart();
+    const { addItem, openCart } = useCart();
 
     const imageUrl = product.images?.length
         ? `${API_HOST}${product.images[0]}`
-        : null; // No image - will show icon placeholder
+        : null;
 
     const handleAddToCart = (e) => {
         e.preventDefault();
         e.stopPropagation();
         addItem(product, 1, product.colors?.[0] || null);
+        openCart();
     };
 
     const discount = product.compare_price && product.compare_price > product.price
@@ -26,80 +27,111 @@ export default function ProductCard({ product }) {
     return (
         <Link
             to={`/products/${product.id}`}
-            className="group bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 flex flex-col h-full"
+            className="group bg-white rounded-2xl overflow-hidden border border-primary-100 hover:border-primary-900 shadow-[0_4px_12px_rgba(15,23,42,0.08)] hover:shadow-[0_12px_32px_rgba(15,23,42,0.15)] transition-all duration-500 flex flex-col h-full"
         >
             {/* Image */}
-            <div className="relative aspect-square overflow-hidden bg-gray-100">
+            <div className="relative aspect-square overflow-hidden bg-gray-50">
                 {imageUrl ? (
                     <img
                         src={imageUrl}
                         alt={product.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                         loading="lazy"
                     />
                 ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
-                        <i className="fas fa-couch text-4xl text-gray-300"></i>
+                    <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                        <i className="fas fa-couch text-4xl text-gray-200"></i>
                     </div>
                 )}
 
-                {/* Badges - Floating consistently */}
-                <div className="absolute top-2 left-2 right-2 flex justify-between items-start">
-                    {/* Left: Featured */}
-                    <div>
-                        {product.featured && (
-                            <span className="px-1.5 py-0.5 bg-white/90 backdrop-blur-sm text-gray-900 text-[10px] font-bold uppercase tracking-wider rounded-sm shadow-sm border border-gray-100">
-                                Featured
-                            </span>
-                        )}
-                    </div>
-
-                    {/* Right: Discount */}
-                    <div>
-                        {discount > 0 && (
-                            <span className="px-1.5 py-0.5 bg-red-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-sm shadow-sm">
-                                -{discount}%
-                            </span>
-                        )}
-                    </div>
+                {/* Badges Overlay */}
+                <div className="absolute top-2.5 left-2.5 right-2.5 flex flex-col gap-1.5 items-start">
+                    {product.featured && (
+                        <span className="px-2 py-0.5 bg-primary-950 text-white text-[9px] font-bold uppercase tracking-widest rounded shadow-sm">
+                            Exclusive
+                        </span>
+                    )}
+                    {discount > 0 && (
+                        <span className="px-2 py-0.5 bg-accent-600 text-white text-[9px] font-bold uppercase tracking-widest rounded shadow-sm">
+                            -{discount}% OFF
+                        </span>
+                    )}
+                    {product.stock > 0 && product.stock < 5 && (
+                        <span className="px-2 py-0.5 bg-red-600 text-white text-[9px] font-bold uppercase tracking-widest rounded shadow-sm animate-pulse">
+                            Low Stock
+                        </span>
+                    )}
                 </div>
 
-                {/* Quick Add Overlay - Slides up on hover */}
-                <div className="absolute inset-x-3 bottom-2 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out">
+                {/* Quick Add Overlay */}
+                <div className="absolute inset-x-3 bottom-3 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out z-10">
                     <button
                         onClick={handleAddToCart}
                         disabled={product.stock === 0}
-                        className="btn-primary w-full !py-1.5 !px-3 !text-[11px] !rounded-md"
+                        className="w-full py-2.5 bg-white/95 backdrop-blur-md text-primary-950 text-[11px] font-bold uppercase tracking-wider rounded-lg shadow-xl hover:bg-primary-950 hover:text-white transition-all active:scale-95"
                     >
-                        {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                        {product.stock === 0 ? 'Sold Out' : 'Quick Add'}
                     </button>
                 </div>
             </div>
 
-            {/* Content */}
-            <div className="p-3 flex flex-col flex-1 gap-2">
-                <div>
-                    {/* Category */}
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">
-                        {product.category?.name || 'Furniture'}
+            {/* Product Content */}
+            <div className="p-3 flex flex-col flex-1">
+                {/* Category & Rating Row */}
+                <div className="flex items-center justify-between mb-1.5">
+                    <p className="text-[10px] font-bold text-secondary-400 uppercase tracking-[0.1em]">
+                        {product.category?.name || 'Collection'}
                     </p>
-
-                    {/* Name - Tighter spacing, dynamic height */}
-                    <h3 className="font-medium text-gray-900 text-sm leading-snug group-hover:text-primary-600 transition-colors">
-                        {product.name}
-                    </h3>
+                    <div className="flex text-accent-500 text-[8px]">
+                        <i className="fas fa-star"></i>
+                        <i className="fas fa-star"></i>
+                        <i className="fas fa-star"></i>
+                        <i className="fas fa-star"></i>
+                        <i className="fas fa-star"></i>
+                    </div>
                 </div>
 
-                {/* Price Block - Immediate follow (No large gap) */}
-                <div className="flex flex-col items-start gap-0.5 mt-auto sm:mt-0">
-                    {product.compare_price && product.compare_price > product.price && (
-                        <span className="text-xs text-gray-400 line-through font-medium">
-                            KSh {product.compare_price.toLocaleString()}
-                        </span>
+                {/* Name */}
+                <h3 className="font-semibold text-primary-900 text-sm leading-snug group-hover:text-primary-600 transition-colors line-clamp-2 mb-1">
+                    {product.name}
+                </h3>
+
+                <div className="flex items-end justify-between mt-3">
+                    {/* Price Block */}
+                    <div className="flex flex-col">
+                        {product.compare_price && product.compare_price > product.price && (
+                            <p className="text-[10px] text-secondary-400 line-through font-medium mb-0.5">
+                                KSh {product.compare_price.toLocaleString()}
+                            </p>
+                        )}
+                        <p className="text-[16px] font-bold text-primary-950 uppercase tracking-tight">
+                            KSh {product.price.toLocaleString()}
+                        </p>
+                    </div>
+
+                    {/* Highly Intuitive Color Options */}
+                    {product.colors?.length > 0 && (
+                        <div className="flex flex-col items-end gap-1.5">
+                            <span className="text-[8px] font-black text-primary-400 uppercase tracking-widest leading-none">
+                                {product.colors.length > 1 ? `${product.colors.length} Colors` : 'Color'}
+                            </span>
+                            <div className="flex -space-x-2">
+                                {product.colors.slice(0, 3).map((color, i) => (
+                                    <div
+                                        key={i}
+                                        className="w-4.5 h-4.5 rounded-full border-2 border-white shadow-sm ring-1 ring-gray-200 transition-all hover:-translate-y-1 hover:scale-110 z-0 hover:z-10"
+                                        style={{ backgroundColor: color.toLowerCase() }}
+                                        title={color}
+                                    ></div>
+                                ))}
+                                {product.colors.length > 3 && (
+                                    <div className="w-4.5 h-4.5 rounded-full bg-gray-50 border-2 border-white shadow-sm ring-1 ring-gray-100 flex items-center justify-center z-20">
+                                        <span className="text-[8px] font-bold text-gray-500">+{product.colors.length - 3}</span>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
                     )}
-                    <span className="text-base font-bold text-gray-900">
-                        KSh {product.price.toLocaleString()}
-                    </span>
                 </div>
             </div>
         </Link>

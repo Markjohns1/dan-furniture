@@ -76,7 +76,8 @@ html {
      Header (4rem/64px) + Gap (2rem/32px) = 6rem spacing */
   scroll-padding-top: 6.5rem;
   -webkit-tap-highlight-color: transparent;
-  overflow-x: hidden; /* Prevent horizontal scroll "swiping" */
+  overflow-x: hidden;
+  /* Prevent horizontal scroll "swiping" */
 }
 
 body {
@@ -87,7 +88,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
-  overflow-x: hidden; /* Ensure no horizontal scroll on body too */
+  overflow-x: hidden;
+  /* Ensure no horizontal scroll on body too */
 }
 
 /* ============== Button Styles ============== */
@@ -282,38 +284,95 @@ body {
   color: #b91c1c;
 }
 
-/* ============== Utility Styles ============== */
+/* ============== Utility Classes ============== */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+.safe-area-pb {
+  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0));
+}
+
 .page {
   min-height: 100vh;
-  /* Add padding for both top (header) and bottom (nav) */
-  padding-top: env(safe-area-inset-top, 0);
+  width: 100%;
   padding-bottom: 5rem;
+  /* Room for BottomNav */
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+  .page {
+    padding-bottom: 6rem;
+    /* Extra room on mobile */
+  }
 }
 
 .container-app {
-  max-width: 72rem;
-  /* Wider max-width (1152px) */
+  width: 100%;
+  max-width: 80rem;
+  /* 1280px */
   margin: 0 auto;
-  padding: 0 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 @media (min-width: 640px) {
   .container-app {
-    padding: 0 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .container-app {
-    padding: 0 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
+}
+
+/* Scrollbar Hide Utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* ============== Animations ============== */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
 
   to {
@@ -323,7 +382,95 @@ body {
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+.animate-slide-left {
+  animation: slideLeft 0.4s ease-out forwards;
+}
+
+.animate-slide-right {
+  animation: slideRight 0.4s ease-out forwards;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes carousel-steps {
+
+  0%,
+  45% {
+    transform: translateX(0);
+  }
+
+  50%,
+  95% {
+    transform: translateX(-25%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-carousel-steps {
+  display: flex;
+  width: 400%;
+  /* 4 "pages" width, assuming 8 items (4 original + 4 clones) */
+  animation: carousel-steps 6s ease-in-out infinite;
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* ============== Scrollbar ============== */
