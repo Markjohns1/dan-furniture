@@ -30,9 +30,30 @@ export default function Cart() {
     });
 
     const [showThankYou, setShowThankYou] = useState(false);
+    const [formError, setFormError] = useState('');
+
+    // Check if form is valid for checkout
+    const isFormValid = customerInfo.name.trim() &&
+        customerInfo.phone.trim() &&
+        customerInfo.address.trim();
 
     // Handle successful checkout - clear cart and show thank you
     const handleCheckoutComplete = () => {
+        // Validate before proceeding
+        if (!customerInfo.name.trim()) {
+            setFormError('Please enter your name');
+            return;
+        }
+        if (!customerInfo.phone.trim() || customerInfo.phone.trim().length < 9) {
+            setFormError('Please enter a valid phone number');
+            return;
+        }
+        if (!customerInfo.address.trim()) {
+            setFormError('Please enter your delivery address');
+            return;
+        }
+
+        setFormError('');
         // Clear the cart
         clearCart();
         // Reset form
@@ -242,6 +263,7 @@ export default function Cart() {
                                         onChange={(e) => setCustomerInfo({ ...customerInfo, name: e.target.value })}
                                         className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
                                         placeholder="Your name"
+                                        required
                                     />
                                 </div>
 
@@ -259,6 +281,7 @@ export default function Cart() {
                                         }}
                                         className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
                                         placeholder="0712345678"
+                                        required
                                     />
                                 </div>
 
@@ -270,6 +293,7 @@ export default function Cart() {
                                         rows={2}
                                         className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
                                         placeholder="e.g. House 12, Westlands, Nairobi (Near Sarit Centre)"
+                                        required
                                     />
                                 </div>
 
@@ -288,15 +312,32 @@ export default function Cart() {
 
                         {/* Footer - Fixed at bottom */}
                         <div className="p-4 pb-24 lg:pb-4 border-t border-gray-100 bg-white flex-shrink-0">
+                            {/* Validation Error */}
+                            {formError && (
+                                <div className="mb-3 p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm text-center">
+                                    <i className="fas fa-exclamation-circle mr-2"></i>
+                                    {formError}
+                                </div>
+                            )}
                             <div className="flex justify-between text-lg font-bold text-gray-900 mb-3">
                                 <span>Total</span>
                                 <span>KSh {subtotal.toLocaleString()}</span>
                             </div>
-                            <WhatsAppOrderButton
-                                message={getWhatsAppMessage(customerInfo)}
-                                className="w-full"
-                                onComplete={handleCheckoutComplete}
-                            />
+                            {isFormValid ? (
+                                <WhatsAppOrderButton
+                                    message={getWhatsAppMessage(customerInfo)}
+                                    className="w-full"
+                                    onComplete={handleCheckoutComplete}
+                                />
+                            ) : (
+                                <button
+                                    disabled
+                                    className="w-full py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-3 bg-gray-300 text-gray-500 cursor-not-allowed"
+                                >
+                                    <i className="fab fa-whatsapp text-2xl"></i>
+                                    Fill required fields (*)
+                                </button>
+                            )}
                         </div>
                     </div>
                 </>
