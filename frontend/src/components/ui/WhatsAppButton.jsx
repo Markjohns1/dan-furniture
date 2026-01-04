@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { configAPI } from '../../api';
 
 export default function WhatsAppButton({ message, className = '' }) {
-    const [waNumber, setWaNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254728983908');
+    const [waNumber, setWaNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254724426993');
 
     // useEffect(() => {
     //     configAPI.get().then((res) => {
@@ -41,7 +41,7 @@ export default function WhatsAppButton({ message, className = '' }) {
 }
 
 export function WhatsAppOrderButton({ message, className = '' }) {
-    const [waNumber, setWaNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254728983908');
+    const [waNumber, setWaNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254724426993');
 
     // useEffect(() => {
     //     configAPI.get().then((res) => {

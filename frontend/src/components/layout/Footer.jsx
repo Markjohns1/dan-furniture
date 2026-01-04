@@ -83,8 +83,8 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <a href="tel:+254728983908" className="text-primary-200/70 hover:text-white transition-colors flex items-center gap-2">
-                                    <i className="fas fa-phone w-4"></i> +254 728 983908
+                                <a href="tel:+254724426993" className="text-primary-200/70 hover:text-white transition-colors flex items-center gap-2">
+                                    <i className="fas fa-phone w-4"></i> +254 724 426993
                                 </a>
                             </li>
                             <li>

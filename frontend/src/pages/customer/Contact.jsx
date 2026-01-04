@@ -11,7 +11,7 @@ export default function Contact() {
         message: ''
     });
 
-    const [waNumber, setWaNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254728983908');
+    const [waNumber, setWaNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254724426993');
 
     // useEffect(() => {
     //     configAPI.get().then((res) => {
@@ -62,7 +62,7 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <p className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-1">Phone</p>
-                                            <p className="text-secondary-600">+254 728 983908</p>
+                                            <p className="text-secondary-600">+254 724 426993</p>
                                             <p className="text-sm text-secondary-400">Mon-Sat 9am to 6pm</p>
                                         </div>
                                     </div>
