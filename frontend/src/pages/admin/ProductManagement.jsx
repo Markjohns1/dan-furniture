@@ -108,27 +108,29 @@ export default function ProductManagement() {
                                             </p>
                                         </div>
 
-                                        <div className="flex items-end justify-between mt-2">
-                                            <p className="text-lg font-bold text-gray-900">
-                                                <span className="text-xs text-gray-400 font-normal mr-1">KSh</span>
+                                        <div className="flex flex-wrap items-end justify-between gap-y-2 mt-2">
+                                            <p className="text-lg font-bold text-gray-900 leading-none">
+                                                <span className="text-xs text-gray-400 font-normal mr-1 uppercase">KSh</span>
                                                 {product.price.toLocaleString()}
                                             </p>
-                                            <div className="flex items-center gap-2">
+                                            <div className="flex items-center gap-1.5 shrink-0 ml-auto">
                                                 <Link
                                                     to={`/admin/products/${product.id}/edit`}
-                                                    className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-50 text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-colors border border-gray-200"
+                                                    className="w-9 h-9 flex items-center justify-center rounded-xl bg-gray-50 text-gray-600 hover:bg-primary-950 hover:text-white transition-all border border-gray-100 shadow-sm"
+                                                    title="Edit Product"
                                                 >
                                                     <i className="fas fa-edit text-sm"></i>
                                                 </Link>
                                                 <button
                                                     onClick={() => handleDelete(product.id)}
                                                     disabled={deleting === product.id}
-                                                    className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-50 text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors border border-gray-200"
+                                                    className="w-9 h-9 flex items-center justify-center rounded-xl bg-gray-50 text-gray-500 hover:bg-red-600 hover:text-white transition-all border border-gray-100 shadow-sm"
+                                                    title="Delete Product"
                                                 >
                                                     {deleting === product.id ? (
                                                         <LoadingSpinner size="sm" />
                                                     ) : (
-                                                        <i className="fas fa-trash text-sm"></i>
+                                                        <i className="fas fa-trash-alt text-sm"></i>
                                                     )}
                                                 </button>
                                             </div>
