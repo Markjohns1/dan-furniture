@@ -1,8 +1,8 @@
 /**
  * Cart Page
  */
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { API_HOST } from '../../api';
@@ -13,7 +13,14 @@ export default function Cart() {
     const { items, itemCount, subtotal, removeItem, updateQuantity, clearCart, getWhatsAppMessage } = useCart();
     const { user, isAuthenticated } = useAuth();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const [showCheckout, setShowCheckout] = useState(false);
+
+    useEffect(() => {
+        if (searchParams.get('checkout') === 'true') {
+            setShowCheckout(true);
+        }
+    }, [searchParams]);
     const [customerInfo, setCustomerInfo] = useState({
         name: user?.full_name || '',
         phone: user?.phone || '',
@@ -53,7 +60,7 @@ export default function Cart() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 pb-40 lg:pb-8">
+        <div className="min-h-screen bg-gray-50 pb-28 lg:pb-8">
             <Header title={`Cart (${itemCount})`} showBack />
 
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -85,38 +92,42 @@ export default function Cart() {
                                             </div>
 
                                             {/* Details */}
-                                            <div className="flex-1 min-w-0">
-                                                <h3 className="font-semibold text-gray-900 line-clamp-2">{item.name}</h3>
-                                                {item.color && (
-                                                    <p className="text-sm text-gray-500 mt-1">Color: {item.color}</p>
-                                                )}
-                                                <p className="text-lg font-bold text-primary-600 mt-2">
-                                                    KSh {item.price.toLocaleString()}
-                                                </p>
+                                            <div className="flex-1 min-w-0 flex flex-col">
+                                                <div className="flex justify-between items-start">
+                                                    <div>
+                                                        <h3 className="font-semibold text-gray-900 line-clamp-2">{item.name}</h3>
+                                                        {item.color && (
+                                                            <p className="text-sm text-gray-500 mt-1">Color: {item.color}</p>
+                                                        )}
+                                                    </div>
+                                                    <button
+                                                        onClick={() => removeItem(item.id, item.color)}
+                                                        className="text-gray-400 hover:text-red-500 p-1 -mr-1"
+                                                    >
+                                                        <i className="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
 
-                                                {/* Quantity Controls */}
-                                                <div className="flex items-center justify-between mt-3">
-                                                    <div className="flex items-center gap-3 bg-gray-100 rounded-lg p-1">
+                                                <div className="flex items-center justify-between mt-auto pt-3">
+                                                    <p className="text-lg font-bold text-primary-600">
+                                                        KSh {item.price.toLocaleString()}
+                                                    </p>
+
+                                                    <div className="flex items-center gap-3 bg-gray-50 rounded-lg p-1 border border-gray-100">
                                                         <button
                                                             onClick={() => handleQuantityChange(item, -1)}
-                                                            className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white transition-colors"
+                                                            className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white hover:shadow-sm transition-all text-gray-600"
                                                         >
                                                             <i className="fas fa-minus text-xs"></i>
                                                         </button>
-                                                        <span className="w-8 text-center font-semibold">{item.quantity}</span>
+                                                        <span className="w-8 text-center font-semibold text-gray-900">{item.quantity}</span>
                                                         <button
                                                             onClick={() => handleQuantityChange(item, 1)}
-                                                            className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white transition-colors"
+                                                            className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white hover:shadow-sm transition-all text-gray-600"
                                                         >
                                                             <i className="fas fa-plus text-xs"></i>
                                                         </button>
                                                     </div>
-                                                    <button
-                                                        onClick={() => removeItem(item.id, item.color)}
-                                                        className="text-red-500 hover:text-red-600 p-2"
-                                                    >
-                                                        <i className="fas fa-trash"></i>
-                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -159,13 +170,7 @@ export default function Cart() {
                             </div>
 
                             <button
-                                onClick={() => {
-                                    if (!isAuthenticated) {
-                                        navigate('/login?redirect=/cart');
-                                    } else {
-                                        setShowCheckout(true);
-                                    }
-                                }}
+                                onClick={() => setShowCheckout(true)}
                                 className="w-full py-4 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center gap-2"
                             >
                                 <i className="fab fa-whatsapp text-xl"></i>
@@ -181,19 +186,14 @@ export default function Cart() {
             </div>
 
             {/* Mobile Checkout Bar */}
-            <div className="fixed bottom-16 left-0 right-0 bg-white border-t border-gray-200 p-4 lg:hidden">
+            {/* Mobile Checkout Bar - Static Card */}
+            <div className="bg-white p-4 lg:hidden mt-4 mx-4 rounded-2xl shadow-sm border border-gray-100">
                 <div className="flex items-center justify-between mb-3">
                     <span className="text-gray-600">Total ({itemCount} items)</span>
                     <span className="text-xl font-bold text-gray-900">KSh {subtotal.toLocaleString()}</span>
                 </div>
                 <button
-                    onClick={() => {
-                        if (!isAuthenticated) {
-                            navigate('/login?redirect=/cart');
-                        } else {
-                            setShowCheckout(true);
-                        }
-                    }}
+                    onClick={() => setShowCheckout(true)}
                     className="w-full py-4 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center gap-2"
                 >
                     <i className="fab fa-whatsapp text-xl"></i>
@@ -204,8 +204,8 @@ export default function Cart() {
             {/* Checkout Sheet */}
             {showCheckout && (
                 <>
-                    <div className="fixed inset-0 bg-black/50 z-50" onClick={() => setShowCheckout(false)} />
-                    <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl z-50 max-h-[85vh] flex flex-col animate-slide-up">
+                    <div className="fixed inset-0 bg-black/50 z-[100]" onClick={() => setShowCheckout(false)} />
+                    <div className="fixed bottom-0 left-0 right-0 lg:inset-0 lg:m-auto lg:h-fit lg:w-full lg:max-w-sm bg-white rounded-t-3xl lg:rounded-2xl z-[100] max-h-[85vh] lg:max-h-[90vh] flex flex-col shadow-2xl animate-slide-up lg:animate-fade-in">
                         {/* Header - Fixed */}
                         <div className="p-4 border-b border-gray-100 flex items-center justify-between flex-shrink-0">
                             <h3 className="text-xl font-bold text-gray-900">Checkout Details</h3>
@@ -215,7 +215,7 @@ export default function Cart() {
                         </div>
 
                         {/* Scrollable Content */}
-                        <div className="flex-1 overflow-y-auto p-4 pb-24">
+                        <div className="flex-1 overflow-y-auto p-4 pb-4">
                             <div className="space-y-4">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
@@ -223,7 +223,7 @@ export default function Cart() {
                                         type="text"
                                         value={customerInfo.name}
                                         onChange={(e) => setCustomerInfo({ ...customerInfo, name: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                        className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
                                         placeholder="Your name"
                                     />
                                 </div>
@@ -234,7 +234,7 @@ export default function Cart() {
                                         type="tel"
                                         value={customerInfo.phone}
                                         onChange={(e) => setCustomerInfo({ ...customerInfo, phone: e.target.value })}
-                                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
+                                        className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
                                         placeholder="0712345678"
                                     />
                                 </div>
@@ -245,8 +245,8 @@ export default function Cart() {
                                         value={customerInfo.address}
                                         onChange={(e) => setCustomerInfo({ ...customerInfo, address: e.target.value })}
                                         rows={2}
-                                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
-                                        placeholder="Enter your delivery address"
+                                        className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
+                                        placeholder="e.g. House 12, Westlands, Nairobi (Near Sarit Centre)"
                                     />
                                 </div>
 
@@ -256,7 +256,7 @@ export default function Cart() {
                                         value={customerInfo.notes}
                                         onChange={(e) => setCustomerInfo({ ...customerInfo, notes: e.target.value })}
                                         rows={2}
-                                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
+                                        className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
                                         placeholder="Any special requests?"
                                     />
                                 </div>
@@ -264,7 +264,7 @@ export default function Cart() {
                         </div>
 
                         {/* Footer - Fixed at bottom */}
-                        <div className="p-4 border-t border-gray-100 bg-white flex-shrink-0">
+                        <div className="p-4 pb-24 lg:pb-4 border-t border-gray-100 bg-white flex-shrink-0">
                             <div className="flex justify-between text-lg font-bold text-gray-900 mb-3">
                                 <span>Total</span>
                                 <span>KSh {subtotal.toLocaleString()}</span>

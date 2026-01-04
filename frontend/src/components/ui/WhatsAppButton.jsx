@@ -6,17 +6,20 @@ import { useState, useEffect } from 'react';
 import { configAPI } from '../../api';
 
 export default function WhatsAppButton({ message, className = '' }) {
-    const [waNumber, setWaNumber] = useState('254700000000');
+    const [waNumber, setWaNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254724426993');
 
     useEffect(() => {
         configAPI.get().then((res) => {
-            setWaNumber(res.data.whatsapp_number);
+            if (res.data.whatsapp_number) {
+                setWaNumber(res.data.whatsapp_number);
+            }
         }).catch(() => { });
     }, []);
 
     const handleClick = () => {
         const encodedMessage = encodeURIComponent(message || 'Hello! I\'m interested in your furniture.');
-        const url = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+        const cleanedNumber = waNumber.toString().replace(/\D/g, '');
+        const url = `https://wa.me/${cleanedNumber}?text=${encodedMessage}`;
         window.open(url, '_blank');
     };
 
@@ -38,17 +41,20 @@ export default function WhatsAppButton({ message, className = '' }) {
 }
 
 export function WhatsAppOrderButton({ message, className = '' }) {
-    const [waNumber, setWaNumber] = useState('254700000000');
+    const [waNumber, setWaNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254724426993');
 
     useEffect(() => {
         configAPI.get().then((res) => {
-            setWaNumber(res.data.whatsapp_number);
+            if (res.data.whatsapp_number) {
+                setWaNumber(res.data.whatsapp_number);
+            }
         }).catch(() => { });
     }, []);
 
     const handleClick = () => {
         const encodedMessage = encodeURIComponent(message);
-        const url = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+        const cleanedNumber = waNumber.toString().replace(/\D/g, '');
+        const url = `https://wa.me/${cleanedNumber}?text=${encodedMessage}`;
         window.open(url, '_blank');
     };
 

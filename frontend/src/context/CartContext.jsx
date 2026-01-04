@@ -106,24 +106,24 @@ export function CartProvider({ children }) {
         const itemsList = items
             .map(
                 (item) =>
-                    `• ${item.name}${item.color ? ` (${item.color})` : ''} x${item.quantity} = KSh ${(
+                    `- ${item.name}${item.color ? ` (${item.color})` : ''} x${item.quantity} = KSh ${(
                         item.price * item.quantity
                     ).toLocaleString()}`
             )
             .join('\n');
 
-        return `🛋️ *NEW ORDER - Daniel Furniture*
-━━━━━━━━━━━━━━━━━━
-👤 Customer: ${customerInfo.name}
-📱 Phone: ${customerInfo.phone}
-📍 Location: ${customerInfo.address}
-━━━━━━━━━━━━━━━━━━
-📦 *ORDER ITEMS:*
+        return `NEW ORDER - Daniel Furniture
+----------------------------
+Customer: ${customerInfo.name}
+Phone: ${customerInfo.phone}
+Location: ${customerInfo.address}
+----------------------------
+ORDER ITEMS:
 ${itemsList}
-━━━━━━━━━━━━━━━━━━
-💰 *TOTAL: KSh ${subtotal.toLocaleString()}*
-━━━━━━━━━━━━━━━━━━
-${customerInfo.notes ? `📝 Notes: ${customerInfo.notes}` : ''}`;
+----------------------------
+TOTAL: KSh ${subtotal.toLocaleString()}
+----------------------------
+${customerInfo.notes ? `Notes: ${customerInfo.notes}` : ''}`;
     };
 
     return (

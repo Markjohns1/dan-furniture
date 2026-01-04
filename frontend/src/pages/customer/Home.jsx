@@ -58,7 +58,7 @@ export default function Home() {
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4"></div>
                 <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary-400/5 rounded-full blur-[150px] translate-y-1/2 -translate-x-1/4"></div>
 
-                <div className="relative z-10 max-w-7xl mx-auto text-center">
+                <div className="relative z-10 max-w-7xl mx-auto text-left sm:text-center">
                     <span className="inline-block py-1.5 px-4 rounded-full bg-accent-600/20 backdrop-blur-md border border-accent-600/30 text-accent-300 text-[10px] font-bold tracking-[0.3em] uppercase mb-8 animate-fade-in">
                         World-Class Furniture Collection
                     </span>
@@ -70,16 +70,16 @@ export default function Home() {
                         Explore Kenya's most massive collection of premium sofasets, dining sets, and bespoke furniture.
                         Where world-class quality meets uncompromising comfort.
                     </p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+                    <div className="flex flex-row w-full sm:w-auto items-center sm:justify-center gap-3 sm:gap-5">
                         <Link
                             to="/products"
-                            className="btn-primary min-w-[200px] text-lg py-5 shadow-2xl hover:shadow-accent-600/20 active:scale-95 transition-all"
+                            className="btn-primary flex-1 sm:flex-none sm:min-w-[200px] text-sm sm:text-lg py-3 sm:py-5 shadow-2xl hover:shadow-accent-600/20 active:scale-95 transition-all text-center justify-center"
                         >
                             Explore Collection
                         </Link>
                         <a
-                            href="https://wa.me/254700000000"
-                            className="btn-secondary min-w-[200px] text-lg py-5 border-white/20 bg-white/5 text-white hover:bg-white hover:text-primary-950 backdrop-blur-md active:scale-95 transition-all"
+                            href="https://wa.me/254724426993"
+                            className="btn-secondary flex-1 sm:flex-none sm:min-w-[200px] text-sm sm:text-lg py-3 sm:py-5 border-white/20 bg-white/5 text-white hover:bg-white hover:text-primary-950 backdrop-blur-md active:scale-95 transition-all flex items-center justify-center"
                         >
                             <i className="fab fa-whatsapp mr-2"></i> WhatsApp Us
                         </a>
@@ -296,7 +296,7 @@ export default function Home() {
                             Our team is here to help you find the perfect furniture for your space. Contact us via WhatsApp for personalized recommendations.
                         </p>
                         <a
-                            href="https://wa.me/254700000000"
+                            href="https://wa.me/254724426993"
                             target="_blank"
                             rel="noreferrer"
                             className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 text-white font-medium rounded-xl hover:bg-green-600 transition-colors shadow-lg hover:shadow-xl"

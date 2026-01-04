@@ -11,7 +11,7 @@ export default function Contact() {
         message: ''
     });
 
-    const [waNumber, setWaNumber] = useState('254700000000');
+    const [waNumber, setWaNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254724426993');
 
     useEffect(() => {
         configAPI.get().then((res) => {
@@ -22,7 +22,8 @@ export default function Contact() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const text = `*New Inquiry via Website*\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Message:* ${formData.message}`;
-        const whatsappUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
+        const cleanedNumber = waNumber.toString().replace(/\D/g, '');
+        const whatsappUrl = `https://wa.me/${cleanedNumber}?text=${encodeURIComponent(text)}`;
         window.open(whatsappUrl, '_blank');
         // Reset form or show success message could occur here
     };
@@ -57,7 +58,7 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <p className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-1">Phone</p>
-                                            <p className="text-secondary-600">+254 700 000 000</p>
+                                            <p className="text-secondary-600">+254 724 426993</p>
                                             <p className="text-sm text-secondary-400">Mon-Sat 9am to 6pm</p>
                                         </div>
                                     </div>

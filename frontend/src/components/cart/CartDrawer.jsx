@@ -56,65 +56,85 @@ export default function CartDrawer({ isOpen, onClose }) {
                     </div>
 
                     {/* Items List */}
-                    <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
-                        {items.length === 0 ? (
-                            <div className="h-full flex flex-col items-center justify-center text-center">
-                                <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-4">
-                                    <i className="fas fa-shopping-bag text-3xl text-gray-200"></i>
-                                </div>
-                                <h3 className="text-lg font-bold text-gray-900">Cart is empty</h3>
-                                <p className="text-gray-500 text-sm mt-2 mb-8">Looks like you haven't added <br /> anything to your cart yet.</p>
-                                <button
-                                    onClick={onClose}
-                                    className="btn-primary"
-                                >
-                                    Start Shopping
-                                </button>
-                            </div>
-                        ) : (
-                            items.map((item) => (
-                                <div key={`${item.id}-${item.selectedColor}`} className="flex gap-4 group">
-                                    <div className="w-20 h-24 bg-gray-50 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100">
-                                        <img
-                                            src={item.images?.[0] ? `${API_HOST}${item.images[0]}` : '/placeholder-furniture.jpg'}
-                                            alt={item.name}
-                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                        />
+                    <div className="flex-1 overflow-y-auto">
+                        <div className="px-6 py-6 space-y-6">
+                            {items.length === 0 ? (
+                                <div className="h-full flex flex-col items-center justify-center text-center py-20">
+                                    <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-4">
+                                        <i className="fas fa-shopping-bag text-3xl text-gray-200"></i>
                                     </div>
-                                    <div className="flex-1">
-                                        <div className="flex justify-between">
-                                            <h4 className="text-sm font-semibold text-gray-900 line-clamp-1">{item.name}</h4>
-                                            <button
-                                                onClick={() => removeItem(item.id, item.selectedColor)}
-                                                className="text-gray-300 hover:text-red-500 transition-colors p-1"
-                                            >
-                                                <i className="fas fa-trash-alt text-xs"></i>
-                                            </button>
+                                    <h3 className="text-lg font-bold text-gray-900">Cart is empty</h3>
+                                    <p className="text-gray-500 text-sm mt-2 mb-8">Looks like you haven't added <br /> anything to your cart yet.</p>
+                                    <Link
+                                        to="/products"
+                                        onClick={onClose}
+                                        className="btn-primary"
+                                    >
+                                        Start Shopping
+                                    </Link>
+                                </div>
+                            ) : (
+                                items.map((item) => (
+                                    <div key={`${item.id}-${item.color}`} className="flex gap-4 group">
+                                        <div className="w-20 h-24 bg-gray-50 rounded-xl overflow-hidden flex-shrink-0 border border-gray-100">
+                                            <img
+                                                src={item.image ? `${API_HOST}${item.image}` : '/placeholder-furniture.jpg'}
+                                                alt={item.name}
+                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            />
                                         </div>
-                                        <p className="text-xs text-gray-500 mt-1 capitalize">{item.selectedColor}</p>
-                                        <div className="flex items-center justify-between mt-4">
-                                            <div className="flex items-center border border-gray-100 rounded-lg overflow-hidden bg-white shadow-sm">
+                                        <div className="flex-1">
+                                            <div className="flex justify-between">
+                                                <h4 className="text-sm font-semibold text-gray-900 line-clamp-1">{item.name}</h4>
                                                 <button
-                                                    onClick={() => updateQuantity(item.id, item.selectedColor, Math.max(1, item.quantity - 1))}
-                                                    className="w-7 h-7 flex items-center justify-center hover:bg-gray-50 text-gray-500 border-r border-gray-50"
+                                                    onClick={() => removeItem(item.id, item.color)}
+                                                    className="w-8 h-8 flex items-center justify-center text-red-500 bg-red-50 hover:bg-red-100 rounded-lg transition-colors"
                                                 >
-                                                    <i className="fas fa-minus text-[8px]"></i>
-                                                </button>
-                                                <span className="w-8 text-center text-xs font-bold text-gray-800">{item.quantity}</span>
-                                                <button
-                                                    onClick={() => updateQuantity(item.id, item.selectedColor, Math.min(item.stock, item.quantity + 1))}
-                                                    className="w-7 h-7 flex items-center justify-center hover:bg-gray-50 text-gray-500 border-l border-gray-50"
-                                                >
-                                                    <i className="fas fa-plus text-[8px]"></i>
+                                                    <i className="fas fa-trash-alt text-sm"></i>
                                                 </button>
                                             </div>
-                                            <span className="text-sm font-bold text-primary-600">
-                                                KSh {item.price.toLocaleString()}
-                                            </span>
+                                            <p className="text-xs text-gray-500 mt-1 capitalize">{item.color}</p>
+                                            <div className="flex items-center justify-between mt-4">
+                                                <div className="flex items-center border border-gray-100 rounded-lg overflow-hidden bg-white shadow-sm">
+                                                    <button
+                                                        onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1), item.color)}
+                                                        className="w-7 h-7 flex items-center justify-center hover:bg-gray-50 text-gray-500 border-r border-gray-50"
+                                                    >
+                                                        <i className="fas fa-minus text-[8px]"></i>
+                                                    </button>
+                                                    <span className="w-8 text-center text-xs font-bold text-gray-800">{item.quantity}</span>
+                                                    <button
+                                                        onClick={() => updateQuantity(item.id, Math.min(item.stock, item.quantity + 1), item.color)}
+                                                        className="w-7 h-7 flex items-center justify-center hover:bg-gray-50 text-gray-500 border-l border-gray-50"
+                                                    >
+                                                        <i className="fas fa-plus text-[8px]"></i>
+                                                    </button>
+                                                </div>
+                                                <span className="text-sm font-bold text-primary-600">
+                                                    KSh {item.price.toLocaleString()}
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
+                                ))
+                            )}
+                        </div>
+
+                        {/* Spotlight Section - Fills the void */}
+                        {items.length > 0 && (
+                            <div className="px-6 pb-6 mt-auto">
+                                <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 shadow-sm group">
+                                    <img
+                                        src={items[0].image ? `${API_HOST}${items[0].image}` : '/placeholder-furniture.jpg'}
+                                        alt="Excellent Choice"
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-primary-950/80 via-transparent to-transparent flex flex-col justify-end p-6">
+                                        <p className="text-accent-400 text-[10px] font-bold uppercase tracking-widest mb-1">Excellent Choice</p>
+                                        <h3 className="text-white font-display text-xl leading-tight opacity-90">{items[0].name}</h3>
+                                    </div>
                                 </div>
-                            ))
+                            </div>
                         )}
                     </div>
 

@@ -293,80 +293,82 @@ export default function Header({ title, showBack = false }) {
                             </div>
                         </div>
 
-                        <div className="flex-1 overflow-y-auto px-6 py-6">
-                            <nav className="space-y-5">
-                                <div className="space-y-2">
-                                    <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center p-3 rounded-xl hover:bg-gray-50 bg-gray-50/50">
-                                        <div className="w-10 h-10 rounded-lg bg-primary-600 text-white flex items-center justify-center mr-4"><i className="fas fa-home text-sm"></i></div>
-                                        <span className="text-lg font-bold text-gray-950">Home Page</span>
-                                    </Link>
-                                    <Link to="/products" onClick={() => setMobileMenuOpen(false)} className="flex items-center p-3 rounded-xl hover:bg-gray-50">
-                                        <div className="w-10 h-10 rounded-lg bg-gray-200 text-gray-700 flex items-center justify-center mr-4"><i className="fas fa-couch text-sm"></i></div>
-                                        <span className="text-lg font-bold text-gray-950">Shop Furniture</span>
-                                    </Link>
-                                </div>
+                        <div className="flex-1 overflow-y-auto">
+                            <div className="px-6 py-6">
+                                <nav className="space-y-5">
+                                    <div className="space-y-2">
+                                        <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center p-3 rounded-xl hover:bg-gray-50 bg-gray-50/50">
+                                            <div className="w-10 h-10 rounded-lg bg-primary-600 text-white flex items-center justify-center mr-4"><i className="fas fa-home text-sm"></i></div>
+                                            <span className="text-lg font-bold text-gray-950">Home Page</span>
+                                        </Link>
+                                        <Link to="/products" onClick={() => setMobileMenuOpen(false)} className="flex items-center p-3 rounded-xl hover:bg-gray-50">
+                                            <div className="w-10 h-10 rounded-lg bg-gray-200 text-gray-700 flex items-center justify-center mr-4"><i className="fas fa-couch text-sm"></i></div>
+                                            <span className="text-lg font-bold text-gray-950">Shop Furniture</span>
+                                        </Link>
+                                    </div>
 
-                                <div className="pt-2 space-y-3">
-                                    <button
-                                        onClick={() => setCollectionsOpen(!collectionsOpen)}
-                                        className={`w-full flex items-center justify-between p-3.5 rounded-2xl transition-all duration-300 border-2 ${collectionsOpen
-                                            ? 'bg-primary-950 border-primary-950 text-white shadow-xl ring-4 ring-primary-50'
-                                            : 'bg-white border-gray-100 text-primary-950 hover:border-primary-100 shadow-sm'
-                                            }`}
-                                    >
-                                        <div className="flex items-center">
-                                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center mr-4 shadow-md transition-colors ${collectionsOpen ? 'bg-white/20 text-white' : 'bg-primary-900 text-white'
-                                                }`}>
-                                                <i className="fas fa-th-large text-sm"></i>
-                                            </div>
-                                            <span className="text-lg font-bold tracking-tight">Collections</span>
-                                        </div>
-                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${collectionsOpen ? 'bg-white/10 rotate-180' : 'bg-gray-50'}`}>
-                                            <i className={`fas fa-chevron-down text-[10px] ${collectionsOpen ? 'text-white' : 'text-gray-400'}`}></i>
-                                        </div>
-                                    </button>
-
-                                    <div className={`grid grid-cols-1 gap-2 overflow-hidden transition-all duration-500 ease-out ${collectionsOpen ? 'max-h-[1000px] opacity-100 mt-2' : 'max-h-0 opacity-0 invisible'}`}>
-                                        {categories && categories.length > 0 ? categories.map(cat => (
-                                            <Link
-                                                key={cat.id}
-                                                to={`/products?category=${cat.slug}`}
-                                                onClick={() => {
-                                                    setMobileMenuOpen(false);
-                                                    setCollectionsOpen(false);
-                                                }}
-                                                className="flex items-center justify-between ml-2 px-6 py-4 rounded-xl hover:bg-primary-50 transition-all bg-white border border-gray-50 hover:border-primary-100 group shadow-sm active:scale-[0.98]"
-                                            >
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-1.5 h-1.5 rounded-full bg-primary-200 group-hover:bg-primary-600 transition-colors"></div>
-                                                    <span className="text-[15px] font-bold text-gray-950 capitalize tracking-tight">{cat.name}</span>
+                                    <div className="pt-2 space-y-3">
+                                        <button
+                                            onClick={() => setCollectionsOpen(!collectionsOpen)}
+                                            className={`w-full flex items-center justify-between p-3.5 rounded-2xl transition-all duration-300 border-2 ${collectionsOpen
+                                                ? 'bg-primary-950 border-primary-950 text-white shadow-xl ring-4 ring-primary-50'
+                                                : 'bg-white border-gray-100 text-primary-950 hover:border-primary-100 shadow-sm'
+                                                }`}
+                                        >
+                                            <div className="flex items-center">
+                                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center mr-4 shadow-md transition-colors ${collectionsOpen ? 'bg-white/20 text-white' : 'bg-primary-900 text-white'
+                                                    }`}>
+                                                    <i className="fas fa-th-large text-sm"></i>
                                                 </div>
-                                                <i className="fas fa-arrow-right text-[10px] text-primary-600 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all"></i>
-                                            </Link>
-                                        )) : <p className="text-sm text-gray-500 italic p-4 text-center">Loading styles...</p>}
-                                    </div>
-                                </div>
-                            </nav>
-                        </div>
+                                                <span className="text-lg font-bold tracking-tight">Collections</span>
+                                            </div>
+                                            <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${collectionsOpen ? 'bg-white/10 rotate-180' : 'bg-gray-50'}`}>
+                                                <i className={`fas fa-chevron-down text-[10px] ${collectionsOpen ? 'text-white' : 'text-gray-400'}`}></i>
+                                            </div>
+                                        </button>
 
-                        <div className="p-6 pb-safe border-t border-gray-100 bg-white">
-                            {isAuthenticated ? (
-                                <Link to="/profile" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-4 py-3 px-4 bg-gray-50 rounded-2xl border border-gray-100">
-                                    <div className="w-9 h-9 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold text-sm">{user.full_name?.charAt(0)}</div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="font-bold text-gray-900 text-sm truncate">{user.full_name}</p>
-                                        <p className="text-[9px] text-primary-600 font-bold uppercase tracking-wider">View Profile</p>
+                                        <div className={`grid grid-cols-1 gap-2 overflow-hidden transition-all duration-500 ease-out ${collectionsOpen ? 'max-h-[1000px] opacity-100 mt-2' : 'max-h-0 opacity-0 invisible'}`}>
+                                            {categories && categories.length > 0 ? categories.map(cat => (
+                                                <Link
+                                                    key={cat.id}
+                                                    to={`/products?category=${cat.slug}`}
+                                                    onClick={() => {
+                                                        setMobileMenuOpen(false);
+                                                        setCollectionsOpen(false);
+                                                    }}
+                                                    className="flex items-center justify-between ml-2 px-6 py-4 rounded-xl hover:bg-primary-50 transition-all bg-white border border-gray-50 hover:border-primary-100 group shadow-sm active:scale-[0.98]"
+                                                >
+                                                    <div className="flex items-center gap-4">
+                                                        <div className="w-1.5 h-1.5 rounded-full bg-primary-200 group-hover:bg-primary-600 transition-colors"></div>
+                                                        <span className="text-[15px] font-bold text-gray-950 capitalize tracking-tight">{cat.name}</span>
+                                                    </div>
+                                                    <i className="fas fa-arrow-right text-[10px] text-primary-600 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all"></i>
+                                                </Link>
+                                            )) : <p className="text-sm text-gray-500 italic p-4 text-center">Loading styles...</p>}
+                                        </div>
                                     </div>
-                                </Link>
-                            ) : (
-                                <div className="grid grid-cols-1 gap-2.5">
-                                    <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="w-full py-3.5 bg-primary-950 text-white font-bold rounded-xl text-center shadow-lg text-sm">Create Account</Link>
-                                    <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="w-full py-3 border border-gray-200 text-gray-900 font-bold rounded-xl text-center bg-white text-sm">Sign In</Link>
-                                </div>
-                            )}
+                                </nav>
+                            </div>
+
+                            <div className="p-6 border-t border-gray-100 bg-white">
+                                {isAuthenticated ? (
+                                    <Link to="/profile" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-4 py-3 px-4 bg-gray-50 rounded-2xl border border-gray-100">
+                                        <div className="w-9 h-9 rounded-full bg-primary-600 text-white flex items-center justify-center font-bold text-sm">{user.full_name?.charAt(0)}</div>
+                                        <div className="flex-1 min-w-0">
+                                            <p className="font-bold text-gray-900 text-sm truncate">{user.full_name}</p>
+                                            <p className="text-[9px] text-primary-600 font-bold uppercase tracking-wider">View Profile</p>
+                                        </div>
+                                    </Link>
+                                ) : (
+                                    <div className="grid grid-cols-1 gap-2.5">
+                                        <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="w-full py-3.5 bg-primary-950 text-white font-bold rounded-xl text-center shadow-lg text-sm">Create Account</Link>
+                                        <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="w-full py-3 border border-gray-200 text-gray-900 font-bold rounded-xl text-center bg-white text-sm">Sign In</Link>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </aside>
-                </div>
+                    </aside >
+                </div >
             )
             }
         </>
