@@ -91,39 +91,77 @@ export default function ProductForm() {
         setAiProcessing(true);
         setError('');
 
-        // Simulation of Groq Vision API
-        // In reality, this would send the image to backend -> Groq Llama 3.2 Vision
+        // Simulation of Groq Vision API - Upgraded for multi-product intelligence
         setTimeout(() => {
             const fileName = images[0]?.name.toLowerCase() || '';
-            let name = 'Premium Modern Furniture';
+            let name = '';
             let desc = '';
             let catId = categories[0]?.id || '';
-            let price = '55000';
-            let mat = 'Solid Hardwood & Premium Fabric';
-            let dim = '210 x 90 x 85 cm';
+            let price = '45000';
+            let mat = 'Premium Materials';
+            let dim = 'Standard Size';
+            let colors = 'Grey, Beige, White';
 
-            if (fileName.includes('sofa') || fileName.includes('couch')) {
-                name = 'Luxury Velvet Sectional Sofaset';
-                desc = 'Indulge in unparalleled comfort with our signature sectional sofaset. Featuring high-density foam cushioning and stain-resistant velvet upholstery, this piece is the masterpiece your living room deserves.';
+            // 1. Detection Logic for Appliances (New!)
+            if (fileName.includes('fridge') || fileName.includes('refrigerator')) {
+                name = 'Double-Door Smart Cooling Refrigerator';
+                desc = 'Keep your food fresh for longer with this energy-efficient smart refrigerator. Features multi-flow air cooling, tempered glass shelves, and a dedicated moisture-controlled crisper drawer.';
+                catId = categories.find(c => c.name.toLowerCase().includes('appliances'))?.id || catId;
+                price = '85000';
+                mat = 'Stainless Steel Finish';
+                dim = '180 x 70 x 65 cm';
+                colors = 'Silver, Black, Metallic';
+            } else if (fileName.includes('wash') || fileName.includes('machine')) {
+                name = 'High-Performance Front Load Washing Machine';
+                desc = 'Experience a deeper clean with low water consumption. This 8kg capacity washer features advanced drum technology for gentle fabric care and high-speed spin for faster drying.';
+                catId = categories.find(c => c.name.toLowerCase().includes('appliances'))?.id || catId;
+                price = '65000';
+                mat = 'Enameled Steel & Glass';
+                dim = '85 x 60 x 55 cm';
+                colors = 'White, Graphite';
+            }
+            // 2. Enhanced Logic for Furniture
+            else if (fileName.includes('sofa') || fileName.includes('couch') || fileName.includes('sectional')) {
+                const types = ['Velvet Sectional', 'Luxury Chesterfield', 'Modern Fabric'];
+                const selected = types[Math.floor(Math.random() * types.length)];
+                name = `${selected} Sofaset`;
+                desc = `Transform your living space with this ${selected.toLowerCase()} masterpiece. Hand-tufted details and high-density foam seating provide both elegance and supreme comfort for your family.`;
                 catId = categories.find(c => c.slug === 'sofasets')?.id || catId;
-                price = '125000';
-            } else if (fileName.includes('chair')) {
+                price = '135000';
+                mat = 'Stain-Resistant Performance Fabric';
+                dim = '240 x 100 x 90 cm';
+                colors = 'Navy, Charcoal, Cream';
+            } else if (fileName.includes('chair') || fileName.includes('stool')) {
                 name = 'Ergonomic Executive Office Chair';
-                desc = 'The perfect blend of luxury and utility. Designed for long hours of focus, this chair features adaptive lumbar support, premium breathable mesh, and a polished aluminum base.';
+                desc = 'Designed for productivity and joint health. Features breathable mesh support, adjustable armrests, and a 360-degree silent swivel base for professional workspaces.';
                 catId = categories.find(c => c.slug === 'office-chairs' || c.slug === 'chairs')?.id || catId;
-                price = '24500';
-                mat = 'Breathable Mesh & Aluminum';
+                price = '22500';
+                mat = 'Breathable Mesh & High-Quality Polymer';
                 dim = '65 x 60 x 120 cm';
+                colors = 'Black, Space Grey';
             } else if (fileName.includes('table') || fileName.includes('dining')) {
-                name = 'Modern 6-Seater Marble Dining Set';
-                desc = 'Transform every meal into a celebration. This stunning set features a scratch-resistant Italian marble top and hand-finished solid oak legs. Built to last for generations.';
+                name = 'Contemporary 6-Seater Oak Dining Table';
+                desc = 'The centerpiece of every memorable meal. Crafted from sustainably sourced solid oak with a smooth, scratch-resistant finish that highlights the natural beauty of the wood grain.';
                 catId = categories.find(c => c.slug === 'dining-sets')?.id || catId;
-                price = '185000';
-                mat = 'Italian Marble & Solid Oak';
-                dim = '180 x 95 x 75 cm';
-            } else {
-                name = 'Classic Collection Masterpiece';
-                desc = 'A stunning addition to any premium interior. Meticulously handcrafted by Dan Classic Furniture experts using the finest materials available in the market.';
+                price = '95000';
+                mat = 'Solid Oak & Natural Oil Finish';
+                dim = '180 x 90 x 75 cm';
+                colors = 'Natural Oak, Walnut, Teak';
+            } else if (fileName.includes('bed') || fileName.includes('bedroom')) {
+                name = 'Royal King Size Upholstered Bed';
+                desc = 'Sleep like royalty on this magnificently designed bed frame. Features a floor-to-ceiling padded headboard and a reinforced steel support system for ultimate stability.';
+                catId = categories.find(c => c.name.toLowerCase().includes('bed'))?.id || catId;
+                price = '110000';
+                mat = 'Velvet Fabric & Solid Mahogany';
+                dim = '210 x 190 x 140 cm';
+                colors = 'Emerald, Midnight Blue, Grey';
+            }
+            // 3. Fallback - Much more professional than "Masterpiece"
+            else {
+                name = 'Dan Classic Private Collection Piece';
+                desc = 'A bespoke addition to your home environment. This item represents the height of craftsmanship, featuring hand-selected materials and a design that prioritizes both aesthetics and functionality.';
+                catId = categories[0]?.id || '';
+                price = '49500';
             }
 
             setFormData({
@@ -134,12 +172,12 @@ export default function ProductForm() {
                 price: price,
                 material: mat,
                 dimensions: dim,
-                colors: 'Brown, Grey, Beige'
+                colors: colors
             });
 
             setShowFullForm(true);
             setAiProcessing(false);
-        }, 2500);
+        }, 2200); // 2.2s speed factor
     };
 
     const handleSubmit = async (e) => {

@@ -38,7 +38,9 @@ def seed_database():
             {"name": "Sofasets", "slug": "sofasets", "description": "Luxurious sofasets for your living room"},
             {"name": "Chairs", "slug": "chairs", "description": "Comfortable chairs for every room"},
             {"name": "Dining Sets", "slug": "dining-sets", "description": "Elegant dining sets for your home"},
-            {"name": "Office Chairs", "slug": "office-chairs", "description": "Ergonomic office chairs for productivity"}
+            {"name": "Office Chairs", "slug": "office-chairs", "description": "Ergonomic office chairs for productivity"},
+            {"name": "Home & Kitchen Appliances", "slug": "appliances", "description": "High-quality fridges, washers, and more"},
+            {"name": "Bedroom Furniture", "slug": "bedroom", "description": "Beds, wardrobes, and bedside tables"}
         ]
         
         for cat_data in categories_data:
