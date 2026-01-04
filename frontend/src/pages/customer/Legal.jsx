@@ -20,8 +20,8 @@ export default function Legal() {
                         <button
                             onClick={() => setActiveTab('privacy')}
                             className={`flex-1 py-4 text-sm font-bold uppercase tracking-wider ${activeTab === 'privacy'
-                                    ? 'bg-primary-50 text-primary-900 border-b-2 border-primary-900'
-                                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                                ? 'bg-primary-50 text-primary-900 border-b-2 border-primary-900'
+                                : 'text-secondary-600 hover:text-primary-900 hover:bg-gray-50'
                                 }`}
                         >
                             Privacy Policy
@@ -29,8 +29,8 @@ export default function Legal() {
                         <button
                             onClick={() => setActiveTab('terms')}
                             className={`flex-1 py-4 text-sm font-bold uppercase tracking-wider ${activeTab === 'terms'
-                                    ? 'bg-primary-50 text-primary-900 border-b-2 border-primary-900'
-                                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                                ? 'bg-primary-50 text-primary-900 border-b-2 border-primary-900'
+                                : 'text-secondary-600 hover:text-primary-900 hover:bg-gray-50'
                                 }`}
                         >
                             Terms of Service
@@ -38,11 +38,11 @@ export default function Legal() {
                     </div>
 
                     {/* Content */}
-                    <div className="p-6 md:p-10 prose prose-slate max-w-none">
+                    <div className="p-6 md:p-10 prose prose-slate max-w-none text-secondary-900">
                         {activeTab === 'privacy' ? (
                             <div className="space-y-6">
                                 <h2 className="text-2xl font-bold text-primary-950">Privacy Policy</h2>
-                                <p className="text-sm text-gray-400 uppercase font-bold">Last Updated: January 2026</p>
+                                <p className="text-sm text-secondary-500 uppercase font-black tracking-tight">Last Updated: January 2026</p>
 
                                 <section>
                                     <h3 className="text-lg font-bold text-gray-900">1. Information We Collect</h3>
@@ -80,7 +80,7 @@ export default function Legal() {
                         ) : (
                             <div className="space-y-6">
                                 <h2 className="text-2xl font-bold text-primary-950">Terms of Service</h2>
-                                <p className="text-sm text-gray-400 uppercase font-bold">Last Updated: January 2026</p>
+                                <p className="text-sm text-secondary-500 uppercase font-black tracking-tight">Last Updated: January 2026</p>
 
                                 <section>
                                     <h3 className="text-lg font-bold text-gray-900">1. Acceptance of Terms</h3>

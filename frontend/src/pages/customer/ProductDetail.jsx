@@ -131,7 +131,7 @@ export default function ProductDetail() {
                         <div className="border-b border-gray-100 pb-4">
                             <Link
                                 to={`/products?category=${product.category?.slug}`}
-                                className="text-xs font-bold text-secondary-600 uppercase tracking-widest mb-2 inline-block hover:text-primary-600 transition-colors"
+                                className="text-xs font-black text-secondary-800 uppercase tracking-widest mb-2 inline-block hover:text-primary-600 transition-colors"
                             >
                                 {product.category?.name}
                             </Link>
@@ -147,7 +147,7 @@ export default function ProductDetail() {
                                 </span>
                                 {product.compare_price && product.compare_price > product.price && (
                                     <>
-                                        <span className="text-sm text-gray-400 line-through font-medium">
+                                        <span className="text-sm text-secondary-500 line-through font-bold">
                                             KSh {product.compare_price.toLocaleString()}
                                         </span>
                                         <span className="px-2 py-0.5 bg-green-50 text-green-700 text-[10px] font-bold uppercase tracking-wider rounded border border-green-100">
@@ -160,7 +160,7 @@ export default function ProductDetail() {
 
                         {/* Description */}
                         {product.description && (
-                            <div className="prose prose-sm text-gray-600 leading-relaxed text-sm">
+                            <div className="prose prose-sm text-secondary-900 leading-relaxed text-sm font-medium">
                                 {product.description}
                             </div>
                         )}
@@ -170,8 +170,8 @@ export default function ProductDetail() {
                             {/* Colors */}
                             {product.colors?.length > 0 && (
                                 <div>
-                                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest block mb-2">
-                                        Color: <span className="text-gray-900 font-medium capitalize">{selectedColor}</span>
+                                    <span className="text-[10px] font-black text-secondary-700 uppercase tracking-widest block mb-2">
+                                        Color: <span className="text-primary-950 font-bold capitalize">{selectedColor}</span>
                                     </span>
                                     <div className="flex flex-wrap gap-2">
                                         {product.colors.map((color) => (
@@ -196,7 +196,7 @@ export default function ProductDetail() {
 
                             {/* Quantity */}
                             <div>
-                                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest block mb-2">Quantity</span>
+                                <span className="text-[10px] font-black text-secondary-700 uppercase tracking-widest block mb-2">Quantity</span>
                                 <div className="flex items-center gap-0 w-32 bg-white rounded-lg border border-gray-200 shadow-sm">
                                     <button
                                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -221,15 +221,15 @@ export default function ProductDetail() {
                         <div className="pt-2 mb-32">
                             <dl className="grid grid-cols-2 gap-x-4 gap-y-4 text-sm">
                                 {product.material && (
-                                    <div className="border border-gray-100 rounded-lg p-3">
-                                        <dt className="text-gray-400 text-[10px] uppercase tracking-widest font-semibold mb-1">Material</dt>
-                                        <dd className="font-medium text-gray-900">{product.material}</dd>
+                                    <div className="border border-secondary-200 rounded-lg p-3 bg-white">
+                                        <dt className="text-secondary-600 text-[10px] uppercase tracking-widest font-black mb-1">Material</dt>
+                                        <dd className="font-bold text-primary-950">{product.material}</dd>
                                     </div>
                                 )}
                                 {product.dimensions && (
-                                    <div className="border border-gray-100 rounded-lg p-3">
-                                        <dt className="text-gray-400 text-[10px] uppercase tracking-widest font-semibold mb-1">Dimensions</dt>
-                                        <dd className="font-medium text-gray-900">{product.dimensions}</dd>
+                                    <div className="border border-secondary-200 rounded-lg p-3 bg-white">
+                                        <dt className="text-secondary-600 text-[10px] uppercase tracking-widest font-black mb-1">Dimensions</dt>
+                                        <dd className="font-bold text-primary-950">{product.dimensions}</dd>
                                     </div>
                                 )}
                             </dl>
@@ -242,8 +242,8 @@ export default function ProductDetail() {
             <div className="fixed bottom-[64px] lg:bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-100 p-2 safe-area-pb shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
                 <div className="container-app max-w-5xl mx-auto flex items-center justify-between gap-4">
                     <div className="hidden md:block">
-                        <p className="text-sm font-medium text-gray-500">Total Price</p>
-                        <p className="text-xl font-bold text-gray-900">KSh {(product.price * quantity).toLocaleString()}</p>
+                        <p className="text-sm font-bold text-secondary-600">Total Price</p>
+                        <p className="text-xl font-black text-primary-950">KSh {(product.price * quantity).toLocaleString()}</p>
                     </div>
 
                     <button

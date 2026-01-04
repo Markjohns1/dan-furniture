@@ -35,7 +35,7 @@ export default function Footer() {
                                 className="h-12 w-auto brightness-0 invert"
                             />
                         </Link>
-                        <p className="text-primary-200/80 leading-relaxed font-light">
+                        <p className="text-white/90 leading-relaxed font-medium">
                             Crafting premium furniture for Kenyan homes. Standard, luxury, and comfort combined.
                             Experience the difference of truly world-class design.
                         </p>
@@ -63,7 +63,7 @@ export default function Footer() {
                                 <li key={cat}>
                                     <Link
                                         to={`/products?category=${cat.toLowerCase().replace(' ', '-')}`}
-                                        className="text-primary-200/70 hover:text-white transition-colors flex items-center gap-2 group"
+                                        className="text-white/80 hover:text-white transition-colors flex items-center gap-2 group font-medium"
                                     >
                                         <span className="w-1 h-1 rounded-full bg-primary-700 group-hover:bg-accent-500 transition-colors"></span>
                                         {cat}
@@ -78,22 +78,22 @@ export default function Footer() {
                         <h4 className="font-display font-medium text-lg mb-6 text-white">Contact & Info</h4>
                         <ul className="space-y-4">
                             <li>
-                                <Link to="/contact" className="text-primary-200/70 hover:text-white transition-colors flex items-center gap-2">
+                                <Link to="/contact" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 font-medium">
                                     <i className="fas fa-envelope w-4"></i> Contact Us
                                 </Link>
                             </li>
                             <li>
-                                <a href="tel:+254724426993" className="text-primary-200/70 hover:text-white transition-colors flex items-center gap-2">
+                                <a href="tel:+254724426993" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 font-medium">
                                     <i className="fas fa-phone w-4"></i> +254 724 426993
                                 </a>
                             </li>
                             <li>
-                                <Link to="/legal" className="text-primary-200/70 hover:text-white transition-colors flex items-center gap-2">
+                                <Link to="/legal" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 font-medium">
                                     <i className="fas fa-shield-alt w-4"></i> Privacy Policy
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/legal" className="text-primary-200/70 hover:text-white transition-colors flex items-center gap-2">
+                                <Link to="/legal" className="text-white/80 hover:text-white transition-colors flex items-center gap-2 font-medium">
                                     <i className="fas fa-file-contract w-4"></i> Terms of Service
                                 </Link>
                             </li>
@@ -103,7 +103,7 @@ export default function Footer() {
                     {/* Newsletter */}
                     <div className="col-span-1">
                         <h4 className="font-display font-medium text-lg mb-6 text-white">Stay in the Loop</h4>
-                        <p className="text-primary-200/80 mb-4 text-sm">
+                        <p className="text-white/90 mb-4 text-sm font-medium">
                             Subscribe to receive updates on new arrivals and exclusive offers.
                         </p>
                         <form onSubmit={handleNewsletter} className="relative">
@@ -125,10 +125,10 @@ export default function Footer() {
 
                 {/* Bottom Strip */}
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="text-xs text-primary-400 text-center md:text-left">
+                    <p className="text-xs text-secondary-200 text-center md:text-left font-medium">
                         &copy; {new Date().getFullYear()} Daniel Furniture. All rights reserved.
                     </p>
-                    <div className="flex gap-6 text-xs text-primary-400 font-medium">
+                    <div className="flex gap-6 text-xs text-secondary-200 font-bold">
                         <span className="flex items-center gap-2">
                             <i className="fas fa-lock"></i> Secure Payment
                         </span>

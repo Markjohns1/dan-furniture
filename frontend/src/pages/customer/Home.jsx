@@ -62,11 +62,11 @@ export default function Home() {
                     <span className="inline-block py-1.5 px-4 rounded-full bg-accent-600/20 backdrop-blur-md border border-accent-600/30 text-accent-300 text-[10px] font-bold tracking-[0.3em] uppercase mb-8 animate-fade-in">
                         World-Class Furniture Collection
                     </span>
-                    <h1 className="text-4xl sm:text-6xl lg:text-8xl font-display font-medium text-white leading-[1.1] mb-8 tracking-tight">
+                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-medium text-white leading-[1.15] mb-6 tracking-tight">
                         Timeless Design <br className="hidden sm:block" />
                         <span className="text-accent-400 italic">Perfectly Crafted</span>
                     </h1>
-                    <p className="text-lg sm:text-xl text-primary-100/80 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+                    <p className="text-base sm:text-lg text-white mb-10 max-w-2xl mx-auto font-medium leading-relaxed opacity-95">
                         Explore Kenya's most massive collection of premium sofasets, dining sets, and bespoke furniture.
                         Where world-class quality meets uncompromising comfort.
                     </p>
@@ -140,7 +140,7 @@ export default function Home() {
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                     <div>
                         <h2 className="text-3xl sm:text-4xl font-display font-medium text-primary-900 mb-3">Curated Categories</h2>
-                        <p className="text-secondary-600">Browse our signature collections for every room.</p>
+                        <p className="text-secondary-800 font-medium">Browse our signature collections for every room.</p>
                     </div>
                     <Link to="/products" className="text-accent-700 font-medium hover:text-accent-800 transition-colors border-b border-accent-300 pb-0.5">
                         View All Categories
@@ -218,7 +218,7 @@ export default function Home() {
                         <div className="max-w-xl">
                             <span className="text-accent-600 text-[10px] font-bold uppercase tracking-[0.3em] block mb-3">Our Selection</span>
                             <h2 className="text-3xl sm:text-5xl font-display font-medium text-primary-950 mb-4">Featured Collection</h2>
-                            <p className="text-secondary-500 font-light leading-relaxed">
+                            <p className="text-secondary-700 font-medium leading-relaxed">
                                 Hand-picked favorites that define the Daniel Furniture aesthetic. <br className="hidden sm:block" />
                                 Each piece is crafted with obsessive attention to detail.
                             </p>
@@ -292,7 +292,7 @@ export default function Home() {
                         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
                             Need Help Choosing?
                         </h2>
-                        <p className="text-gray-300 max-w-lg mx-auto mb-8">
+                        <p className="text-white/90 max-w-lg mx-auto mb-8 font-medium">
                             Our team is here to help you find the perfect furniture for your space. Contact us via WhatsApp for personalized recommendations.
                         </p>
                         <a

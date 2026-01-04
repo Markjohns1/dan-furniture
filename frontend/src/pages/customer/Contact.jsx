@@ -34,7 +34,7 @@ export default function Contact() {
                     <div className="text-center mb-12">
                         <span className="text-accent-600 text-xs font-bold uppercase tracking-widest">Get In Touch</span>
                         <h1 className="text-4xl font-display font-medium text-primary-950 mt-2 mb-4">We'd Love to Hear From You</h1>
-                        <p className="text-secondary-500 max-w-xl mx-auto">
+                        <p className="text-secondary-800 font-medium max-w-xl mx-auto">
                             Whether you have a question about our products, need a custom piece, or just want to say hello, our team is ready to answer all your questions.
                         </p>
                     </div>
@@ -51,8 +51,8 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <p className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-1">Phone</p>
-                                            <p className="text-secondary-600">+254 724 426993</p>
-                                            <p className="text-sm text-secondary-400">Mon-Sat 9am to 6pm</p>
+                                            <p className="text-secondary-900 font-bold">+254 724 426993</p>
+                                            <p className="text-sm text-secondary-600 font-medium">Mon-Sat 9am to 6pm</p>
                                         </div>
                                     </div>
 
@@ -62,7 +62,7 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <p className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-1">Email</p>
-                                            <p className="text-secondary-600">info@danfurniture.co.ke</p>
+                                            <p className="text-secondary-900 font-bold">info@danfurniture.co.ke</p>
                                         </div>
                                     </div>
 
@@ -72,8 +72,8 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <p className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-1">Location</p>
-                                            <p className="text-secondary-600">Nairobi, Kenya</p>
-                                            <p className="text-sm text-secondary-400">Available for deliveries countrywide</p>
+                                            <p className="text-secondary-900 font-bold">Nairobi, Kenya</p>
+                                            <p className="text-sm text-secondary-600 font-medium">Available for deliveries countrywide</p>
                                         </div>
                                     </div>
                                 </div>

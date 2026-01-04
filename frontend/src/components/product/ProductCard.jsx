@@ -132,7 +132,7 @@ export default function ProductCard({ product }) {
             <div className="p-3 flex flex-col flex-1">
                 {/* Category & Rating Row */}
                 <div className="flex items-center justify-between mb-1.5">
-                    <p className="text-[10px] font-bold text-secondary-600 uppercase tracking-[0.1em]">
+                    <p className="text-[10px] font-black text-secondary-800 uppercase tracking-[0.15em]">
                         {product.category?.name || 'Collection'}
                     </p>
                     <div className="flex text-accent-500 text-[8px]">
@@ -153,7 +153,7 @@ export default function ProductCard({ product }) {
                     {/* Price Block */}
                     <div className="flex flex-col">
                         {product.compare_price && product.compare_price > product.price && (
-                            <p className="text-[10px] text-secondary-500 line-through font-medium mb-0.5">
+                            <p className="text-[10px] text-secondary-600 line-through font-bold mb-0.5 opacity-80">
                                 KSh {product.compare_price.toLocaleString()}
                             </p>
                         )}
@@ -165,7 +165,7 @@ export default function ProductCard({ product }) {
                     {/* Highly Intuitive Color Options */}
                     {product.colors?.length > 0 && (
                         <div className="flex flex-col items-end gap-1.5">
-                            <span className="text-[8px] font-black text-primary-400 uppercase tracking-widest leading-none">
+                            <span className="text-[8px] font-black text-primary-700 uppercase tracking-widest leading-none">
                                 {product.colors.length > 1 ? `${product.colors.length} Colors` : 'Color'}
                             </span>
                             <div className="flex -space-x-2">
