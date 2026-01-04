@@ -164,7 +164,7 @@ export default function Sidebar({ isOpen, onClose }) {
 
                 {/* Footer */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100 bg-gray-50">
-                    <div className="flex items-center justify-center gap-4 text-gray-400">
+                    <div className="flex items-center justify-center gap-4 text-secondary-400">
                         <a href="https://wa.me/254724426993" className="hover:text-green-500">
                             <i className="fab fa-whatsapp text-xl"></i>
                         </a>

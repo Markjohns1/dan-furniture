@@ -109,7 +109,7 @@ export default function Products() {
 
                 {/* Page Header */}
                 <div className="mb-6">
-                    <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    <h1 className="text-2xl sm:text-3xl font-bold text-secondary-900">
                         {categorySlug
                             ? categories.find(c => c.slug === categorySlug)?.name || 'Products'
                             : featured === 'true'
@@ -117,7 +117,7 @@ export default function Products() {
                                 : 'All Products'
                         }
                     </h1>
-                    <p className="text-gray-600 mt-1">{pagination.total} products available</p>
+                    <p className="text-secondary-600 mt-1">{pagination.total} products available</p>
                 </div>
 
                 {/* Filters Bar */}
@@ -129,12 +129,12 @@ export default function Products() {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search products..."
-                            className="w-full pl-12 pr-24 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                            className="w-full pl-12 pr-24 py-3 bg-white border border-secondary-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
                         />
-                        <i className="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <i className="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-secondary-400"></i>
                         <button
                             type="submit"
-                            className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 shadow-sm transition-all active:scale-95"
                         >
                             Search
                         </button>
@@ -144,18 +144,18 @@ export default function Products() {
                     <div className="flex gap-2">
                         <button
                             onClick={() => setShowFilters(!showFilters)}
-                            className="flex items-center gap-2 px-4 py-3 bg-white border border-gray-200 rounded-xl font-medium text-gray-700 hover:bg-gray-50 lg:hidden"
+                            className="flex items-center gap-2 px-4 py-3 bg-white border border-secondary-200 rounded-xl font-medium text-secondary-700 hover:bg-secondary-50 lg:hidden"
                         >
-                            <i className="fas fa-filter"></i>
+                            <i className="fas fa-filter text-primary-600"></i>
                             Filter
                         </button>
 
                         <select
                             value={sort}
                             onChange={(e) => handleSortChange(e.target.value)}
-                            className="px-4 py-3 bg-white border border-gray-200 rounded-xl font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            className="px-4 py-3 bg-white border border-secondary-200 rounded-xl font-medium text-secondary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all"
                         >
-                            <option value="newest">Newest</option>
+                            <option value="newest">Newest First</option>
                             <option value="price_low">Price: Low to High</option>
                             <option value="price_high">Price: High to Low</option>
                             <option value="name">Name A-Z</option>
@@ -172,8 +172,8 @@ export default function Products() {
                                 <li>
                                     <button
                                         onClick={() => handleCategoryChange(null)}
-                                        className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${!categorySlug
-                                            ? 'bg-primary-50 text-primary-700 font-medium'
+                                        className={`w-full text-left px-4 py-2.5 rounded-xl transition-all duration-200 ${!categorySlug
+                                            ? 'bg-primary-950 text-white shadow-md'
                                             : 'text-secondary-700 hover:bg-secondary-50'
                                             }`}
                                     >
@@ -184,13 +184,15 @@ export default function Products() {
                                     <li key={cat.id}>
                                         <button
                                             onClick={() => handleCategoryChange(cat.slug)}
-                                            className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${categorySlug === cat.slug
-                                                ? 'bg-primary-50 text-primary-700 font-medium'
-                                                : 'text-gray-600 hover:bg-gray-50'
+                                            className={`w-full text-left px-4 py-2.5 rounded-xl transition-all duration-200 flex items-center justify-between ${categorySlug === cat.slug
+                                                ? 'bg-primary-950 text-white shadow-md'
+                                                : 'text-secondary-700 hover:bg-secondary-50'
                                                 }`}
                                         >
-                                            {cat.name}
-                                            <span className="text-gray-400 text-sm ml-2">({cat.product_count || 0})</span>
+                                            <span className="font-medium">{cat.name}</span>
+                                            <span className={`text-xs ml-2 ${categorySlug === cat.slug ? 'text-white/70' : 'text-secondary-400'}`}>
+                                                ({cat.product_count || 0})
+                                            </span>
                                         </button>
                                     </li>
                                 ))}
@@ -249,9 +251,9 @@ export default function Products() {
                                                 window.scrollTo(0, 0);
                                             }}
                                             disabled={page <= 1}
-                                            className="px-4 py-2 bg-white border border-gray-200 rounded-lg font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            className="px-4 py-2 bg-white border border-secondary-200 rounded-lg font-medium text-secondary-700 hover:bg-secondary-50 disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
-                                            <i className="fas fa-chevron-left"></i>
+                                            <i className="fas fa-chevron-left text-primary-600"></i>
                                         </button>
 
                                         <span className="px-4 py-2 bg-primary-50 text-primary-700 font-medium rounded-lg">
@@ -266,18 +268,18 @@ export default function Products() {
                                                 window.scrollTo(0, 0);
                                             }}
                                             disabled={page >= pagination.pages}
-                                            className="px-4 py-2 bg-white border border-gray-200 rounded-lg font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            className="px-4 py-2 bg-white border border-secondary-200 rounded-lg font-medium text-secondary-700 hover:bg-secondary-50 disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
-                                            <i className="fas fa-chevron-right"></i>
+                                            <i className="fas fa-chevron-right text-primary-600"></i>
                                         </button>
                                     </div>
                                 )}
                             </>
                         ) : (
-                            <div className="text-center py-16 bg-white rounded-2xl">
-                                <i className="fas fa-search text-5xl text-gray-300 mb-4"></i>
-                                <h3 className="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
-                                <p className="text-gray-500 mb-6">Try adjusting your search or filters</p>
+                            <div className="text-center py-16 bg-white rounded-2xl shadow-sm border border-secondary-100">
+                                <i className="fas fa-search text-5xl text-secondary-200 mb-4"></i>
+                                <h3 className="text-xl font-semibold text-secondary-900 mb-2">No products found</h3>
+                                <p className="text-secondary-500 mb-6">Try adjusting your search or filters</p>
                                 <button
                                     onClick={() => {
                                         setSearchQuery('');
@@ -317,9 +319,9 @@ export default function Products() {
                                 <div className="space-y-2">
                                     <button
                                         onClick={() => handleCategoryChange(null)}
-                                        className={`w-full text-left px-4 py-3 rounded-xl transition-colors ${!categorySlug
-                                            ? 'bg-primary-100 text-primary-700 font-medium'
-                                            : 'bg-gray-100 text-gray-700'
+                                        className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${!categorySlug
+                                            ? 'bg-primary-950 text-white shadow-md'
+                                            : 'bg-secondary-50 text-secondary-900'
                                             }`}
                                     >
                                         All Categories
@@ -328,13 +330,15 @@ export default function Products() {
                                         <button
                                             key={cat.id}
                                             onClick={() => handleCategoryChange(cat.slug)}
-                                            className={`w-full text-left px-4 py-3 rounded-xl transition-colors ${categorySlug === cat.slug
-                                                ? 'bg-primary-100 text-primary-700 font-medium'
-                                                : 'bg-gray-100 text-gray-700'
+                                            className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-200 flex items-center justify-between ${categorySlug === cat.slug
+                                                ? 'bg-primary-950 text-white shadow-md'
+                                                : 'bg-secondary-50 text-secondary-900'
                                                 }`}
                                         >
-                                            {cat.name}
-                                            <span className="text-gray-400 ml-2">({cat.product_count || 0})</span>
+                                            <span className="font-medium">{cat.name}</span>
+                                            <span className={`text-xs ${categorySlug === cat.slug ? 'text-white/70' : 'text-secondary-400'}`}>
+                                                ({cat.product_count || 0})
+                                            </span>
                                         </button>
                                     ))}
                                 </div>
