@@ -93,19 +93,19 @@ export default function Home() {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-gray-100/50">
                         <div className="space-y-1">
                             <p className="text-primary-900 font-display font-bold text-lg">Nairobi</p>
-                            <p className="text-xs text-secondary-500 uppercase tracking-wider">Free Delivery</p>
+                            <p className="text-xs text-secondary-600 font-bold uppercase tracking-wider">Free Delivery</p>
                         </div>
                         <div className="space-y-1">
                             <p className="text-primary-900 font-display font-bold text-lg">Quality</p>
-                            <p className="text-xs text-secondary-500 uppercase tracking-wider">Guaranteed</p>
+                            <p className="text-xs text-secondary-600 font-bold uppercase tracking-wider">Guaranteed</p>
                         </div>
                         <div className="space-y-1">
                             <p className="text-primary-900 font-display font-bold text-lg">4.9/5</p>
-                            <p className="text-xs text-secondary-500 uppercase tracking-wider">Customer Rating</p>
+                            <p className="text-xs text-secondary-600 font-bold uppercase tracking-wider">Customer Rating</p>
                         </div>
                         <div className="space-y-1">
                             <p className="text-primary-900 font-display font-bold text-lg">24/7</p>
-                            <p className="text-xs text-secondary-500 uppercase tracking-wider">Support</p>
+                            <p className="text-xs text-secondary-600 font-bold uppercase tracking-wider">Support</p>
                         </div>
                     </div>
                 </div>
@@ -122,7 +122,7 @@ export default function Home() {
                                 to={cat.id === 'all' ? '/products' : `/products?category=${cat.slug}`}
                                 className={`px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.15em] transition-all flex items-center gap-2.5 shadow-sm border ${cat.id === 'all'
                                     ? 'bg-primary-950 text-white border-primary-950 scale-105 z-10'
-                                    : 'bg-white text-gray-800 border-gray-100 hover:border-primary-300 hover:bg-primary-50 active:scale-95'
+                                    : 'bg-white text-secondary-900 font-black border-secondary-100 hover:border-primary-300 hover:bg-primary-50 active:scale-95'
                                     }`}
                             >
                                 {cat.id !== 'all' && (

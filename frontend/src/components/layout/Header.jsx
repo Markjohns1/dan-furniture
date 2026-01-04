@@ -70,7 +70,7 @@ export default function Header({ title, showBack = false }) {
                                 className={({ isActive }) =>
                                     `px-4 py-2 rounded-lg font-medium transition-colors ${isActive
                                         ? 'bg-primary-950 text-white shadow-lg shadow-primary-900/20'
-                                        : 'text-gray-500 hover:text-primary-900 hover:bg-gray-50'
+                                        : 'text-secondary-600 hover:text-primary-900 hover:bg-secondary-50'
                                     }`
                                 }
                             >
@@ -82,7 +82,7 @@ export default function Header({ title, showBack = false }) {
                                 <div
                                     className={`flex items-center gap-1 px-4 py-2 rounded-lg font-medium transition-colors cursor-default ${location.pathname.startsWith('/products')
                                         ? 'bg-primary-950 text-white shadow-lg shadow-primary-900/20'
-                                        : 'text-gray-500 hover:text-primary-900 hover:bg-gray-50'
+                                        : 'text-secondary-600 hover:text-primary-900 hover:bg-secondary-50'
                                         }`}
                                 >
                                     Products
@@ -93,7 +93,7 @@ export default function Header({ title, showBack = false }) {
                                 <div className="absolute left-0 top-full pt-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 z-50">
                                     <div className="w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-3 overflow-hidden">
                                         <div className="px-4 py-2 border-b border-gray-50">
-                                            <p className="text-[10px] font-bold text-secondary-400 uppercase tracking-widest">Categories</p>
+                                            <p className="text-[10px] font-bold text-secondary-600 uppercase tracking-widest">Categories</p>
                                         </div>
                                         <div className="max-h-[350px] overflow-y-auto">
                                             <Link
@@ -182,7 +182,7 @@ export default function Header({ title, showBack = false }) {
                                         placeholder="Search furniture..."
                                         className="w-48 lg:w-64 pl-10 pr-4 py-2 bg-gray-50 border border-gray-100 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:w-80 lg:focus:w-96 transition-all duration-300"
                                     />
-                                    <i className="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary-600 transition-colors"></i>
+                                    <i className="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-secondary-400 group-focus-within:text-primary-600 transition-colors"></i>
                                 </form>
                             </div>
 

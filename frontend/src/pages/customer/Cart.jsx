@@ -8,6 +8,7 @@ import { useAuth } from '../../context/AuthContext';
 import { API_HOST } from '../../api';
 import Header from '../../components/layout/Header';
 import { WhatsAppOrderButton } from '../../components/ui/WhatsAppButton';
+import SEO from '../../components/ui/SEO';
 
 export default function Cart() {
     const { items, itemCount, subtotal, removeItem, updateQuantity, clearCart, getWhatsAppMessage } = useCart();
@@ -78,6 +79,7 @@ export default function Cart() {
     if (items.length === 0) {
         return (
             <div className="min-h-screen bg-gray-50 pb-20 lg:pb-8">
+                <SEO title="Your Cart" description="View and manage your selected furniture pieces." />
                 <Header title="Cart" />
                 <div className="max-w-lg mx-auto px-4 py-16 text-center">
                     <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
@@ -99,6 +101,7 @@ export default function Cart() {
 
     return (
         <div className="min-h-screen bg-gray-50 pb-28 lg:pb-8">
+            <SEO title="Your Cart" description="Complete your order and checkout." />
             <Header title={`Cart (${itemCount})`} showBack />
 
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

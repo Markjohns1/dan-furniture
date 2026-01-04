@@ -131,7 +131,7 @@ export default function ProductDetail() {
                         <div className="border-b border-gray-100 pb-4">
                             <Link
                                 to={`/products?category=${product.category?.slug}`}
-                                className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 inline-block hover:text-primary-600 transition-colors"
+                                className="text-xs font-bold text-secondary-600 uppercase tracking-widest mb-2 inline-block hover:text-primary-600 transition-colors"
                             >
                                 {product.category?.name}
                             </Link>

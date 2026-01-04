@@ -78,7 +78,7 @@ export default function Sidebar({ isOpen, onClose }) {
                             if (item.divider) {
                                 return (
                                     <li key={index} className="pt-4 pb-2">
-                                        <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                                        <span className="text-xs font-semibold text-secondary-500 uppercase tracking-wider">
                                             {item.label}
                                         </span>
                                     </li>
@@ -175,8 +175,8 @@ export default function Sidebar({ isOpen, onClose }) {
                             <i className="fas fa-phone text-xl"></i>
                         </a>
                     </div>
-                    <p className="text-center text-xs text-gray-400 mt-2">
-                        © 2024 Daniel Furniture
+                    <p className="text-center text-xs text-secondary-500 mt-2">
+                        © 2026 Daniel Furniture
                     </p>
                 </div>
             </aside>

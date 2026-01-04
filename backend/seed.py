@@ -23,7 +23,7 @@ def seed_database():
         if not admin:
             admin = User(
                 email="admin@danfurniture.co.ke",
-                phone="254700000000",
+                phone="254724426993",
                 password_hash=get_password_hash("admin123"),
                 full_name="Dan (Admin)",
                 role=UserRole.ADMIN
