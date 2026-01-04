@@ -165,13 +165,13 @@ export default function Sidebar({ isOpen, onClose }) {
                 {/* Footer */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100 bg-gray-50">
                     <div className="flex items-center justify-center gap-4 text-gray-400">
-                        <a href="https://wa.me/254700000000" className="hover:text-green-500">
+                        <a href="https://wa.me/254724426993" className="hover:text-green-500">
                             <i className="fab fa-whatsapp text-xl"></i>
                         </a>
                         <a href="https://instagram.com" className="hover:text-pink-500">
                             <i className="fab fa-instagram text-xl"></i>
                         </a>
-                        <a href="tel:+254700000000" className="hover:text-primary-500">
+                        <a href="tel:+254724426993" className="hover:text-primary-500">
                             <i className="fas fa-phone text-xl"></i>
                         </a>
                     </div>
