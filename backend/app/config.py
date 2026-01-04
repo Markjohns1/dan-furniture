@@ -17,7 +17,7 @@ class Settings:
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./dan_furniture.db")
     
     # WhatsApp
-    WHATSAPP_NUMBER: str = os.getenv("WHATSAPP_NUMBER", "254700000000")
+    WHATSAPP_NUMBER: str = os.getenv("WHATSAPP_NUMBER", "254724426993")
     
     # Upload
     MAX_FILE_SIZE_MB: int = int(os.getenv("MAX_FILE_SIZE_MB", "5"))
