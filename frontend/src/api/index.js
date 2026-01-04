@@ -3,11 +3,11 @@
  */
 import axios from 'axios';
 
-// API host for images (without /api suffix)
-export const API_HOST = import.meta.env.VITE_API_HOST || 'http://localhost:8000';
+// API host for images (without /api suffix) - using relative path for proxy
+export const API_HOST = '';
 
 // API base URL for endpoints
-const API_BASE_URL = import.meta.env.VITE_API_URL || `${API_HOST}/api`;
+const API_BASE_URL = '/api';
 
 // Create axios instance
 const api = axios.create({

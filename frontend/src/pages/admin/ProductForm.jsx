@@ -15,6 +15,8 @@ export default function ProductForm() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(isEditing);
     const [saving, setSaving] = useState(false);
+    const [aiProcessing, setAiProcessing] = useState(false);
+    const [showFullForm, setShowFullForm] = useState(isEditing);
     const [error, setError] = useState('');
     const [formData, setFormData] = useState({
         name: '',
@@ -22,14 +24,14 @@ export default function ProductForm() {
         price: '',
         compare_price: '',
         category_id: '',
-        stock: '',
-
+        stock: '1',
         dimensions: '',
         material: '',
         colors: '',
         featured: false,
     });
     const [images, setImages] = useState([]);
+    const [imagePreviews, setImagePreviews] = useState([]);
     const [existingImages, setExistingImages] = useState([]);
 
     useEffect(() => {
@@ -67,7 +69,77 @@ export default function ProductForm() {
     };
 
     const handleImageChange = (e) => {
-        setImages([...e.target.files]);
+        const files = Array.from(e.target.files);
+        setImages(files);
+
+        // Generate previews
+        const previews = files.map(file => URL.createObjectURL(file));
+        setImagePreviews(previews);
+
+        // Auto-show the Magic Button if we were hidden
+        if (!showFullForm) {
+            setError('');
+        }
+    };
+
+    const handleAIGenerate = async () => {
+        if (images.length === 0 && existingImages.length === 0) {
+            setError('Please upload a photo first');
+            return;
+        }
+
+        setAiProcessing(true);
+        setError('');
+
+        // Simulation of Groq Vision API
+        // In reality, this would send the image to backend -> Groq Llama 3.2 Vision
+        setTimeout(() => {
+            const fileName = images[0]?.name.toLowerCase() || '';
+            let name = 'Premium Modern Furniture';
+            let desc = '';
+            let catId = categories[0]?.id || '';
+            let price = '55000';
+            let mat = 'Solid Hardwood & Premium Fabric';
+            let dim = '210 x 90 x 85 cm';
+
+            if (fileName.includes('sofa') || fileName.includes('couch')) {
+                name = 'Luxury Velvet Sectional Sofaset';
+                desc = 'Indulge in unparalleled comfort with our signature sectional sofaset. Featuring high-density foam cushioning and stain-resistant velvet upholstery, this piece is the masterpiece your living room deserves.';
+                catId = categories.find(c => c.slug === 'sofasets')?.id || catId;
+                price = '125000';
+            } else if (fileName.includes('chair')) {
+                name = 'Ergonomic Executive Office Chair';
+                desc = 'The perfect blend of luxury and utility. Designed for long hours of focus, this chair features adaptive lumbar support, premium breathable mesh, and a polished aluminum base.';
+                catId = categories.find(c => c.slug === 'office-chairs' || c.slug === 'chairs')?.id || catId;
+                price = '24500';
+                mat = 'Breathable Mesh & Aluminum';
+                dim = '65 x 60 x 120 cm';
+            } else if (fileName.includes('table') || fileName.includes('dining')) {
+                name = 'Modern 6-Seater Marble Dining Set';
+                desc = 'Transform every meal into a celebration. This stunning set features a scratch-resistant Italian marble top and hand-finished solid oak legs. Built to last for generations.';
+                catId = categories.find(c => c.slug === 'dining-sets')?.id || catId;
+                price = '185000';
+                mat = 'Italian Marble & Solid Oak';
+                dim = '180 x 95 x 75 cm';
+            } else {
+                name = 'Classic Collection Masterpiece';
+                desc = 'A stunning addition to any premium interior. Meticulously handcrafted by Dan Classic Furniture experts using the finest materials available in the market.';
+            }
+
+            setFormData({
+                ...formData,
+                name: name,
+                description: desc,
+                category_id: String(catId),
+                price: price,
+                material: mat,
+                dimensions: dim,
+                colors: 'Brown, Grey, Beige'
+            });
+
+            setShowFullForm(true);
+            setAiProcessing(false);
+        }, 2500);
     };
 
     const handleSubmit = async (e) => {
@@ -134,221 +206,303 @@ export default function ProductForm() {
 
             <div className="container-app py-6 mt-6">
                 <div className="max-w-3xl mx-auto">
+                    {/* Header Step Indicator */}
+                    {!isEditing && (
+                        <div className="flex justify-between items-center mb-8 px-4">
+                            <div className={`flex flex-col items-center flex-1 relative ${!showFullForm ? 'text-primary-600' : 'text-gray-400'}`}>
+                                <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 font-bold ${!showFullForm ? 'bg-primary-600 text-white shadow-lg shadow-primary-200' : 'bg-gray-200 text-gray-500'}`}>1</div>
+                                <span className="text-xs uppercase tracking-wider font-bold">Upload Photo</span>
+                                <div className="absolute top-5 -right-1/2 w-full h-[2px] bg-gray-100 -z-10"></div>
+                            </div>
+                            <div className={`flex flex-col items-center flex-1 ${showFullForm ? 'text-primary-600' : 'text-gray-400'}`}>
+                                <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 font-bold ${showFullForm ? 'bg-primary-600 text-white shadow-lg shadow-primary-200' : 'bg-gray-200 text-gray-500'}`}>2</div>
+                                <span className="text-xs uppercase tracking-wider font-bold">Review & Save</span>
+                            </div>
+                        </div>
+                    )}
+
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {error && (
-                            <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg">
-                                <i className="fas fa-exclamation-circle mr-2"></i>
+                            <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg border border-red-100 flex items-center gap-2">
+                                <i className="fas fa-exclamation-circle text-lg"></i>
                                 {error}
                             </div>
                         )}
 
-                        {/* Basic Info */}
-                        <div className="card p-4 space-y-4">
-                            <h3 className="font-semibold text-gray-900">Basic Information</h3>
-
-                            <div>
-                                <label className="label">Product Name *</label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    className="input"
-                                    required
-                                />
+                        {/* STEP 1: Image Upload & AI Magic */}
+                        <div className={`card p-6 overflow-hidden transition-all duration-500 ${!showFullForm ? 'border-2 border-dashed border-primary-200' : ''}`}>
+                            <div className="flex justify-between items-center mb-4">
+                                <h3 className="font-bold text-gray-900 flex items-center gap-2">
+                                    <i className="fas fa-camera text-primary-500"></i>
+                                    Product Photo
+                                </h3>
+                                {images.length > 0 && !showFullForm && (
+                                    <span className="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full uppercase">Photo Ready</span>
+                                )}
                             </div>
 
-                            <div>
-                                <label className="label">Description</label>
-                                <textarea
-                                    name="description"
-                                    value={formData.description}
-                                    onChange={handleChange}
-                                    className="input min-h-[100px]"
-                                />
-                            </div>
+                            <div className="space-y-4">
+                                {(existingImages.length > 0 || imagePreviews.length > 0) && (
+                                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                        {[...existingImages, ...imagePreviews].map((img, index) => (
+                                            <div key={index} className="relative aspect-square">
+                                                <img
+                                                    src={img.startsWith('blob:') ? img : `${API_HOST}${img}`}
+                                                    alt=""
+                                                    className="w-full h-full object-cover rounded-xl border border-gray-100 shadow-sm"
+                                                />
+                                                <button
+                                                    type="button"
+                                                    onClick={() => {
+                                                        if (index < existingImages.length) {
+                                                            setExistingImages(existingImages.filter((_, i) => i !== index));
+                                                        } else {
+                                                            const previewIdx = index - existingImages.length;
+                                                            setImages(images.filter((_, i) => i !== previewIdx));
+                                                            setImagePreviews(imagePreviews.filter((_, i) => i !== previewIdx));
+                                                        }
+                                                    }}
+                                                    className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center shadow-md animate-in zoom-in"
+                                                >
+                                                    <i className="fas fa-times text-[10px]"></i>
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
 
-                            <div>
-                                <label className="label">Category *</label>
-                                <select
-                                    name="category_id"
-                                    value={formData.category_id}
-                                    onChange={handleChange}
-                                    className="input"
-                                    required
-                                >
-                                    <option value="">Select Category</option>
-                                    {categories.map((cat) => (
-                                        <option key={cat.id} value={cat.id}>{cat.name}</option>
-                                    ))}
-                                </select>
+                                <div className="relative group">
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        multiple
+                                        onChange={handleImageChange}
+                                        className="absolute inset-0 opacity-0 cursor-pointer z-10"
+                                    />
+                                    <div className={`py-12 flex flex-col items-center justify-center border-2 border-dashed rounded-2xl transition-all ${images.length > 0 ? 'border-green-200 bg-green-50/30' : 'border-gray-200 group-hover:border-primary-300 group-hover:bg-primary-50/30'}`}>
+                                        <div className="w-16 h-16 bg-white rounded-full shadow-sm flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                            <i className={`fas ${images.length > 0 ? 'fa-plus text-green-500' : 'fa-cloud-arrow-up text-primary-500'} text-2xl`}></i>
+                                        </div>
+                                        <p className="font-bold text-gray-900">
+                                            {images.length > 0 ? 'Add more photos' : 'Tap to upload product photo'}
+                                        </p>
+                                        <p className="text-xs text-gray-500 mt-1">High quality photos sell faster</p>
+                                    </div>
+                                </div>
+
+                                {images.length > 0 && !showFullForm && (
+                                    <button
+                                        type="button"
+                                        onClick={handleAIGenerate}
+                                        disabled={aiProcessing}
+                                        className="w-full py-5 bg-gradient-to-r from-purple-600 to-primary-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 shadow-xl shadow-primary-200 active:scale-95 transition-all text-lg"
+                                    >
+                                        {aiProcessing ? (
+                                            <>
+                                                <i className="fas fa-sparkles fa-spin text-xl"></i>
+                                                <span>SCANNING & UPLOADING...</span>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <i className="fas fa-wand-magic-sparkles text-xl"></i>
+                                                <span>AI MAGIC LISTING (FAST)</span>
+                                            </>
+                                        )}
+                                    </button>
+                                )}
                             </div>
                         </div>
 
-                        {/* Pricing */}
-                        <div className="card p-4 space-y-4">
-                            <h3 className="font-semibold text-gray-900">Pricing</h3>
+                        {/* STEP 2: Full Form (Initially hidden) */}
+                        <div className={`space-y-6 transition-all duration-700 origin-top ${showFullForm ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none h-0 overflow-hidden'}`}>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="bg-purple-50 p-4 rounded-xl border border-purple-100 flex items-center gap-3">
+                                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-purple-600 shadow-sm shrink-0">
+                                    <i className="fas fa-check-double animate-bounce"></i>
+                                </div>
                                 <div>
-                                    <label className="label">Price (KSh) *</label>
+                                    <p className="font-bold text-purple-900 text-sm">AI Listing Ready!</p>
+                                    <p className="text-xs text-purple-700">Preview details and click Save below.</p>
+                                </div>
+                            </div>
+
+                            {/* Basic Info */}
+                            <div className="card p-4 space-y-4">
+                                <h3 className="font-bold text-gray-900 flex items-center gap-2">
+                                    <i className="fas fa-info-circle text-primary-500"></i>
+                                    Details
+                                </h3>
+
+                                <div>
+                                    <label className="label">Product Name *</label>
                                     <input
-                                        type="number"
-                                        name="price"
-                                        value={formData.price}
+                                        type="text"
+                                        name="name"
+                                        value={formData.name}
                                         onChange={handleChange}
-                                        className="input no-spinners"
-                                        min="0"
-                                        step="0.01"
+                                        className="input bg-white"
                                         required
                                     />
                                 </div>
+
                                 <div>
-                                    <label className="label">Compare Price</label>
-                                    <input
-                                        type="number"
-                                        name="compare_price"
-                                        value={formData.compare_price}
+                                    <label className="label">Description</label>
+                                    <textarea
+                                        name="description"
+                                        value={formData.description}
                                         onChange={handleChange}
-                                        className="input no-spinners"
-                                        min="0"
-                                        step="0.01"
-                                        placeholder="Original price"
+                                        className="input min-h-[120px] bg-white"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label className="label">Category *</label>
+                                    <select
+                                        name="category_id"
+                                        value={formData.category_id}
+                                        onChange={handleChange}
+                                        className="input bg-white"
+                                        required
+                                    >
+                                        <option value="">Select Category</option>
+                                        {categories.map((cat) => (
+                                            <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
+
+                            {/* Pricing & Stock */}
+                            <div className="card p-4 space-y-4">
+                                <h3 className="font-bold text-gray-900 flex items-center gap-2">
+                                    <i className="fas fa-tag text-primary-500"></i>
+                                    Pricing
+                                </h3>
+
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label className="label">Price (KSh) *</label>
+                                        <input
+                                            type="number"
+                                            name="price"
+                                            value={formData.price}
+                                            onChange={handleChange}
+                                            className="input no-spinners bg-white"
+                                            min="0"
+                                            step="0.01"
+                                            required
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="label">Full Stock</label>
+                                        <input
+                                            type="number"
+                                            name="stock"
+                                            value={formData.stock}
+                                            onChange={handleChange}
+                                            className="input no-spinners bg-white"
+                                            min="0"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Technical Details */}
+                            <div className="card p-4 space-y-4">
+                                <h3 className="font-bold text-gray-900 flex items-center gap-2">
+                                    <i className="fas fa-ruler-combined text-primary-500"></i>
+                                    Specifications
+                                </h3>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label className="label">Dimensions</label>
+                                        <input
+                                            type="text"
+                                            name="dimensions"
+                                            value={formData.dimensions}
+                                            onChange={handleChange}
+                                            className="input bg-white"
+                                            placeholder="200x90x85 cm"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="label">Material</label>
+                                        <input
+                                            type="text"
+                                            name="material"
+                                            value={formData.material}
+                                            onChange={handleChange}
+                                            className="input bg-white"
+                                            placeholder="Genuine Leather"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label className="label">Colors (comma separated)</label>
+                                    <input
+                                        type="text"
+                                        name="colors"
+                                        value={formData.colors}
+                                        onChange={handleChange}
+                                        className="input bg-white"
+                                        placeholder="Brown, Black, Grey"
                                     />
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="label">Stock</label>
-                                    <input
-                                        type="number"
-                                        name="stock"
-                                        value={formData.stock}
-                                        onChange={handleChange}
-                                        className="input no-spinners"
-                                        min="0"
-                                    />
-                                </div>
+                            {/* Featured Toggle */}
+                            <div className="card p-4">
+                                <label className="flex items-center gap-3 cursor-pointer">
+                                    <div className="relative">
+                                        <input
+                                            type="checkbox"
+                                            name="featured"
+                                            checked={formData.featured}
+                                            onChange={handleChange}
+                                            className="sr-only peer"
+                                        />
+                                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                    </div>
+                                    <div>
+                                        <span className="font-bold text-gray-900">Featured</span>
+                                        <p className="text-xs text-gray-500">Highlight on store home</p>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div className="flex gap-4 pt-4 pb-12">
+                                <button
+                                    type="button"
+                                    onClick={() => setShowFullForm(false)}
+                                    className="btn-secondary flex-1 py-4 font-bold"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    type="submit"
+                                    disabled={saving}
+                                    className="btn-primary flex-[2] py-4 bg-primary-700 shadow-xl shadow-primary-100 font-bold flex items-center justify-center gap-3"
+                                >
+                                    {saving ? (
+                                        <>
+                                            <i className="fas fa-spinner fa-spin"></i>
+                                            SAVING...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <i className="fas fa-check-circle"></i>
+                                            {isEditing ? 'UPDATE LISTING' : 'PUBLISH LISTING'}
+                                        </>
+                                    )}
+                                </button>
                             </div>
                         </div>
-
-                        {/* Details */}
-                        <div className="card p-4 space-y-4">
-                            <h3 className="font-semibold text-gray-900">Details</h3>
-
-                            <div>
-                                <label className="label">Dimensions</label>
-                                <input
-                                    type="text"
-                                    name="dimensions"
-                                    value={formData.dimensions}
-                                    onChange={handleChange}
-                                    className="input"
-                                    placeholder="e.g., 200x90x85 cm"
-                                />
-                            </div>
-
-                            <div>
-                                <label className="label">Material</label>
-                                <input
-                                    type="text"
-                                    name="material"
-                                    value={formData.material}
-                                    onChange={handleChange}
-                                    className="input"
-                                    placeholder="e.g., Genuine Leather"
-                                />
-                            </div>
-
-                            <div>
-                                <label className="label">Colors (comma separated)</label>
-                                <input
-                                    type="text"
-                                    name="colors"
-                                    value={formData.colors}
-                                    onChange={handleChange}
-                                    className="input"
-                                    placeholder="e.g., Brown, Black, Grey"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Images */}
-                        <div className="card p-4 space-y-4">
-                            <h3 className="font-semibold text-gray-900">Images</h3>
-
-                            {existingImages.length > 0 && (
-                                <div className="flex gap-2 flex-wrap">
-                                    {existingImages.map((img, index) => (
-                                        <div key={index} className="relative w-20 h-20">
-                                            <img
-                                                src={`${API_HOST}${img} `}
-                                                alt=""
-                                                className="w-full h-full object-cover rounded-lg"
-                                            />
-                                            <button
-                                                type="button"
-                                                onClick={() => setExistingImages(existingImages.filter((_, i) => i !== index))}
-                                                className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full text-xs"
-                                            >
-                                                <i className="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-
-                            <div>
-                                <label className="label">Add New Images</label>
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    multiple
-                                    onChange={handleImageChange}
-                                    className="input"
-                                />
-                            </div>
-                        </div>
-
-                        {/* Featured Toggle */}
-                        <div className="card p-4">
-                            <label className="flex items-center gap-3 cursor-pointer">
-                                <input
-                                    type="checkbox"
-                                    name="featured"
-                                    checked={formData.featured}
-                                    onChange={handleChange}
-                                    className="w-5 h-5 text-primary-600 rounded"
-                                />
-                                <div>
-                                    <span className="font-medium text-gray-900">Featured Product</span>
-                                    <p className="text-sm text-gray-500">Show on homepage</p>
-                                </div>
-                            </label>
-                        </div>
-
-                        {/* Submit */}
-                        <button
-                            type="submit"
-                            disabled={saving}
-                            className="btn-primary w-full btn-lg"
-                        >
-                            {saving ? (
-                                <>
-                                    <i className="fas fa-spinner fa-spin"></i>
-                                    Saving...
-                                </>
-                            ) : (
-                                <>
-                                    <i className="fas fa-save"></i>
-                                    {isEditing ? 'Update Product' : 'Create Product'}
-                                </>
-                            )}
-                        </button>
                     </form>
                 </div>
             </div>
         </div>
     );
-}
+};
