@@ -233,7 +233,13 @@ export default function Cart() {
                                     <input
                                         type="tel"
                                         value={customerInfo.phone}
-                                        onChange={(e) => setCustomerInfo({ ...customerInfo, phone: e.target.value })}
+                                        onChange={(e) => {
+                                            const val = e.target.value;
+                                            // Only allow digits, plus, and spaces
+                                            if (/^[0-9+\s]*$/.test(val)) {
+                                                setCustomerInfo({ ...customerInfo, phone: val });
+                                            }
+                                        }}
                                         className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
                                         placeholder="0712345678"
                                     />
