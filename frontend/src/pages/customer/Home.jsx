@@ -308,63 +308,7 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* Footer */}
-            <footer className="bg-gray-900 text-gray-400 py-12 mt-12">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div className="col-span-2 lg:col-span-1">
-                            <div className="mb-4">
-                                <img
-                                    src="/logo.svg"
-                                    alt="Daniel Furniture"
-                                    className="h-12 w-auto brightness-0 invert"
-                                />
-                            </div>
-                            <p className="text-sm">Premium furniture for your home. Quality craftsmanship meets timeless design.</p>
-                        </div>
 
-                        <div>
-                            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
-                            <ul className="space-y-2 text-sm">
-                                <li><Link to="/products" className="hover:text-white transition-colors">All Products</Link></li>
-                                <li><Link to="/products?category=sofasets" className="hover:text-white transition-colors">Sofasets</Link></li>
-                                <li><Link to="/products?category=chairs" className="hover:text-white transition-colors">Chairs</Link></li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h4 className="text-white font-semibold mb-4">Account</h4>
-                            <ul className="space-y-2 text-sm">
-                                <li><Link to="/login" className="hover:text-white transition-colors">Login</Link></li>
-                                <li><Link to="/register" className="hover:text-white transition-colors">Register</Link></li>
-                                <li><Link to="/cart" className="hover:text-white transition-colors">Cart</Link></li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h4 className="text-white font-semibold mb-4">Contact</h4>
-                            <ul className="space-y-2 text-sm">
-                                <li>
-                                    <a href="https://wa.me/254700000000" className="flex items-center gap-2 hover:text-white transition-colors">
-                                        <i className="fab fa-whatsapp"></i>
-                                        WhatsApp
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="tel:+254700000000" className="flex items-center gap-2 hover:text-white transition-colors">
-                                        <i className="fas fa-phone"></i>
-                                        +254 700 000 000
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="border-t border-gray-800 mt-10 pt-8 text-center text-sm">
-                        <p>© 2024 Daniel Furniture. All rights reserved.</p>
-                    </div>
-                </div>
-            </footer>
 
             {/* WhatsApp FAB */}
             <WhatsAppButton />

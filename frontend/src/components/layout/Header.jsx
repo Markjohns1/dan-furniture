@@ -47,7 +47,7 @@ export default function Header({ title, showBack = false }) {
 
     return (
         <>
-            <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-200">
+            <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-[0.5px] border-[#000080] transition-all duration-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-20">
                         {/* Left: Logo & Back */}
@@ -81,8 +81,8 @@ export default function Header({ title, showBack = false }) {
                             <div className="relative group px-1">
                                 <div
                                     className={`flex items-center gap-1 px-4 py-2 rounded-lg font-medium transition-colors cursor-default ${location.pathname.startsWith('/products')
-                                            ? 'bg-primary-950 text-white shadow-lg shadow-primary-900/20'
-                                            : 'text-gray-500 hover:text-primary-900 hover:bg-gray-50'
+                                        ? 'bg-primary-950 text-white shadow-lg shadow-primary-900/20'
+                                        : 'text-gray-500 hover:text-primary-900 hover:bg-gray-50'
                                         }`}
                                 >
                                     Products
