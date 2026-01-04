@@ -104,8 +104,9 @@ export default function CartDrawer({ isOpen, onClose }) {
                                                     </button>
                                                     <span className="w-8 text-center text-xs font-bold text-gray-800">{item.quantity}</span>
                                                     <button
-                                                        onClick={() => updateQuantity(item.id, Math.min(item.stock, item.quantity + 1), item.color)}
+                                                        onClick={() => updateQuantity(item.id, item.quantity + 1, item.color)}
                                                         className="w-7 h-7 flex items-center justify-center hover:bg-gray-50 text-gray-500 border-l border-gray-50"
+                                                        disabled={item.quantity >= 100}
                                                     >
                                                         <i className="fas fa-plus text-[8px]"></i>
                                                     </button>

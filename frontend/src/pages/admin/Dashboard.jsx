@@ -72,7 +72,7 @@ export default function Dashboard() {
                             </Link>
                         )}
                         {stats?.low_stock_count > 0 && (
-                            <Link to="/admin/analytics/low-stock" className="flex items-center justify-between p-4 bg-red-600 rounded-xl shadow-lg shadow-red-600/20 group hover:scale-[1.02] transition-transform">
+                            <Link to="/admin/products/new" className="flex items-center justify-between p-4 bg-red-600 rounded-xl shadow-lg shadow-red-600/20 group hover:scale-[1.02] transition-transform">
                                 <div className="flex items-center gap-4">
                                     <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white backdrop-blur-sm">
                                         <i className="fas fa-exclamation-triangle"></i>
@@ -194,15 +194,15 @@ export default function Dashboard() {
                                         {recentOrders.map((order) => (
                                             <Link
                                                 key={order.id}
-                                                to={`/ admin / orders / ${order.id} `}
+                                                to={`/admin/orders`}
                                                 className="flex items-center justify-between p-4 hover:bg-gray-50 transition-colors group"
                                             >
                                                 <div className="flex items-center gap-4">
-                                                    <div className={`w - 2.5 h - 2.5 rounded - full shrink - 0 ${order.status === 'pending' ? 'bg-accent-400 ring-4 ring-accent-50 group-hover:ring-accent-100' :
+                                                    <div className={`w-2.5 h-2.5 rounded-full shrink-0 ${order.status === 'pending' ? 'bg-accent-400 ring-4 ring-accent-50 group-hover:ring-accent-100' :
                                                         order.status === 'confirmed' ? 'bg-blue-400 ring-4 ring-blue-50 group-hover:ring-blue-100' :
                                                             order.status === 'delivered' ? 'bg-green-400 ring-4 ring-green-50 group-hover:ring-green-100' :
                                                                 'bg-red-400 ring-4 ring-red-50 group-hover:ring-red-100'
-                                                        } transition - all`}></div>
+                                                        } transition-all`}></div>
                                                     <div className="min-w-0">
                                                         <p className="text-sm font-bold text-gray-900 truncate">{order.customer_name}</p>
                                                         <p className="text-xs text-gray-500 font-medium mt-0.5">{order.order_number}</p>

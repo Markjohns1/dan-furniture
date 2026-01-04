@@ -138,7 +138,7 @@ async def delete_category(
 @router.get("", response_model=ProductListResponse)
 async def get_products(
     page: int = Query(1, ge=1),
-    limit: int = Query(12, ge=1, le=50),
+    limit: int = Query(12, ge=1, le=100),
     category_id: Optional[int] = None,
     min_price: Optional[float] = None,
     max_price: Optional[float] = None,

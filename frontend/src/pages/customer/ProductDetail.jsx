@@ -28,6 +28,8 @@ export default function ProductDetail() {
                 setProduct(res.data);
                 if (res.data.colors?.length > 0) {
                     setSelectedColor(res.data.colors[0]);
+                } else {
+                    setSelectedColor('Standard');
                 }
             })
             .catch(console.error)
@@ -200,16 +202,16 @@ export default function ProductDetail() {
                                 <div className="flex items-center gap-0 w-32 bg-white rounded-lg border border-gray-200 shadow-sm">
                                     <button
                                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                        className="w-10 h-9 flex items-center justify-center text-gray-500 hover:text-gray-900 transition-colors border-r border-gray-100 hover:bg-gray-50"
+                                        className="w-10 h-9 flex items-center justify-center text-gray-500 hover:text-gray-900 transition-colors border-r border-gray-100 hover:bg-gray-50 disabled:opacity-30"
                                         disabled={quantity <= 1}
                                     >
                                         <i className="fas fa-minus text-[10px]"></i>
                                     </button>
                                     <span className="flex-1 text-center font-semibold text-sm text-gray-900">{quantity}</span>
                                     <button
-                                        onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
-                                        className="w-10 h-9 flex items-center justify-center text-gray-500 hover:text-gray-900 transition-colors border-l border-gray-100 hover:bg-gray-50"
-                                        disabled={quantity >= product.stock}
+                                        onClick={() => setQuantity(quantity + 1)}
+                                        className="w-10 h-9 flex items-center justify-center text-gray-500 hover:text-gray-900 transition-colors border-l border-gray-100 hover:bg-gray-50 disabled:opacity-30"
+                                        disabled={quantity >= 100}
                                     >
                                         <i className="fas fa-plus text-[10px]"></i>
                                     </button>

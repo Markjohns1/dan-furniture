@@ -96,7 +96,7 @@ export function AuthProvider({ children }) {
         }
     };
 
-    const isAdmin = user?.role === 'admin';
+    const isAdmin = user?.role?.toLowerCase() === 'admin';
     const isAuthenticated = !!user;
 
     return (

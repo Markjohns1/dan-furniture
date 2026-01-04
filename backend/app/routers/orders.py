@@ -112,7 +112,7 @@ async def create_order(
 @router.get("", response_model=OrderListResponse)
 async def get_orders(
     page: int = Query(1, ge=1),
-    limit: int = Query(10, ge=1, le=50),
+    limit: int = Query(10, ge=1, le=100),
     status: Optional[OrderStatus] = None,
     search: Optional[str] = None,
     current_user: User = Depends(get_current_user),

@@ -71,7 +71,7 @@ export default function Cart() {
         const newQty = item.quantity + delta;
         if (newQty <= 0) {
             removeItem(item.id, item.color);
-        } else {
+        } else if (newQty <= 100) {
             updateQuantity(item.id, newQty, item.color);
         }
     };

@@ -13,6 +13,7 @@ export default function ProductManagement() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [deleting, setDeleting] = useState(null);
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,21 +22,24 @@ export default function ProductManagement() {
             categoriesAPI.getAll(),
         ])
             .then(([productsRes, categoriesRes]) => {
-                setProducts(productsRes.data.products);
-                setCategories(categoriesRes.data);
+                setProducts(productsRes.data.products || []);
+                setCategories(categoriesRes.data || []);
+                setError('');
             })
-            .catch(console.error)
+            .catch(err => {
+                console.error(err);
+                setError('Failed to load products. Please check connection.');
+            })
             .finally(() => setLoading(false));
     }, []);
 
     const handleDelete = async (id) => {
-        if (!confirm('Are you sure you want to delete this product?')) return;
-
         setDeleting(id);
         try {
             await productsAPI.delete(id);
             setProducts(products.filter((p) => p.id !== id));
         } catch (error) {
+            console.error('Delete failed:', error);
             alert('Failed to delete product');
         }
         setDeleting(null);
@@ -111,7 +115,7 @@ export default function ProductManagement() {
                                             </p>
                                             <div className="flex items-center gap-2">
                                                 <Link
-                                                    to={`/admin/products/${product.id}`}
+                                                    to={`/admin/products/${product.id}/edit`}
                                                     className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-50 text-gray-600 hover:bg-primary-50 hover:text-primary-600 transition-colors border border-gray-200"
                                                 >
                                                     <i className="fas fa-edit text-sm"></i>

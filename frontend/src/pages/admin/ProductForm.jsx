@@ -24,7 +24,7 @@ export default function ProductForm() {
         price: '',
         compare_price: '',
         category_id: '',
-        stock: '1',
+        stock: '100',
         dimensions: '',
         material: '',
         colors: '',
