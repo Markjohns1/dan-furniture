@@ -21,12 +21,29 @@ export default function Cart() {
             setShowCheckout(true);
         }
     }, [searchParams]);
+
     const [customerInfo, setCustomerInfo] = useState({
         name: user?.full_name || '',
         phone: user?.phone || '',
         address: user?.address || '',
         notes: '',
     });
+
+    const [showThankYou, setShowThankYou] = useState(false);
+
+    // Handle successful checkout - clear cart and show thank you
+    const handleCheckoutComplete = () => {
+        // Clear the cart
+        clearCart();
+        // Reset form
+        setCustomerInfo({ name: '', phone: '', address: '', notes: '' });
+        // Close checkout modal
+        setShowCheckout(false);
+        // Show thank you message
+        setShowThankYou(true);
+        // Auto-hide thank you after 5 seconds
+        setTimeout(() => setShowThankYou(false), 5000);
+    };
 
     const handleQuantityChange = (item, delta) => {
         const newQty = item.quantity + delta;
@@ -278,10 +295,33 @@ export default function Cart() {
                             <WhatsAppOrderButton
                                 message={getWhatsAppMessage(customerInfo)}
                                 className="w-full"
+                                onComplete={handleCheckoutComplete}
                             />
                         </div>
                     </div>
                 </>
+            )}
+
+            {/* Thank You Message */}
+            {showThankYou && (
+                <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/50">
+                    <div className="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl animate-fade-in">
+                        <div className="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
+                            <i className="fas fa-check text-4xl text-green-600"></i>
+                        </div>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-2">Order Sent!</h2>
+                        <p className="text-gray-600 mb-6">
+                            Your order has been sent via WhatsApp. We'll confirm your order shortly.
+                        </p>
+                        <Link
+                            to="/products"
+                            className="inline-block px-8 py-3 bg-primary-600 text-white font-semibold rounded-xl hover:bg-primary-700 transition-colors"
+                            onClick={() => setShowThankYou(false)}
+                        >
+                            Continue Shopping
+                        </Link>
+                    </div>
+                </div>
             )}
         </div>
     );

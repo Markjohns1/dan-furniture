@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { configAPI } from '../../api';
+import { useState } from 'react';
 import Header from '../../components/layout/Header';
 import SEO from '../../components/ui/SEO';
 import WhatsAppButton from '../../components/ui/WhatsAppButton';
@@ -11,17 +10,7 @@ export default function Contact() {
         message: ''
     });
 
-    const [waNumber, setWaNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254724426993');
-
-    // useEffect(() => {
-    //     configAPI.get().then((res) => {
-    //         if (res.data.whatsapp_number) setWaNumber(res.data.whatsapp_number);
-    //     }).catch(() => { });
-    // }, []);
-    // ... Note: I need to encompass enough context or use 2 chunks.
-    // I'll use 2 chunks logic or just update line 14 and line 60 separately.
-    // Replace content tool requires contiguous if replace_file_content.
-    // multi_replace is better.
+    const [waNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254724426993');
 
     const handleSubmit = (e) => {
         e.preventDefault();
