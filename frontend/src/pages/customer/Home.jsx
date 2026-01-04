@@ -78,7 +78,7 @@ export default function Home() {
                             Explore Collection
                         </Link>
                         <a
-                            href="https://wa.me/254724426993"
+                            href="https://wa.me/254728983908"
                             className="btn-secondary flex-1 sm:flex-none sm:min-w-[200px] text-sm sm:text-lg py-3 sm:py-5 border-white/20 bg-white/5 text-white hover:bg-white hover:text-primary-950 backdrop-blur-md active:scale-95 transition-all flex items-center justify-center"
                         >
                             <i className="fab fa-whatsapp mr-2"></i> WhatsApp Us
@@ -296,7 +296,7 @@ export default function Home() {
                             Our team is here to help you find the perfect furniture for your space. Contact us via WhatsApp for personalized recommendations.
                         </p>
                         <a
-                            href="https://wa.me/254724426993"
+                            href="https://wa.me/254728983908"
                             target="_blank"
                             rel="noreferrer"
                             className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 text-white font-medium rounded-xl hover:bg-green-600 transition-colors shadow-lg hover:shadow-xl"

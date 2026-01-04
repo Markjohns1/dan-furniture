@@ -11,13 +11,17 @@ export default function Contact() {
         message: ''
     });
 
-    const [waNumber, setWaNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254724426993');
+    const [waNumber, setWaNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254728983908');
 
-    useEffect(() => {
-        configAPI.get().then((res) => {
-            if (res.data.whatsapp_number) setWaNumber(res.data.whatsapp_number);
-        }).catch(() => { });
-    }, []);
+    // useEffect(() => {
+    //     configAPI.get().then((res) => {
+    //         if (res.data.whatsapp_number) setWaNumber(res.data.whatsapp_number);
+    //     }).catch(() => { });
+    // }, []);
+    // ... Note: I need to encompass enough context or use 2 chunks.
+    // I'll use 2 chunks logic or just update line 14 and line 60 separately.
+    // Replace content tool requires contiguous if replace_file_content.
+    // multi_replace is better.
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -58,7 +62,7 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <p className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-1">Phone</p>
-                                            <p className="text-secondary-600">+254 724 426993</p>
+                                            <p className="text-secondary-600">+254 728 983908</p>
                                             <p className="text-sm text-secondary-400">Mon-Sat 9am to 6pm</p>
                                         </div>
                                     </div>
