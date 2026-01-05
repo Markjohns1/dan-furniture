@@ -234,7 +234,7 @@ export default function Home() {
                     {loading ? (
                         <ProductGridSkeleton count={4} />
                     ) : featured.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             {featured.slice(0, 4).map((product) => (
                                 <div key={product.id} className="animate-fade-in" style={{ animationDelay: '100ms' }}>
                                     <ProductCard product={product} />
@@ -263,7 +263,7 @@ export default function Home() {
                         <ProductGridSkeleton count={8} />
                     ) : newArrivals.length > 0 ? (
                         <>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                                 {newArrivals.slice(0, 8).map((product) => (
                                     <ProductCard key={product.id} product={product} />
                                 ))}
