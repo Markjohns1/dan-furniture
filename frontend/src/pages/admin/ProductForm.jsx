@@ -91,94 +91,93 @@ export default function ProductForm() {
         setAiProcessing(true);
         setError('');
 
-        // Simulation of Groq Vision API - High Accuracy Version
+        // Simulation of Groq Vision API - High Precision Version
         setTimeout(() => {
             const fileName = images[0]?.name.toLowerCase() || '';
             let name = '';
             let desc = '';
-            let catId = categories[0]?.id || '';
-            let price = '45000';
-            let mat = 'Premium Materials';
-            let dim = 'Standard Size';
-            let colorsArr = ['Grey', 'Beige', 'White'];
+            let catId = '';
+            let price = '1500';
+            let mat = 'High Quality Material';
+            let dim = 'Standard';
+            let colorsArr = ['Natural'];
 
-            // Fast Color Detection from Filename
-            if (fileName.includes('grey') || fileName.includes('gray')) colorsArr = ['Grey', 'Silver'];
-            else if (fileName.includes('brown') || fileName.includes('coffee')) colorsArr = ['Brown', 'Espresso'];
-            else if (fileName.includes('black')) colorsArr = ['Black', 'Charcoal'];
-            else if (fileName.includes('blue')) colorsArr = ['Navy Blue', 'Royal Blue'];
-            else if (fileName.includes('white')) colorsArr = ['Pure White', 'Off-White'];
+            // 1. Intelligent Color Extraction
+            const colorMap = {
+                'black': ['Black', 'Matte Black'],
+                'grey': ['Grey', 'Silver'],
+                'gray': ['Grey', 'Silver'],
+                'brown': ['Brown', 'Walnut'],
+                'white': ['White', 'Cream'],
+                'blue': ['Navy Blue', 'Royal Blue'],
+                'red': ['Deep Red', 'Burgundy'],
+                'gold': ['Gold', 'Brass']
+            };
 
+            for (let key in colorMap) {
+                if (fileName.includes(key)) {
+                    colorsArr = colorMap[key];
+                    break;
+                }
+            }
             const primaryColor = colorsArr[0];
 
-            // 1. Detection Logic for Appliances
+            // 2. High-Speed Category & Item Matching
             if (fileName.includes('fridge') || fileName.includes('refrigerator')) {
-                name = `Double-Door ${primaryColor} Smart Refrigerator`;
-                desc = 'Experience superior preservation with this energy-efficient smart refrigerator. Features multi-flow air cooling, tempered glass shelves, and a dedicated moisture-controlled crisper drawer for maximum freshness.';
-                catId = categories.find(c => c.name.toLowerCase().includes('appliances'))?.id || catId;
-                price = '85000';
-                mat = 'Stainless Steel Finish';
-                dim = '180 x 70 x 65 cm';
-            } else if (fileName.includes('wash') || fileName.includes('machine')) {
-                name = `High-Performance ${primaryColor} Front Load Washer`;
-                desc = 'Engineered for a deeper clean with low water consumption. This 8kg capacity washer features advanced drum technology for gentle fabric care and high-speed spin for faster drying cycles.';
-                catId = categories.find(c => c.name.toLowerCase().includes('appliances'))?.id || catId;
-                price = '65000';
-                mat = 'Enameled Steel & Reinforced Glass';
-                dim = '85 x 60 x 55 cm';
-            }
-            // 2. Detection Logic for Furniture (High Accuracy)
-            else if (fileName.includes('recliner')) {
-                name = `Luxury ${primaryColor} Manual Rocker Recliner`;
-                desc = `Upgrade your relaxation with this premium rocker recliner. Featuring a smooth manual recline motion, padded lumbar support, and a high-resiliency foam core for the ultimate 'cloud-like' feel.`;
-                catId = categories.find(c => c.slug === 'sofasets' || c.slug === 'chairs')?.id || catId;
-                price = '58500';
-                mat = 'Premium Microfiber & Solid Steel Frame';
-                dim = '100 x 95 x 100 cm';
-            } else if (fileName.includes('sofa') || fileName.includes('couch') || fileName.includes('sectional')) {
-                const types = ['Velvet Sectional', 'Luxury Chesterfield', 'Modern Fabric'];
-                const selected = types[Math.floor(Math.random() * types.length)];
-                name = `${primaryColor} ${selected} Sofaset`;
-                desc = `Transform your interior with this ${selected.toLowerCase()} collection. Expertly crafted with hand-tufted details and deep-seated comfort, it provides both a bold aesthetic statement and cozy seating.`;
-                catId = categories.find(c => c.slug === 'sofasets')?.id || catId;
-                price = '135000';
-                mat = 'Stain-Resistant Performance Fabric';
-                dim = '240 x 100 x 90 cm';
-            } else if (fileName.includes('chair') || fileName.includes('stool')) {
-                name = `Ergonomic ${primaryColor} Executive Chair`;
-                desc = 'Engineered for long-form productivity and orthopedic health. Features breathable weight-sensitive mesh, adjustable 4D armrests, and a silent-glide aluminum base.';
-                catId = categories.find(c => c.slug === 'office-chairs' || c.slug === 'chairs')?.id || catId;
+                name = `${primaryColor} Smart Fridge`;
+                desc = 'Energy-efficient cooling with multi-flow air tech. Sleek design for modern kitchens.';
+                catId = categories.find(c => c.slug === 'appliances')?.id || '';
+                price = '89000';
+                mat = 'Stainless Steel';
+                dim = '180x70x65cm';
+            } else if (fileName.includes('wash')) {
+                name = `${primaryColor} Front Load Washer`;
+                desc = '8kg capacity with advanced drum tech for gentle fabric care. High-speed spin.';
+                catId = categories.find(c => c.slug === 'appliances')?.id || '';
+                price = '68000';
+                mat = 'Enameled Steel';
+                dim = '85x60x55cm';
+            } else if (fileName.includes('sofa') || fileName.includes('couch') || fileName.includes('recliner')) {
+                const isRecliner = fileName.includes('recliner');
+                name = isRecliner ? `${primaryColor} Luxury Recliner` : `${primaryColor} Sectional Sofa`;
+                desc = isRecliner ? 'Ergonomic manual recline with high-density foam support.' : 'Premium comfort with stain-resistant fabric. Perfect for families.';
+                catId = categories.find(c => c.slug === 'sofasets')?.id || '';
+                price = isRecliner ? '55000' : '125000';
+                mat = 'Premium Fabric & Wood';
+                dim = isRecliner ? '100x95cm' : '240x100cm';
+            } else if (fileName.includes('chair')) {
+                name = `${primaryColor} Executive Chair`;
+                desc = 'Professional ergonomic support with breathable mesh and silent swivel.';
+                catId = categories.find(c => c.slug === 'office-chairs' || c.slug === 'chairs')?.id || '';
                 price = '22500';
-                mat = 'Premium Mesh & Engineered Polymer';
-                dim = '65 x 60 x 120 cm';
+                mat = 'Mesh & Aluminum';
+                dim = '65x120cm';
             } else if (fileName.includes('table') || fileName.includes('dining')) {
-                name = `Contemporary ${primaryColor} Oak Dining Table`;
-                desc = 'The anchor of your dining room. Crafted from sustainably harvested solid oak with a scratch-resistant satin finish that showcases the organic elegance of the wood grain.';
-                catId = categories.find(c => c.slug === 'dining-sets')?.id || catId;
+                name = `${primaryColor} Dining Table`;
+                desc = 'Solid oak construction with a scratch-resistant finish. Seats 6 comfortably.';
+                catId = categories.find(c => c.slug === 'dining-sets')?.id || '';
                 price = '95000';
-                mat = 'Solid Oak & Natural Varnish';
-                dim = '180 x 90 x 75 cm';
-            } else if (fileName.includes('stand') || fileName.includes('tv') || fileName.includes('unit')) {
-                name = `Modern ${primaryColor} Entertainment Center`;
-                desc = 'A sleek solution for your media needs. Featuring integrated cable management, soft-close drawers, and spacious shelving for consoles and soundbars.';
-                catId = categories.find(c => c.name.toLowerCase().includes('furniture'))?.id || catId;
-                price = '38000';
-                mat = 'MDF with High-Gloss Walnut Veneer';
-                dim = '180 x 40 x 50 cm';
-            } else if (fileName.includes('bed') || fileName.includes('bedroom')) {
-                name = `Royal ${primaryColor} King Size Bed`;
-                desc = 'Elegant comfort for the modern bedroom. This frame features an oversized upholstered headboard with nailhead trim and a heavy-duty slatted base for superior mattress support.';
-                catId = categories.find(c => c.name.toLowerCase().includes('bed'))?.id || catId;
-                price = '115000';
-                mat = 'Solid Wood Internal Frame & Linen Overlay';
-                dim = '210 x 195 x 150 cm';
-            }
-            // 3. Fallback
-            else {
-                name = `Dan Classic ${primaryColor} Private Collection`;
-                desc = 'An exquisite addition to any premium home. This piece represents the pinnacle of craftsmanship, featuring hand-finished details and a design that prioritizes longevity and style.';
+                mat = 'Solid Wood';
+                dim = '180x90cm';
+            } else if (fileName.includes('bed')) {
+                name = `${primaryColor} King Bed`;
+                desc = 'Upholstered frame with reinforced steel support for ultimate comfort.';
+                catId = categories.find(c => c.slug === 'bedroom')?.id || '';
+                price = '110000';
+                mat = 'Upholstered Wood';
+                dim = '210x190cm';
+            } else if (fileName.includes('spoon') || fileName.includes('cutlery')) {
+                name = 'Premium Stainless Spoon';
+                desc = 'Durable and elegant stainless steel cutlery for daily use.';
+                catId = categories[0]?.id || ''; // Fallback to first category
+                price = '450';
+                mat = 'Stainless Steel';
+            } else {
+                // Honest Fallback - Don't guess if you don't know
+                name = 'General Inventory Item';
+                desc = 'Unidentified product. Please review name and category carefully.';
                 catId = categories[0]?.id || '';
-                price = '49500';
+                price = '1000';
             }
 
             setFormData({
@@ -194,7 +193,7 @@ export default function ProductForm() {
 
             setShowFullForm(true);
             setAiProcessing(false);
-        }, 2200); // 2.2s speed factor
+        }, 1800); // Faster processing time for snappy demo // 2.2s speed factor
     };
 
     const handleSubmit = async (e) => {
