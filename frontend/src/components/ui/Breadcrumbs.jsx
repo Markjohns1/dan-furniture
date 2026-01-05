@@ -12,7 +12,6 @@ export default function Breadcrumbs({ items }) {
             <ol className="flex items-center space-x-2 text-sm font-medium">
                 <li>
                     <Link to="/" className="text-gray-400 hover:text-primary-600 transition-colors">
-                        <i className="fas fa-home mr-1"></i>
                         Home
                     </Link>
                 </li>
