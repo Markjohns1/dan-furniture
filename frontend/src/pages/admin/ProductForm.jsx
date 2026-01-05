@@ -111,29 +111,47 @@ export default function ProductForm() {
                 catId = categories.find(c => c.slug === 'appliances')?.id || '';
                 price = '95000';
                 mat = 'Brush-finished Stainless Steel';
-            } else if (hasKeyword(['sofa', 'couch', 'recliner', 'sectional'])) {
+            } else if (hasKeyword(['sofa', 'couch', 'recliner', 'sectional', 'seater'])) {
                 const isRec = fileName.includes('recliner');
-                name = isRec ? 'Premium Comfort Recliner' : 'Elegance Sectional Sofaset';
-                desc = isRec ? '• Smooth manual recline\n• High-density comfort foam\n• Lumbar support tracking' : '• Stain-resistant performance fabric\n• Reinforced internal frame\n• Modern silhouette design';
+                const isLeather = fileName.includes('leather');
+                const isVelvet = fileName.includes('velvet');
+
+                let seater = '';
+                if (fileName.includes('7') || fileName.includes('seven')) seater = '7-Seater ';
+                else if (fileName.includes('5') || fileName.includes('five')) seater = '5-Seater ';
+                else if (fileName.includes('3') || fileName.includes('three')) seater = '3-Seater ';
+                else if (fileName.includes('1') || fileName.includes('single')) seater = 'Single-Seater ';
+
+                const material = isLeather ? 'Premium Leather' : (isVelvet ? 'Luxury Velvet' : 'Quality Fabric');
+
+                name = isRec ? `${seater}Comfort Recliner` : `${seater}Elegance ${isVelvet ? 'Velvet ' : ''}Sofaset`;
+                desc = `• ${material} finish\n• High-density comfort foam\n• Reinforced internal frame\n• Modern artisan design`;
                 catId = categories.find(c => c.slug === 'sofasets')?.id || '';
-                price = isRec ? '65000' : '155000';
-                mat = isRec ? 'Quality Microfiber' : 'High-Thread Velvet';
-            } else if (hasKeyword(['chair', 'stool', 'office'])) {
-                name = 'Ergonomic Executive Office Chair';
-                desc = '• Advanced lumbar support\n• Synchro-tilt mechanism\n• Polished aluminum base';
-                catId = categories.find(c => c.slug === 'office-chairs' || c.slug === 'chairs')?.id || '';
-                price = '24500';
-            } else if (hasKeyword(['table', 'dining', 'center'])) {
-                name = 'Classic Hardwood Dining Table';
-                desc = '• Heat resistant top\n• Natural wood grain finish\n• Sturdy artisan construction';
-                catId = categories.find(c => c.slug === 'dining-sets')?.id || '';
-                price = '85000';
+
+                // Adjust price based on seater count
+                if (seater.includes('7')) price = '185000';
+                else if (seater.includes('5')) price = '145000';
+                else if (seater.includes('3')) price = '85000';
+                else if (isRec) price = '65000';
+                else price = '155000';
+
+                mat = material + ' & Hardwood';
+            } else if (hasKeyword(['tv', 'stand', 'coffee', 'center', 'side', 'table'])) {
+                const isTv = fileName.includes('tv');
+                const isCoffee = fileName.includes('coffee') || fileName.includes('center');
+
+                name = isTv ? 'Modern Low-Profile TV Stand' : (isCoffee ? 'Artisan Coffee Table' : 'Classic Side Stand');
+                desc = '• Impact-resistant surface\n• Compact showroom design\n• Scratch-resistant finish';
+                catId = categories.find(c => c.slug === 'dining-sets' || c.slug === 'tables')?.id || '';
+                price = isTv ? '35000' : (isCoffee ? '24500' : '15000');
+                dim = 'Compact Showroom Fit';
             } else {
                 // 2. High-Value Fallback (Simulates 'seeing' a high-end item)
                 const furnitureTypes = [
-                    { n: 'Artisan Curved Velvet Sofa', p: '145000', m: 'Italian Velvet', d: '• Seamless curved design\n• High-resiliency cushioning\n• Gold-tone metal accents', c: ['Emerald', 'Midnight Blue'], cat: 'sofasets' },
-                    { n: 'Hand-Carved Mahogany Bed Frame', p: '115000', m: 'Solid Mahogany', d: '• Traditional hand-carvings\n• Reinforced support system\n• Sustainable luxury wood', c: ['Deep Red', 'Brown'], cat: 'bedroom' },
-                    { n: 'Minimalist Nordic Oak Table', p: '75000', m: 'White Oak', d: '• Clean aesthetic lines\n• Professional finish\n• Tapered solid wood legs', c: ['Natural', 'Light Oak'], cat: 'dining-sets' }
+                    { n: 'Elegance 7-Seater Velvet Sofaset', p: '195000', m: 'Italian Velvet', d: '• Full 7-seater configuration\n• High-resiliency cushioning\n• Gold-tone metal accents', c: ['Midnight Blue', 'Emerald'], cat: 'sofasets' },
+                    { n: 'Modern L-Shaped Sectional', p: '155000', m: 'Stain-Resistant Fabric', d: '• Space-saving L-design\n• Modular layout flexibility\n• Solid mahogany base', c: ['Grey', 'Beige'], cat: 'sofasets' },
+                    { n: 'Low-Profile Artisan TV Stand', p: '32000', m: 'Solid Oak', d: '• Designed for large screens\n• Sleek minimalist aesthetic\n• Cable management system', c: ['Natural', 'Warm Walnut'], cat: 'dining-sets' },
+                    { n: 'Premium Rocker Recliner', p: '68000', m: 'Top-Grain Leather', d: '• Full-body lumbar support\n• Smooth rocker mechanism\n• Breathable leather finish', c: ['Black', 'Dark Brown'], cat: 'sofasets' }
                 ];
 
                 const randomChoice = furnitureTypes[Math.floor(Math.random() * furnitureTypes.length)];
