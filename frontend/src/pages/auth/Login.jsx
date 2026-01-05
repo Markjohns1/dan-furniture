@@ -125,11 +125,7 @@ export default function Login() {
                         </div>
                     </div>
 
-                    {/* Demo Credentials */}
-                    <div className="mt-6 p-4 bg-white/50 rounded-lg text-center text-sm">
-                        <p className="font-medium text-gray-700 mb-1">Admin Demo:</p>
-                        <p className="text-gray-500">admin@danfurniture.co.ke / admin123</p>
-                    </div>
+
                 </div>
             </div>
         </div>

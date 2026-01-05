@@ -113,28 +113,27 @@ export default function ProductForm() {
                 mat = 'Brush-finished Stainless Steel';
             } else if (hasKeyword(['sofa', 'couch', 'recliner', 'sectional'])) {
                 const isRec = fileName.includes('recliner');
-                name = isRec ? 'Luxury Rocker Recliner' : 'Premium Sectional Sofaset';
+                name = isRec ? 'Daniel Signature Recliner' : 'Daniel Signature Sectional';
                 desc = isRec ? '• Smooth manual recline\n• High-density comfort foam\n• Lumbar support tracking' : '• Stain-resistant performance fabric\n• Reinforced internal frame\n• Modern silhouette design';
                 catId = categories.find(c => c.slug === 'sofasets')?.id || '';
                 price = isRec ? '65000' : '155000';
                 mat = isRec ? 'Quality Microfiber' : 'High-Thread Velvet';
             } else if (hasKeyword(['chair', 'stool', 'office'])) {
                 name = 'Executive Professional Chair';
-                desc = '• Ergonomic mesh backing\n• Synchro-tilt mechanism\n• Polished aluminum base';
+                desc = '• Lumbar support technology\n• Synchro-tilt mechanism\n• Polished aluminum base';
                 catId = categories.find(c => c.slug === 'office-chairs' || c.slug === 'chairs')?.id || '';
                 price = '24500';
             } else if (hasKeyword(['table', 'dining', 'center'])) {
-                name = 'Contemporary Dining Piece';
+                name = 'Artisan Dining Piece';
                 desc = '• Heat resistant top\n• Natural wood grain finish\n• Sturdy artisan construction';
                 catId = categories.find(c => c.slug === 'dining-sets')?.id || '';
                 price = '85000';
             } else {
                 // 2. High-Value Fallback (Simulates 'seeing' a high-end item)
                 const furnitureTypes = [
-                    { n: 'Artisan Curved Sofa', p: '145000', m: 'Italian Velvet', d: '• Seamless curved design\n• High-resiliency cushioning\n• Gold-tone metal accents', c: ['Emerald', 'Midnight Blue'], cat: 'sofasets' },
-                    { n: 'Hand-Carved Mahogany Bed', p: '115000', m: 'Solid Mahogany', d: '• Traditional hand-carvings\n• Reinforced support system\n• Sustainable luxury wood', c: ['Deep Red', 'Brown'], cat: 'bedroom' },
-                    { n: 'Minimalist Nordic Table', p: '75000', m: 'White Oak', d: '• Clean aesthetic lines\n• Scratch-resistant finish\n• Tapered solid wood legs', c: ['Natural', 'Light Oak'], cat: 'dining-sets' },
-                    { n: 'Orthopedic Swivel Chair', p: '32000', m: 'Top-Grain Leather', d: '• Full lumbar articulation\n• Premium leather finish\n• Silent casters for all floors', c: ['Black', 'Tan'], cat: 'office-chairs' }
+                    { n: 'Daniel Signature Curved Sofa', p: '145000', m: 'Italian Velvet', d: '• Seamless curved design\n• High-resiliency cushioning\n• Gold-tone metal accents', c: ['Emerald', 'Midnight Blue'], cat: 'sofasets' },
+                    { n: 'Daniel Classic Mahogany Bed', p: '115000', m: 'Solid Mahogany', d: '• Traditional hand-carvings\n• Reinforced support system\n• Sustainable luxury wood', c: ['Deep Red', 'Brown'], cat: 'bedroom' },
+                    { n: 'Minimalist Nordic Table', p: '75000', m: 'White Oak', d: '• Clean aesthetic lines\n• Professional finish\n• Tapered solid wood legs', c: ['Natural', 'Light Oak'], cat: 'dining-sets' }
                 ];
 
                 const randomChoice = furnitureTypes[Math.floor(Math.random() * furnitureTypes.length)];
@@ -146,12 +145,17 @@ export default function ProductForm() {
                 catId = categories.find(c => c.slug === randomChoice.cat)?.id || categories[0]?.id || '';
             }
 
+            // AUTO-DISCOUNT Logic for "The Smile Factor"
+            const salePrice = parseInt(price);
+            const comparePrice = Math.round(salePrice * (1.15 + (Math.random() * 0.1))); // 15-25% markup
+
             setFormData({
                 ...formData,
                 name: name,
                 description: desc,
                 category_id: String(catId),
-                price: price,
+                price: String(salePrice),
+                compare_price: String(comparePrice),
                 material: mat,
                 dimensions: dim,
                 colors: colorsArr.join(', ')
