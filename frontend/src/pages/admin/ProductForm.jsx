@@ -106,34 +106,34 @@ export default function ProductForm() {
 
             // 1. Keyword-Based Detection
             if (hasKeyword(['fridge', 'refrigerator'])) {
-                name = 'Smart Cooling Fridge';
-                desc = '• Multi-flow air technology\n• High energy efficiency\n• Digital temperature display';
+                name = 'Smart Multi-Flow Refrigerator';
+                desc = '• Intelligent cooling technology\n• High energy efficiency\n• Digital temperature display';
                 catId = categories.find(c => c.slug === 'appliances')?.id || '';
                 price = '95000';
                 mat = 'Brush-finished Stainless Steel';
             } else if (hasKeyword(['sofa', 'couch', 'recliner', 'sectional'])) {
                 const isRec = fileName.includes('recliner');
-                name = isRec ? 'Daniel Signature Recliner' : 'Daniel Signature Sectional';
+                name = isRec ? 'Premium Comfort Recliner' : 'Elegance Sectional Sofaset';
                 desc = isRec ? '• Smooth manual recline\n• High-density comfort foam\n• Lumbar support tracking' : '• Stain-resistant performance fabric\n• Reinforced internal frame\n• Modern silhouette design';
                 catId = categories.find(c => c.slug === 'sofasets')?.id || '';
                 price = isRec ? '65000' : '155000';
                 mat = isRec ? 'Quality Microfiber' : 'High-Thread Velvet';
             } else if (hasKeyword(['chair', 'stool', 'office'])) {
-                name = 'Executive Professional Chair';
-                desc = '• Lumbar support technology\n• Synchro-tilt mechanism\n• Polished aluminum base';
+                name = 'Ergonomic Executive Office Chair';
+                desc = '• Advanced lumbar support\n• Synchro-tilt mechanism\n• Polished aluminum base';
                 catId = categories.find(c => c.slug === 'office-chairs' || c.slug === 'chairs')?.id || '';
                 price = '24500';
             } else if (hasKeyword(['table', 'dining', 'center'])) {
-                name = 'Artisan Dining Piece';
+                name = 'Classic Hardwood Dining Table';
                 desc = '• Heat resistant top\n• Natural wood grain finish\n• Sturdy artisan construction';
                 catId = categories.find(c => c.slug === 'dining-sets')?.id || '';
                 price = '85000';
             } else {
                 // 2. High-Value Fallback (Simulates 'seeing' a high-end item)
                 const furnitureTypes = [
-                    { n: 'Daniel Signature Curved Sofa', p: '145000', m: 'Italian Velvet', d: '• Seamless curved design\n• High-resiliency cushioning\n• Gold-tone metal accents', c: ['Emerald', 'Midnight Blue'], cat: 'sofasets' },
-                    { n: 'Daniel Classic Mahogany Bed', p: '115000', m: 'Solid Mahogany', d: '• Traditional hand-carvings\n• Reinforced support system\n• Sustainable luxury wood', c: ['Deep Red', 'Brown'], cat: 'bedroom' },
-                    { n: 'Minimalist Nordic Table', p: '75000', m: 'White Oak', d: '• Clean aesthetic lines\n• Professional finish\n• Tapered solid wood legs', c: ['Natural', 'Light Oak'], cat: 'dining-sets' }
+                    { n: 'Artisan Curved Velvet Sofa', p: '145000', m: 'Italian Velvet', d: '• Seamless curved design\n• High-resiliency cushioning\n• Gold-tone metal accents', c: ['Emerald', 'Midnight Blue'], cat: 'sofasets' },
+                    { n: 'Hand-Carved Mahogany Bed Frame', p: '115000', m: 'Solid Mahogany', d: '• Traditional hand-carvings\n• Reinforced support system\n• Sustainable luxury wood', c: ['Deep Red', 'Brown'], cat: 'bedroom' },
+                    { n: 'Minimalist Nordic Oak Table', p: '75000', m: 'White Oak', d: '• Clean aesthetic lines\n• Professional finish\n• Tapered solid wood legs', c: ['Natural', 'Light Oak'], cat: 'dining-sets' }
                 ];
 
                 const randomChoice = furnitureTypes[Math.floor(Math.random() * furnitureTypes.length)];
