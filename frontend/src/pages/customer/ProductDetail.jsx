@@ -8,13 +8,13 @@ import { useCart } from '../../context/CartContext';
 import Header from '../../components/layout/Header';
 import ProductCard from '../../components/product/ProductCard';
 import { LoadingPage } from '../../components/ui/Loading';
-import WhatsAppButton from '../../components/ui/WhatsAppButton';
+import WhatsAppButton, { WhatsAppOrderButton } from '../../components/ui/WhatsAppButton';
 import SEO from '../../components/ui/SEO';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
 
 export default function ProductDetail() {
     const { id } = useParams();
-    const { addItem, openCart } = useCart();
+    const { addItem, openCart, getQuickWhatsAppMessage } = useCart();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [selectedColor, setSelectedColor] = useState(null);
@@ -248,22 +248,23 @@ export default function ProductDetail() {
                         <p className="text-xl font-black text-primary-950">KSh {(product.price * quantity).toLocaleString()}</p>
                     </div>
 
-                    <button
-                        onClick={handleAddToCart}
-                        disabled={product.stock === 0}
-                        className={`btn-primary flex-1 md:flex-none md:w-64 !py-2.5 ${addedToCart ? '!bg-green-600 hover:!bg-green-700' : ''}`}
-                    >
-                        {addedToCart ? (
-                            <span className="flex items-center justify-center gap-2">
-                                <i className="fas fa-check-circle"></i> Added to Cart
-                            </span>
-                        ) : (
-                            <span className="flex items-center justify-center gap-2">
-                                <i className="fas fa-shopping-bag"></i>
-                                {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
-                            </span>
-                        )}
-                    </button>
+                    <div className="flex flex-1 gap-2">
+                        <button
+                            onClick={handleAddToCart}
+                            disabled={product.stock === 0}
+                            className={`flex-[1] flex items-center justify-center h-12 rounded-xl transition-all duration-300 border-2 ${addedToCart
+                                ? 'bg-green-50 border-green-200 text-green-700'
+                                : 'bg-white border-primary-950 text-primary-950 hover:bg-gray-50 active:scale-95'
+                                }`}
+                        >
+                            <i className={`fas ${addedToCart ? 'fa-check' : 'fa-shopping-bag'} text-lg`}></i>
+                        </button>
+
+                        <WhatsAppOrderButton
+                            message={getQuickWhatsAppMessage(product, quantity, selectedColor)}
+                            className="flex-[3] !py-0 h-12 text-sm sm:text-base shadow-lg shadow-green-100"
+                        />
+                    </div>
                 </div>
             </div>
 

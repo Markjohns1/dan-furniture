@@ -333,13 +333,24 @@ export default function Cart() {
                                     onComplete={handleCheckoutComplete}
                                 />
                             ) : (
-                                <button
-                                    disabled
-                                    className="w-full py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-3 bg-gray-300 text-gray-500 cursor-not-allowed"
-                                >
-                                    <i className="fab fa-whatsapp text-2xl"></i>
-                                    Fill required fields (*)
-                                </button>
+                                <div className="space-y-3">
+                                    <button
+                                        disabled
+                                        className="w-full py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-3 bg-gray-100 text-gray-400 cursor-not-allowed border-2 border-dashed border-gray-200"
+                                    >
+                                        Fill required fields (*)
+                                    </button>
+                                    <div className="relative flex items-center justify-center py-2">
+                                        <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-100"></div></div>
+                                        <span className="relative px-3 bg-white text-[10px] font-bold text-gray-300 uppercase tracking-widest">Or just chat</span>
+                                    </div>
+                                    <WhatsAppOrderButton
+                                        message={getWhatsAppMessage({ name: 'Lazy Buyer', phone: 'Quick Chat', address: 'Conversational order' })}
+                                        className="w-full !bg-white !text-green-600 border-2 border-green-600 !py-3 !text-sm"
+                                        onComplete={handleCheckoutComplete}
+                                    />
+                                    <p className="text-[10px] text-center text-gray-400 italic">"I'm lazy, just take me to WhatsApp!"</p>
+                                </div>
                             )}
                         </div>
                     </div>

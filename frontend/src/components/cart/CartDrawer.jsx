@@ -6,9 +6,10 @@ import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { API_HOST } from '../../api';
+import { WhatsAppOrderButton } from '../ui/WhatsAppButton';
 
 export default function CartDrawer({ isOpen, onClose }) {
-    const { items, removeItem, updateQuantity, subtotal } = useCart();
+    const { items, removeItem, updateQuantity, subtotal, getWhatsAppMessage, clearCart } = useCart();
     const location = useLocation();
 
     // Close drawer on route change
@@ -162,8 +163,19 @@ export default function CartDrawer({ isOpen, onClose }) {
                                     onClick={onClose}
                                     className="btn-primary py-3 text-center !shadow-lg"
                                 >
-                                    Checkout
+                                    Full Checkout
                                 </Link>
+                            </div>
+                            <div className="pt-1">
+                                <WhatsAppOrderButton
+                                    message={getWhatsAppMessage({ name: 'Lazy Customer', phone: 'Direct Chat', address: 'Drawer Checkout' })}
+                                    className="!py-3 !text-sm !bg-white !text-green-600 border border-green-200 shadow-sm"
+                                    onComplete={() => {
+                                        clearCart();
+                                        onClose();
+                                    }}
+                                />
+                                <p className="text-[9px] text-center text-gray-400 mt-2 italic font-medium">Quickest way to order ⚡</p>
                             </div>
                         </div>
                     )}

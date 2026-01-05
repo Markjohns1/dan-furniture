@@ -142,6 +142,15 @@ ${customerInfo.notes ? `Notes: ${customerInfo.notes}` : ''}`;
                 toggleCart,
                 getOrderItems,
                 getWhatsAppMessage,
+                getQuickWhatsAppMessage: (product, qty, color) => {
+                    return `HI DANIEL!
+I am interested in this item:
+- ${product.name}${color ? ` (${color})` : ''}
+- Quantity: ${qty}
+- Total: KSh ${(product.price * qty).toLocaleString()}
+
+Is this available? I'd like to order it now!`;
+                },
             }}
         >
             {children}
