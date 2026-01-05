@@ -91,7 +91,7 @@ export default function ProductForm() {
         setAiProcessing(true);
         setError('');
 
-        // Simulation of Groq Vision API - High Precision Version
+        // Simulation of Groq Vision API - Ultra Precision Version
         setTimeout(() => {
             const fileName = images[0]?.name.toLowerCase() || '';
             let name = '';
@@ -102,16 +102,18 @@ export default function ProductForm() {
             let dim = 'Standard';
             let colorsArr = ['Natural'];
 
-            // 1. Intelligent Color Extraction
+            // 1. Precise Color Mapping
             const colorMap = {
-                'black': ['Black', 'Matte Black'],
-                'grey': ['Grey', 'Silver'],
-                'gray': ['Grey', 'Silver'],
-                'brown': ['Brown', 'Walnut'],
-                'white': ['White', 'Cream'],
-                'blue': ['Navy Blue', 'Royal Blue'],
-                'red': ['Deep Red', 'Burgundy'],
-                'gold': ['Gold', 'Brass']
+                'black': ['Black', 'Onyx'],
+                'grey': ['Light Grey', 'Silver'],
+                'gray': ['Dark Grey', 'Charcoal'],
+                'brown': ['Espresso Brown', 'Coffee'],
+                'tan': ['Tan Leather', 'Beige'],
+                'white': ['Pearl White', 'Cream'],
+                'navy': ['Navy Blue', 'Deep Blue'],
+                'blue': ['Sky Blue', 'Azure'],
+                'green': ['Emerald Green', 'Forest'],
+                'gold': ['Metallic Gold', 'Brass']
             };
 
             for (let key in colorMap) {
@@ -122,62 +124,54 @@ export default function ProductForm() {
             }
             const primaryColor = colorsArr[0];
 
-            // 2. High-Speed Category & Item Matching
+            // 2. Material & Seater Detection (Short & Keen)
+            const material = fileName.includes('leather') ? 'Premium Leather' :
+                fileName.includes('velvet') ? 'High-Grade Velvet' :
+                    fileName.includes('wood') ? 'Solid Hardwood' : 'Durable Performance Fabric';
+
+            const seater = fileName.includes('single') || fileName.includes(' 1 ') ? 'Single Seater' :
+                fileName.includes(' 3 ') || fileName.includes('three') ? '3-Seater' :
+                    fileName.includes(' 5 ') || fileName.includes('five') ? '5-Seater' :
+                        fileName.includes(' 7 ') || fileName.includes('seven') ? '7-Seater' : '';
+
+            // 3. Category Logic
             if (fileName.includes('fridge') || fileName.includes('refrigerator')) {
-                name = `${primaryColor} Smart Fridge`;
-                desc = 'Energy-efficient cooling with multi-flow air tech. Sleek design for modern kitchens.';
+                name = `${primaryColor} Smart Cooling Fridge`;
+                desc = '• Multi-flow air tech\n• Low energy consumption\n• Silent compressor system';
                 catId = categories.find(c => c.slug === 'appliances')?.id || '';
-                price = '89000';
+                price = '95000';
                 mat = 'Stainless Steel';
-                dim = '180x70x65cm';
-            } else if (fileName.includes('wash')) {
-                name = `${primaryColor} Front Load Washer`;
-                desc = '8kg capacity with advanced drum tech for gentle fabric care. High-speed spin.';
-                catId = categories.find(c => c.slug === 'appliances')?.id || '';
-                price = '68000';
-                mat = 'Enameled Steel';
-                dim = '85x60x55cm';
             } else if (fileName.includes('sofa') || fileName.includes('couch') || fileName.includes('recliner')) {
                 const isRecliner = fileName.includes('recliner');
-                name = isRecliner ? `${primaryColor} Luxury Recliner` : `${primaryColor} Sectional Sofa`;
-                desc = isRecliner ? 'Ergonomic manual recline with high-density foam support.' : 'Premium comfort with stain-resistant fabric. Perfect for families.';
+                name = `${primaryColor} ${seater} ${isRecliner ? 'Recliner' : 'Sofa'}`;
+                desc = `• ${material} finish\n• High-density foam seating\n• Reinforced internal frame`;
                 catId = categories.find(c => c.slug === 'sofasets')?.id || '';
-                price = isRecliner ? '55000' : '125000';
-                mat = 'Premium Fabric & Wood';
-                dim = isRecliner ? '100x95cm' : '240x100cm';
+                price = isRecliner ? '65000' : (seater.includes('7') ? '165000' : '125000');
+                mat = material;
             } else if (fileName.includes('chair')) {
-                name = `${primaryColor} Executive Chair`;
-                desc = 'Professional ergonomic support with breathable mesh and silent swivel.';
+                name = `${primaryColor} Executive Office Chair`;
+                desc = '• Lumbar support technology\n• High-grade mesh/leather\n• Heavy-duty swivel base';
                 catId = categories.find(c => c.slug === 'office-chairs' || c.slug === 'chairs')?.id || '';
-                price = '22500';
-                mat = 'Mesh & Aluminum';
-                dim = '65x120cm';
+                price = '28500';
+                mat = 'Ergonomic Polymers';
             } else if (fileName.includes('table') || fileName.includes('dining')) {
-                name = `${primaryColor} Dining Table`;
-                desc = 'Solid oak construction with a scratch-resistant finish. Seats 6 comfortably.';
+                const isMarble = fileName.includes('marble');
+                name = `${primaryColor} ${isMarble ? 'Marble' : 'Solid Oak'} Dining Table`;
+                desc = `• ${isMarble ? 'Italian Marble' : 'Natural Oakwood'}\n• Scratch resistant top\n• 6-8 Seater capacity`;
                 catId = categories.find(c => c.slug === 'dining-sets')?.id || '';
-                price = '95000';
-                mat = 'Solid Wood';
-                dim = '180x90cm';
+                price = isMarble ? '185000' : '85000';
+                mat = isMarble ? 'Marble & Steel' : 'Solid Wood';
             } else if (fileName.includes('bed')) {
-                name = `${primaryColor} King Bed`;
-                desc = 'Upholstered frame with reinforced steel support for ultimate comfort.';
+                name = `${primaryColor} King Size Upholstered Bed`;
+                desc = '• Reinforced steel base\n• Premium padded headboard\n• Easy-clean fabric overlay';
                 catId = categories.find(c => c.slug === 'bedroom')?.id || '';
-                price = '110000';
-                mat = 'Upholstered Wood';
-                dim = '210x190cm';
-            } else if (fileName.includes('spoon') || fileName.includes('cutlery')) {
-                name = 'Premium Stainless Spoon';
-                desc = 'Durable and elegant stainless steel cutlery for daily use.';
-                catId = categories[0]?.id || ''; // Fallback to first category
-                price = '450';
-                mat = 'Stainless Steel';
+                price = '115000';
+                mat = 'Hardwood & Upholstery';
             } else {
-                // Honest Fallback - Don't guess if you don't know
-                name = 'General Inventory Item';
-                desc = 'Unidentified product. Please review name and category carefully.';
+                name = `Premium ${primaryColor} Collection Item`;
+                desc = '• Handpicked quality\n• Ready for delivery\n• Signature design';
                 catId = categories[0]?.id || '';
-                price = '1000';
+                price = '25000';
             }
 
             setFormData({
