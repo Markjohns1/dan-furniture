@@ -102,7 +102,7 @@ export default function CategoryManagement() {
                             setFormData({ name: '', description: '' });
                             setShowForm(!showForm);
                         }}
-                        className="btn-primary"
+                        className="btn-primary py-2 px-4 sm:py-2.5 sm:px-6 text-sm sm:text-base"
                     >
                         <i className={`fas ${showForm ? 'fa-times' : 'fa-plus'} mr-2`}></i>
                         {showForm ? 'Cancel' : 'Add Category'}
@@ -151,13 +151,13 @@ export default function CategoryManagement() {
                                 />
                             </div>
                             <div className="flex gap-3 pt-2">
-                                <button type="submit" className="btn-primary flex-1">
+                                <button type="submit" className="btn-primary flex-1 py-2 sm:py-2.5 text-sm sm:text-base">
                                     {editingCategory ? 'Save Changes' : 'Create Category'}
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => setShowForm(false)}
-                                    className="btn-secondary flex-1"
+                                    className="btn-secondary flex-1 py-2 sm:py-2.5 text-sm sm:text-base"
                                 >
                                     Cancel
                                 </button>

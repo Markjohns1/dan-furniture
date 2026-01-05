@@ -65,7 +65,7 @@ export default function ProductManagement() {
             <div className="container-app py-6">
                 {/* Header Actions */}
                 <div className="flex justify-end mb-6">
-                    <Link to="/admin/products/new" className="btn btn-primary shadow-lg w-full sm:w-auto px-6 py-2.5">
+                    <Link to="/admin/products/new" className="btn btn-primary shadow-lg px-4 py-2 sm:px-6 sm:py-2.5 text-sm sm:text-base">
                         <i className="fas fa-plus"></i>
                         Add New Product
                     </Link>

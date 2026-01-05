@@ -88,7 +88,7 @@ export default function UserManagement() {
                     </div>
                     <button
                         onClick={() => setShowForm(!showForm)}
-                        className="btn-primary !py-2 !px-4 !text-sm"
+                        className="btn-primary !py-2 !px-4 !text-xs sm:!text-sm"
                     >
                         <i className={`fas ${showForm ? 'fa-times' : 'fa-plus'} mr-2`}></i>
                         {showForm ? 'Cancel' : 'Add User'}
@@ -198,7 +198,7 @@ export default function UserManagement() {
                                 <button
                                     type="submit"
                                     disabled={submitting}
-                                    className="btn-primary"
+                                    className="btn-primary py-2 px-5 sm:py-2.5 sm:px-6 text-sm sm:text-base"
                                 >
                                     {submitting ? (
                                         <>

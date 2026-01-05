@@ -519,14 +519,14 @@ export default function ProductForm() {
                                 <button
                                     type="button"
                                     onClick={() => setShowFullForm(false)}
-                                    className="btn-secondary flex-1 py-4 font-bold"
+                                    className="btn-secondary flex-1 py-3 sm:py-4 font-bold text-sm sm:text-base"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={saving}
-                                    className="btn-primary flex-[2] py-4 bg-primary-700 shadow-xl shadow-primary-100 font-bold flex items-center justify-center gap-3"
+                                    className="btn-primary flex-[2] py-3 sm:py-4 bg-primary-700 shadow-xl shadow-primary-100 font-bold flex items-center justify-center gap-3 text-sm sm:text-base"
                                 >
                                     {saving ? (
                                         <>
