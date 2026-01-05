@@ -337,7 +337,7 @@ export default function ProductForm() {
                                         type="button"
                                         onClick={handleAIGenerate}
                                         disabled={aiProcessing}
-                                        className="w-full py-5 bg-gradient-to-r from-purple-600 to-primary-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 shadow-xl shadow-primary-200 active:scale-95 transition-all text-lg"
+                                        className="w-full py-3.5 sm:py-5 bg-gradient-to-r from-purple-600 to-primary-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 shadow-xl shadow-primary-200 active:scale-95 transition-all text-base sm:text-lg"
                                     >
                                         {aiProcessing ? (
                                             <>
