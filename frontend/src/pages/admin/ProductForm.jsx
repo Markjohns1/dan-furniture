@@ -91,87 +91,59 @@ export default function ProductForm() {
         setAiProcessing(true);
         setError('');
 
-        // Simulation of Groq Vision API - Ultra Precision Version
+        // Simulation of Groq Vision API - Smart Heuristic Engine
         setTimeout(() => {
             const fileName = images[0]?.name.toLowerCase() || '';
             let name = '';
             let desc = '';
             let catId = '';
-            let price = '1500';
-            let mat = 'High Quality Material';
-            let dim = 'Standard';
-            let colorsArr = ['Natural'];
+            let price = '45000';
+            let mat = 'Solid Wood & Premium Upholstery';
+            let dim = 'Standard Showroom Size';
+            let colorsArr = ['Natural', 'Warm Walnut'];
 
-            // 1. Precise Color Mapping
-            const colorMap = {
-                'black': ['Black', 'Onyx'],
-                'grey': ['Light Grey', 'Silver'],
-                'gray': ['Dark Grey', 'Charcoal'],
-                'brown': ['Espresso Brown', 'Coffee'],
-                'tan': ['Tan Leather', 'Beige'],
-                'white': ['Pearl White', 'Cream'],
-                'navy': ['Navy Blue', 'Deep Blue'],
-                'blue': ['Sky Blue', 'Azure'],
-                'green': ['Emerald Green', 'Forest'],
-                'gold': ['Metallic Gold', 'Brass']
-            };
+            const hasKeyword = (keys) => keys.some(k => fileName.includes(k));
 
-            for (let key in colorMap) {
-                if (fileName.includes(key)) {
-                    colorsArr = colorMap[key];
-                    break;
-                }
-            }
-            const primaryColor = colorsArr[0];
-
-            // 2. Material & Seater Detection (Short & Keen)
-            const material = fileName.includes('leather') ? 'Premium Leather' :
-                fileName.includes('velvet') ? 'High-Grade Velvet' :
-                    fileName.includes('wood') ? 'Solid Hardwood' : 'Durable Performance Fabric';
-
-            const seater = fileName.includes('single') || fileName.includes(' 1 ') ? 'Single Seater' :
-                fileName.includes(' 3 ') || fileName.includes('three') ? '3-Seater' :
-                    fileName.includes(' 5 ') || fileName.includes('five') ? '5-Seater' :
-                        fileName.includes(' 7 ') || fileName.includes('seven') ? '7-Seater' : '';
-
-            // 3. Category Logic
-            if (fileName.includes('fridge') || fileName.includes('refrigerator')) {
-                name = `${primaryColor} Smart Cooling Fridge`;
-                desc = '• Multi-flow air tech\n• Low energy consumption\n• Silent compressor system';
+            // 1. Keyword-Based Detection
+            if (hasKeyword(['fridge', 'refrigerator'])) {
+                name = 'Smart Cooling Fridge';
+                desc = '• Multi-flow air technology\n• High energy efficiency\n• Digital temperature display';
                 catId = categories.find(c => c.slug === 'appliances')?.id || '';
                 price = '95000';
-                mat = 'Stainless Steel';
-            } else if (fileName.includes('sofa') || fileName.includes('couch') || fileName.includes('recliner')) {
-                const isRecliner = fileName.includes('recliner');
-                name = `${primaryColor} ${seater} ${isRecliner ? 'Recliner' : 'Sofa'}`;
-                desc = `• ${material} finish\n• High-density foam seating\n• Reinforced internal frame`;
+                mat = 'Brush-finished Stainless Steel';
+            } else if (hasKeyword(['sofa', 'couch', 'recliner', 'sectional'])) {
+                const isRec = fileName.includes('recliner');
+                name = isRec ? 'Luxury Rocker Recliner' : 'Premium Sectional Sofaset';
+                desc = isRec ? '• Smooth manual recline\n• High-density comfort foam\n• Lumbar support tracking' : '• Stain-resistant performance fabric\n• Reinforced internal frame\n• Modern silhouette design';
                 catId = categories.find(c => c.slug === 'sofasets')?.id || '';
-                price = isRecliner ? '65000' : (seater.includes('7') ? '165000' : '125000');
-                mat = material;
-            } else if (fileName.includes('chair')) {
-                name = `${primaryColor} Executive Office Chair`;
-                desc = '• Lumbar support technology\n• High-grade mesh/leather\n• Heavy-duty swivel base';
+                price = isRec ? '65000' : '155000';
+                mat = isRec ? 'Quality Microfiber' : 'High-Thread Velvet';
+            } else if (hasKeyword(['chair', 'stool', 'office'])) {
+                name = 'Executive Professional Chair';
+                desc = '• Ergonomic mesh backing\n• Synchro-tilt mechanism\n• Polished aluminum base';
                 catId = categories.find(c => c.slug === 'office-chairs' || c.slug === 'chairs')?.id || '';
-                price = '28500';
-                mat = 'Ergonomic Polymers';
-            } else if (fileName.includes('table') || fileName.includes('dining')) {
-                const isMarble = fileName.includes('marble');
-                name = `${primaryColor} ${isMarble ? 'Marble' : 'Solid Oak'} Dining Table`;
-                desc = `• ${isMarble ? 'Italian Marble' : 'Natural Oakwood'}\n• Scratch resistant top\n• 6-8 Seater capacity`;
+                price = '24500';
+            } else if (hasKeyword(['table', 'dining', 'center'])) {
+                name = 'Contemporary Dining Piece';
+                desc = '• Heat resistant top\n• Natural wood grain finish\n• Sturdy artisan construction';
                 catId = categories.find(c => c.slug === 'dining-sets')?.id || '';
-                price = isMarble ? '185000' : '85000';
-                mat = isMarble ? 'Marble & Steel' : 'Solid Wood';
-            } else if (fileName.includes('bed')) {
-                name = `${primaryColor} King Size Upholstered Bed`;
-                desc = '• Reinforced steel base\n• Premium padded headboard\n• Easy-clean fabric overlay';
-                catId = categories.find(c => c.slug === 'bedroom')?.id || '';
-                price = '115000';
-                mat = 'Hardwood & Upholstery';
+                price = '85000';
             } else {
-                name = `Premium ${primaryColor} Collection Item`;
-                desc = '• Handpicked quality\n• Ready for delivery\n• Signature design';
-                catId = categories[0]?.id || '';
-                price = '25000';
+                // 2. High-Value Fallback (Simulates 'seeing' a high-end item)
+                const furnitureTypes = [
+                    { n: 'Artisan Curved Sofa', p: '145000', m: 'Italian Velvet', d: '• Seamless curved design\n• High-resiliency cushioning\n• Gold-tone metal accents', c: ['Emerald', 'Midnight Blue'], cat: 'sofasets' },
+                    { n: 'Hand-Carved Mahogany Bed', p: '115000', m: 'Solid Mahogany', d: '• Traditional hand-carvings\n• Reinforced support system\n• Sustainable luxury wood', c: ['Deep Red', 'Brown'], cat: 'bedroom' },
+                    { n: 'Minimalist Nordic Table', p: '75000', m: 'White Oak', d: '• Clean aesthetic lines\n• Scratch-resistant finish\n• Tapered solid wood legs', c: ['Natural', 'Light Oak'], cat: 'dining-sets' },
+                    { n: 'Orthopedic Swivel Chair', p: '32000', m: 'Top-Grain Leather', d: '• Full lumbar articulation\n• Premium leather finish\n• Silent casters for all floors', c: ['Black', 'Tan'], cat: 'office-chairs' }
+                ];
+
+                const randomChoice = furnitureTypes[Math.floor(Math.random() * furnitureTypes.length)];
+                name = randomChoice.n;
+                price = randomChoice.p;
+                mat = randomChoice.m;
+                desc = randomChoice.d;
+                colorsArr = randomChoice.c;
+                catId = categories.find(c => c.slug === randomChoice.cat)?.id || categories[0]?.id || '';
             }
 
             setFormData({
@@ -187,7 +159,7 @@ export default function ProductForm() {
 
             setShowFullForm(true);
             setAiProcessing(false);
-        }, 1800); // Faster processing time for snappy demo // 2.2s speed factor
+        }, 1500);
     };
 
     const handleSubmit = async (e) => {
