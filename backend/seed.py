@@ -1,6 +1,6 @@
 """
 Dan Classic Furniture - Database Seeder
-Run this to seed the database with initial categories and an admin user.
+Seeds the database with admin user, categories, and initial professional products.
 """
 import sys
 import os
@@ -8,9 +8,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from app.database import SessionLocal, init_db
 from app.models.user import User, UserRole
-from app.models.product import Category
+from app.models.product import Product, Category
 from app.utils.auth import get_password_hash
-
 
 def seed_database():
     """Seed the database with initial data"""
@@ -18,7 +17,7 @@ def seed_database():
     db = SessionLocal()
     
     try:
-        # Create admin user if not exists
+        # 1. Create admin user if not exists
         admin = db.query(User).filter(User.email == "admin@danfurniture.co.ke").first()
         if not admin:
             admin = User(
@@ -29,11 +28,9 @@ def seed_database():
                 role=UserRole.ADMIN
             )
             db.add(admin)
-            print("[OK] Admin user created: admin@danfurniture.co.ke / admin123")
-        else:
-            print("[INFO] Admin user already exists")
+            print("[OK] Admin user created")
         
-        # Create categories
+        # 2. Create categories
         categories_data = [
             {"name": "Sofasets", "slug": "sofasets", "description": "Luxurious sofasets for your living room"},
             {"name": "Chairs", "slug": "chairs", "description": "Comfortable chairs for every room"},
@@ -49,8 +46,95 @@ def seed_database():
                 category = Category(**cat_data)
                 db.add(category)
                 print(f"[OK] Category created: {cat_data['name']}")
-            else:
-                print(f"[INFO] Category already exists: {cat_data['name']}")
+        
+        db.commit() # Commit categories first to get IDs
+
+        # 3. Create professional sample products
+        cat_sofas = db.query(Category).filter(Category.slug == "sofasets").first()
+        cat_dining = db.query(Category).filter(Category.slug == "dining-sets").first()
+        cat_office = db.query(Category).filter(Category.slug == "office-chairs").first()
+        cat_beds = db.query(Category).filter(Category.slug == "bedroom").first()
+        cat_chairs = db.query(Category).filter(Category.slug == "chairs").first()
+
+        products_data = [
+            {
+                "name": "Royal Chesterfield Sofa",
+                "description": "Handcrafted premium leather Chesterfield sofa with deep buttoning and mahogany legs. A truly timeless piece for your living room.",
+                "price": 125000,
+                "compare_price": 150000,
+                "category_id": cat_sofas.id if cat_sofas else 1,
+                "stock": 5,
+                "sku": "SOF-CHEST-01",
+                "dimensions": "220x95x75 cm",
+                "material": "Top Grain Leather",
+                "colors": ["Brown", "Black", "Burgundy"],
+                "images": ["/uploads/products/sofa.png"],
+                "featured": True
+            },
+            {
+                "name": "Modern Mahogany Dining Set",
+                "description": "Elegant 6-seater dining set made from solid mahogany. Includes 6 velvet-upholstered chairs for maximum comfort.",
+                "price": 85000,
+                "compare_price": 95000,
+                "category_id": cat_dining.id if cat_dining else 3,
+                "stock": 3,
+                "sku": "DIN-MAHOG-01",
+                "dimensions": "180x90x75 cm",
+                "material": "Solid Mahogany",
+                "colors": ["Walnut", "Dark Oak"],
+                "images": ["/uploads/products/dining.png"],
+                "featured": True
+            },
+            {
+                "name": "ErgoPro Executive Chair",
+                "description": "Professional executive chair with lumbar support, adjustable headrest, and breathable mesh back. Perfect for long working hours.",
+                "price": 28000,
+                "compare_price": 35000,
+                "category_id": cat_office.id if cat_office else 4,
+                "stock": 15,
+                "sku": "OFF-ERGO-01",
+                "dimensions": "Standard Adjustable",
+                "material": "Nylon Mesh & Aluminum",
+                "colors": ["Black", "Grey"],
+                "images": ["/uploads/products/office.png"],
+                "featured": False
+            },
+            {
+                "name": "Victoria Velvet King Bed",
+                "description": "Grand king-sized bed with a tall wingback headboard in plush velvet. Includes a sturdy slatted base for ultimate support.",
+                "price": 75000,
+                "compare_price": 85000,
+                "category_id": cat_beds.id if cat_beds else 6,
+                "stock": 4,
+                "sku": "BED-VIC-01",
+                "dimensions": "180x200 cm",
+                "material": "Velvet & Engineered Wood",
+                "colors": ["Emerald Green", "Navy Blue", "Grey"],
+                "images": ["/uploads/products/bed.png"],
+                "featured": True
+            },
+            {
+                "name": "Azure Velvet Accent Chair",
+                "description": "Stylish accent chair with deep blue velvet upholstery and brushed gold legs. Adds a pop of color and luxury to any corner.",
+                "price": 18500,
+                "compare_price": 22000,
+                "category_id": cat_chairs.id if cat_chairs else 2,
+                "stock": 10,
+                "sku": "CHR-AZURE-01",
+                "dimensions": "75x80x85 cm",
+                "material": "Velvet & Steel",
+                "colors": ["Blue", "Yellow", "Pink"],
+                "images": ["/uploads/products/accent.png"],
+                "featured": False
+            }
+        ]
+
+        for p_data in products_data:
+            existing = db.query(Product).filter(Product.sku == p_data["sku"]).first()
+            if not existing:
+                product = Product(**p_data)
+                db.add(product)
+                print(f"[OK] Product created: {p_data['name']}")
         
         db.commit()
         print("\nDatabase seeding complete!")
@@ -61,7 +145,6 @@ def seed_database():
         raise
     finally:
         db.close()
-
 
 if __name__ == "__main__":
     seed_database()

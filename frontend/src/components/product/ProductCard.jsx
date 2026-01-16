@@ -1,6 +1,6 @@
 /**
  * Dan Classic Furniture - Product Card Component
- * Clean, professional design
+ * Premium, professional design with micro-interactions
  */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,7 @@ export default function ProductCard({ product }) {
     const { addItem, openCart, getQuickWhatsAppMessage } = useCart();
     const [isAdding, setIsAdding] = useState(false);
     const [isAdded, setIsAdded] = useState(false);
+    const [imageLoaded, setImageLoaded] = useState(false);
 
     const imageUrl = product.images?.length
         ? `${API_HOST}${product.images[0]}`
@@ -29,17 +30,16 @@ export default function ProductCard({ product }) {
         if (isAdding || isAdded) return;
 
         setIsAdding(true);
-        // Add to cart but don't open drawer immediately, let animation play
         addItem(product, 1, product.colors?.[0] || null);
 
         setTimeout(() => {
             setIsAdding(false);
             setIsAdded(true);
-        }, 800);
+        }, 600);
 
         setTimeout(() => {
             setIsAdded(false);
-        }, 2000);
+        }, 2500);
     };
 
     const discount = product.compare_price && product.compare_price > product.price
@@ -49,62 +49,86 @@ export default function ProductCard({ product }) {
     return (
         <Link
             to={`/products/${product.id}`}
-            className="group bg-white rounded-2xl overflow-hidden border border-primary-100 hover:border-primary-900 shadow-[0_4px_12px_rgba(15,23,42,0.08)] hover:shadow-[0_12px_32px_rgba(15,23,42,0.15)] transition-all duration-500 flex flex-col h-full"
+            className="group bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-primary-200 shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)] transition-all duration-500 flex flex-col h-full hover-lift"
         >
-            {/* Image */}
-            <div className="relative aspect-square overflow-hidden bg-gray-50">
+            {/* Image Container */}
+            <div className="relative aspect-[4/5] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+                {/* Loading Skeleton */}
+                {!imageLoaded && imageUrl && (
+                    <div className="absolute inset-0 skeleton"></div>
+                )}
+
                 {imageUrl ? (
                     <img
                         src={imageUrl}
                         alt={product.name}
-                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                        className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${imageLoaded ? 'opacity-100' : 'opacity-0'
+                            }`}
                         loading="lazy"
+                        onLoad={() => setImageLoaded(true)}
                     />
                 ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gray-100">
-                        <i className="fas fa-couch text-4xl text-gray-200"></i>
+                    <div className="w-full h-full flex items-center justify-center">
+                        <i className="fas fa-couch text-5xl text-gray-200"></i>
                     </div>
                 )}
 
-                {/* Badges Overlay */}
-                <div className="absolute top-2.5 left-2.5 right-2.5 flex flex-col gap-1.5 items-start">
+                {/* Gradient Overlay on Hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                {/* Badges Overlay - Enhanced */}
+                <div className="absolute top-3 left-3 right-3 flex flex-col gap-2 items-start">
                     {product.featured && (
-                        <span className="px-2 py-0.5 bg-primary-950 text-white text-[9px] font-bold uppercase tracking-widest rounded shadow-sm">
+                        <span className="px-2.5 py-1 bg-primary-950 text-white text-[9px] font-bold uppercase tracking-wider rounded-lg shadow-lg">
+                            <i className="fas fa-crown mr-1 text-amber-400"></i>
                             Exclusive
                         </span>
                     )}
                     {discount > 0 && (
-                        <span className="px-2 py-0.5 bg-accent-600 text-white text-[9px] font-bold uppercase tracking-widest rounded shadow-sm">
+                        <span className="px-2.5 py-1 bg-gradient-to-r from-red-500 to-orange-500 text-white text-[9px] font-bold uppercase tracking-wider rounded-lg shadow-lg">
                             -{discount}% OFF
                         </span>
                     )}
                     {product.stock > 0 && product.stock < 5 && (
-                        <span className="px-2 py-0.5 bg-red-600 text-white text-[9px] font-bold uppercase tracking-widest rounded shadow-sm animate-pulse">
-                            Low Stock
+                        <span className="px-2.5 py-1 bg-amber-500 text-white text-[9px] font-bold uppercase tracking-wider rounded-lg shadow-lg animate-pulse-soft">
+                            <i className="fas fa-fire mr-1"></i>
+                            Only {product.stock} left
+                        </span>
+                    )}
+                    {product.stock === 0 && (
+                        <span className="px-2.5 py-1 bg-gray-800 text-white text-[9px] font-bold uppercase tracking-wider rounded-lg shadow-lg">
+                            Sold Out
                         </span>
                     )}
                 </div>
 
-                {/* Mobile Add Button - Animated */}
-                <div className="lg:hidden absolute bottom-2.5 left-2.5 right-2.5 flex gap-2 z-20">
+                {/* Mobile Action Buttons - Always Visible */}
+                <div className="lg:hidden absolute bottom-3 left-3 right-3 flex gap-2 z-20">
                     <button
                         onClick={handleMobileAdd}
                         disabled={product.stock === 0}
-                        className={`flex-1 flex items-center justify-center gap-1.5 h-10 rounded-xl shadow-lg transition-all duration-300 transform active:scale-95 ${isAdded
-                            ? 'bg-green-600 text-white border-green-600'
+                        className={`flex-1 flex items-center justify-center gap-2 h-11 rounded-xl shadow-xl transition-all duration-300 transform active:scale-95 font-bold text-[11px] uppercase tracking-wide ${isAdded
+                            ? 'bg-green-500 text-white'
                             : isAdding
-                                ? 'bg-primary-700 text-white border-primary-700'
-                                : 'bg-primary-950/95 backdrop-blur-sm text-white border-primary-950 hover:bg-primary-900'
+                                ? 'bg-primary-800 text-white'
+                                : product.stock === 0
+                                    ? 'bg-gray-400 text-white cursor-not-allowed'
+                                    : 'bg-primary-950/95 backdrop-blur-md text-white'
                             }`}
                     >
                         {isAdded ? (
-                            <i className="fas fa-check text-xs"></i>
+                            <>
+                                <i className="fas fa-check"></i>
+                                Added
+                            </>
                         ) : isAdding ? (
-                            <i className="fas fa-circle-notch fa-spin text-xs"></i>
+                            <i className="fas fa-circle-notch fa-spin"></i>
+                        ) : product.stock === 0 ? (
+                            'Sold Out'
                         ) : (
                             <>
                                 <i className="fas fa-plus text-[10px]"></i>
-                                <span className="text-[10px] font-bold uppercase tracking-wide">Add</span>
+                                Add
                             </>
                         )}
                     </button>
@@ -114,33 +138,42 @@ export default function ProductCard({ product }) {
                         onClick={(e) => e.stopPropagation()}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex-1 flex items-center justify-center gap-1.5 h-10 rounded-xl shadow-lg bg-[#25D366] text-white active:scale-95 transition-all"
+                        className="flex-1 flex items-center justify-center gap-2 h-11 rounded-xl shadow-xl bg-gradient-to-r from-green-500 to-green-600 text-white active:scale-95 transition-all font-bold text-[11px] uppercase tracking-wide"
                     >
-                        <i className="fab fa-whatsapp text-sm"></i>
-                        <span className="text-[10px] font-bold uppercase tracking-wide">Order</span>
+                        <i className="fab fa-whatsapp text-base"></i>
+                        Order
                     </a>
                 </div>
 
-                {/* Quick Add Overlay (Desktop) */}
-                <div className="hidden lg:block absolute inset-x-3 bottom-3 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out z-10">
+                {/* Desktop Quick Add Button */}
+                <div className="hidden lg:flex absolute inset-x-4 bottom-4 opacity-0 translate-y-4 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out z-10 gap-2">
                     <button
                         onClick={handleAddToCart}
                         disabled={product.stock === 0}
-                        className="w-full py-2.5 bg-white/95 backdrop-blur-md text-primary-950 text-[11px] font-bold uppercase tracking-wider rounded-lg shadow-xl hover:bg-primary-950 hover:text-white transition-all active:scale-95"
+                        className="flex-1 py-3 bg-white text-primary-950 text-[11px] font-bold uppercase tracking-wider rounded-xl shadow-xl hover:bg-primary-950 hover:text-white transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {product.stock === 0 ? 'Sold Out' : 'Quick Add'}
                     </button>
+                    <a
+                        href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || '254724426993'}?text=${encodeURIComponent(getQuickWhatsAppMessage(product, 1))}`}
+                        onClick={(e) => e.stopPropagation()}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-12 h-12 flex items-center justify-center bg-green-500 text-white rounded-xl shadow-xl hover:bg-green-600 transition-all active:scale-95"
+                    >
+                        <i className="fab fa-whatsapp text-lg"></i>
+                    </a>
                 </div>
             </div>
 
-            {/* Product Content */}
-            <div className="p-3 flex flex-col flex-1">
+            {/* Product Content - Enhanced */}
+            <div className="p-4 flex flex-col flex-1">
                 {/* Category & Rating Row */}
-                <div className="flex items-center justify-between mb-1.5">
-                    <p className="text-[10px] font-black text-secondary-800 uppercase tracking-[0.15em]">
+                <div className="flex items-center justify-between mb-2">
+                    <p className="text-[10px] font-black text-secondary-600 uppercase tracking-[0.15em]">
                         {product.category?.name || 'Collection'}
                     </p>
-                    <div className="flex text-accent-500 text-[8px]">
+                    <div className="flex items-center gap-1 text-amber-500 text-[9px]">
                         <i className="fas fa-star"></i>
                         <i className="fas fa-star"></i>
                         <i className="fas fa-star"></i>
@@ -149,42 +182,43 @@ export default function ProductCard({ product }) {
                     </div>
                 </div>
 
-                {/* Name */}
-                <h3 className="font-semibold text-primary-900 text-sm leading-snug group-hover:text-primary-600 transition-colors line-clamp-2 mb-1">
+                {/* Product Name */}
+                <h3 className="font-semibold text-primary-900 text-base leading-snug group-hover:text-primary-700 transition-colors line-clamp-2 mb-3">
                     {product.name}
                 </h3>
 
-                <div className="flex items-end justify-between mt-3">
+                {/* Price & Colors Row */}
+                <div className="flex items-end justify-between mt-auto pt-2 border-t border-gray-50">
                     {/* Price Block */}
                     <div className="flex flex-col">
                         {product.compare_price && product.compare_price > product.price && (
-                            <p className="text-[10px] text-secondary-600 line-through font-bold mb-0.5 opacity-80">
+                            <p className="text-[11px] text-secondary-500 line-through font-semibold mb-0.5">
                                 KSh {product.compare_price.toLocaleString()}
                             </p>
                         )}
-                        <p className="text-[16px] font-bold text-primary-950 uppercase tracking-tight">
+                        <p className="text-lg font-bold text-primary-950 tracking-tight">
                             KSh {product.price.toLocaleString()}
                         </p>
                     </div>
 
-                    {/* Highly Intuitive Color Options */}
+                    {/* Color Options - Premium Display */}
                     {product.colors?.length > 0 && (
                         <div className="flex flex-col items-end gap-1.5">
-                            <span className="text-[8px] font-black text-primary-700 uppercase tracking-widest leading-none">
+                            <span className="text-[8px] font-black text-secondary-500 uppercase tracking-widest">
                                 {product.colors.length > 1 ? `${product.colors.length} Colors` : 'Color'}
                             </span>
-                            <div className="flex -space-x-2">
-                                {product.colors.slice(0, 3).map((color, i) => (
+                            <div className="flex -space-x-1.5">
+                                {product.colors.slice(0, 4).map((color, i) => (
                                     <div
                                         key={i}
-                                        className="w-4.5 h-4.5 rounded-full border-2 border-white shadow-sm ring-1 ring-gray-200 transition-all hover:-translate-y-1 hover:scale-110 z-0 hover:z-10"
+                                        className="w-5 h-5 rounded-full border-2 border-white shadow-sm ring-1 ring-gray-200 transition-transform hover:scale-125 hover:-translate-y-1 hover:z-10"
                                         style={{ backgroundColor: color.toLowerCase() }}
                                         title={color}
                                     ></div>
                                 ))}
-                                {product.colors.length > 3 && (
-                                    <div className="w-4.5 h-4.5 rounded-full bg-gray-50 border-2 border-white shadow-sm ring-1 ring-gray-100 flex items-center justify-center z-20">
-                                        <span className="text-[8px] font-bold text-gray-500">+{product.colors.length - 3}</span>
+                                {product.colors.length > 4 && (
+                                    <div className="w-5 h-5 rounded-full bg-gray-100 border-2 border-white shadow-sm ring-1 ring-gray-200 flex items-center justify-center z-20">
+                                        <span className="text-[7px] font-bold text-gray-600">+{product.colors.length - 4}</span>
                                     </div>
                                 )}
                             </div>

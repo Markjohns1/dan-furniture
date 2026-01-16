@@ -1,27 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
   <url>
     <loc>https://danielfurniture.co.ke/</loc>
-    <lastmod>2026-01-05</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://danielfurniture.co.ke/og-image.png</image:loc>
+      <image:title>Daniel Furniture - Premium Furniture Store Kenya</image:title>
+    </image:image>
   </url>
+  
+  <!-- Products Listing -->
   <url>
     <loc>https://danielfurniture.co.ke/products</loc>
-    <lastmod>2026-01-05</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
+  
+  <!-- Category: Sofasets -->
+  <url>
+    <loc>https://danielfurniture.co.ke/products?category=sofasets</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Category: Dining Sets -->
+  <url>
+    <loc>https://danielfurniture.co.ke/products?category=dining-sets</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Category: Beds -->
+  <url>
+    <loc>https://danielfurniture.co.ke/products?category=beds</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Category: Chairs -->
+  <url>
+    <loc>https://danielfurniture.co.ke/products?category=chairs</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Category: Office Chairs -->
+  <url>
+    <loc>https://danielfurniture.co.ke/products?category=office-chairs</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Featured Products -->
+  <url>
+    <loc>https://danielfurniture.co.ke/products?featured=true</loc>
+    <lastmod>2026-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Contact Page -->
   <url>
     <loc>https://danielfurniture.co.ke/contact</loc>
-    <lastmod>2026-01-05</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  
+  <!-- Legal/Terms Page -->
   <url>
     <loc>https://danielfurniture.co.ke/legal</loc>
-    <lastmod>2026-01-05</lastmod>
+    <lastmod>2026-01-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
+  
 </urlset>

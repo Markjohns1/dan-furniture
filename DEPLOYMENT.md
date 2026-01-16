@@ -1,4 +1,4 @@
-# 🚀 Deployment Guide - Dan Classic Furniture
+# Deployment Guide - Dan Classic Furniture
 
 This guide walks you through deploying the Dan Classic Furniture e-commerce platform to production.
 
@@ -229,4 +229,4 @@ Before going live:
 
 ---
 
-**Happy Deploying! 🚀**
+**Happy Deploying!**

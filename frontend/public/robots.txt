@@ -1,4 +1,33 @@
+# Daniel Furniture - robots.txt
+# https://danielfurniture.co.ke
+
 User-agent: *
 Allow: /
+Allow: /products
+Allow: /products/*
+Allow: /contact
+Allow: /legal
 
+# Disallow admin areas
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /login
+Disallow: /register
+Disallow: /cart
+Disallow: /profile
+Disallow: /orders
+
+# Disallow query parameters that create duplicate content
+Disallow: /*?page=
+Disallow: /*?sort=
+Disallow: /*?search=
+
+# Crawl delay for polite crawling
+Crawl-delay: 1
+
+# Sitemaps
 Sitemap: https://danielfurniture.co.ke/sitemap.xml
+Sitemap: https://danielfurniture.co.ke/sitemap-graveyard.xml
+
+# Host
+Host: https://danielfurniture.co.ke
