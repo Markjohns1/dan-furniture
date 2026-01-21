@@ -112,7 +112,7 @@ dan-classic-furniture/
 │   │   ├── components/        # Reusable UI components
 │   │   │   ├── layout/        # Header, BottomNav
 │   │   │   ├── product/       # ProductCard
-│   │   │   └── ui/            # Loading, WhatsAppButton
+│   │   │   └── ui/
 │   │   ├── context/           # React contexts
 │   │   │   ├── AuthContext.jsx
 │   │   │   └── CartContext.jsx
