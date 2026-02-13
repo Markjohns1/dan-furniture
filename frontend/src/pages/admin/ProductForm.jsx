@@ -1,5 +1,5 @@
 /**
- * Daniel Furniture - Admin Add/Edit Product
+ * Touch Wood - Admin Add/Edit Product
  */
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -106,11 +106,11 @@ export default function ProductForm() {
 
             // 1. Keyword-Based Detection
             if (hasKeyword(['fridge', 'refrigerator'])) {
-                name = 'Smart Multi-Flow Refrigerator';
-                desc = '• Intelligent cooling technology\n• High energy efficiency\n• Digital temperature display';
+                name = 'Touch Wood Smart Cooler';
+                desc = '• Natural wood veneer finish\n• Intelligent climate control\n• Whisper-quiet operation\n• High energy efficiency';
                 catId = categories.find(c => c.slug === 'appliances')?.id || '';
-                price = '95000';
-                mat = 'Brush-finished Stainless Steel';
+                price = '115000';
+                mat = 'Solid Wood & Stainless Steel';
             } else if (hasKeyword(['sofa', 'couch', 'recliner', 'sectional', 'seater'])) {
                 const isRec = fileName.includes('recliner');
                 const isLeather = fileName.includes('leather');
@@ -120,38 +120,38 @@ export default function ProductForm() {
                 if (fileName.includes('7') || fileName.includes('seven')) seater = '7-Seater ';
                 else if (fileName.includes('5') || fileName.includes('five')) seater = '5-Seater ';
                 else if (fileName.includes('3') || fileName.includes('three')) seater = '3-Seater ';
-                else if (fileName.includes('1') || fileName.includes('single')) seater = 'Single-Seater ';
+                else if (fileName.includes('1') || fileName.includes('single')) seater = 'Individual ';
 
-                const material = isLeather ? 'Premium Leather' : (isVelvet ? 'Luxury Velvet' : 'Quality Fabric');
+                const material = isLeather ? 'Artisan Leather' : (isVelvet ? 'Plush Earth-Tone Velvet' : 'Organic Woven Fabric');
 
-                name = isRec ? `${seater}Comfort Recliner` : `${seater}Elegance ${isVelvet ? 'Velvet ' : ''}Sofaset`;
-                desc = `• ${material} finish\n• High-density comfort foam\n• Reinforced internal frame\n• Modern artisan design`;
+                name = isRec ? `${seater}Legacy Recliner` : `${seater}Touch Wood ${isVelvet ? 'Velvet ' : ''}Sofaset`;
+                desc = `• Hand-carved Mahogany frame\n• ${material} finish\n• High-density organic foam\n• Mastercrafted joinery`;
                 catId = categories.find(c => c.slug === 'sofasets')?.id || '';
 
-                // Adjust price based on seater count
                 if (seater.includes('7')) price = '185000';
                 else if (seater.includes('5')) price = '145000';
                 else if (seater.includes('3')) price = '85000';
-                else if (isRec) price = '65000';
+                else if (isRec) price = '75000';
                 else price = '155000';
 
-                mat = material + ' & Hardwood';
+                mat = 'Solid Mahogany & ' + material;
             } else if (hasKeyword(['tv', 'stand', 'coffee', 'center', 'side', 'table'])) {
                 const isTv = fileName.includes('tv');
                 const isCoffee = fileName.includes('coffee') || fileName.includes('center');
 
-                name = isTv ? 'Modern Low-Profile TV Stand' : (isCoffee ? 'Artisan Coffee Table' : 'Classic Side Stand');
-                desc = '• Impact-resistant surface\n• Compact showroom design\n• Scratch-resistant finish';
+                name = isTv ? 'Live-Edge TV Console' : (isCoffee ? 'Hand-Carved Coffee Table' : 'Artisan Side Pedestal');
+                desc = '• Reclaimed hardwood surface\n• Natural grain preservation\n• Traditional mortise and tenon joinery';
                 catId = categories.find(c => c.slug === 'dining-sets' || c.slug === 'tables')?.id || '';
-                price = isTv ? '35000' : (isCoffee ? '24500' : '15000');
-                dim = 'Compact Showroom Fit';
+                price = isTv ? '42000' : (isCoffee ? '28500' : '18000');
+                dim = 'Artisanal Standard Fit';
+                mat = 'Mvule / Mahogany';
             } else {
                 // 2. High-Value Fallback (Simulates 'seeing' a high-end item)
                 const furnitureTypes = [
-                    { n: 'Elegance 7-Seater Velvet Sofaset', p: '195000', m: 'Italian Velvet', d: '• Full 7-seater configuration\n• High-resiliency cushioning\n• Gold-tone metal accents', c: ['Midnight Blue', 'Emerald'], cat: 'sofasets' },
-                    { n: 'Modern L-Shaped Sectional', p: '155000', m: 'Stain-Resistant Fabric', d: '• Space-saving L-design\n• Modular layout flexibility\n• Solid mahogany base', c: ['Grey', 'Beige'], cat: 'sofasets' },
-                    { n: 'Low-Profile Artisan TV Stand', p: '32000', m: 'Solid Oak', d: '• Designed for large screens\n• Sleek minimalist aesthetic\n• Cable management system', c: ['Natural', 'Warm Walnut'], cat: 'dining-sets' },
-                    { n: 'Premium Rocker Recliner', p: '68000', m: 'Top-Grain Leather', d: '• Full-body lumbar support\n• Smooth rocker mechanism\n• Breathable leather finish', c: ['Black', 'Dark Brown'], cat: 'sofasets' }
+                    { n: 'Signature 7-Seater Royal Sofaset', p: '215000', m: 'Mvule Wood & Top-Grain Leather', d: '• Signature Touch Wood craftsmanship\n• Expansive 7-seater layout\n• Lifetime durability guarantee', c: ['Oak', 'Deep Walnut'], cat: 'sofasets' },
+                    { n: 'Hand-Carved Sectional Lounge', p: '165000', m: 'Solid Mahogany & Linen', d: '• Locally sourced hardwood\n• Modular luxury design\n• Hand-polished wood accents', c: ['Natural', 'Sand'], cat: 'sofasets' },
+                    { n: 'Solid Wood Floating Entertainment Unit', p: '48000', m: 'African Teak', d: '• Minimalist nature-forward design\n• Concealed storage compartments\n• Precision-crafted wood grain', c: ['Teak', 'Ebony'], cat: 'sofasets' },
+                    { n: 'The "Tree-to-Home" Accent Chair', p: '45000', m: 'Steam-Bent Oak', d: '• Ergonomic natural curves\n• Locally hand-woven seat\n• Eco-friendly oil finish', c: ['Light Oak', 'Mvule'], cat: 'sofasets' }
                 ];
 
                 const randomChoice = furnitureTypes[Math.floor(Math.random() * furnitureTypes.length)];
@@ -160,7 +160,7 @@ export default function ProductForm() {
                 mat = randomChoice.m;
                 desc = randomChoice.d;
                 colorsArr = randomChoice.c;
-                catId = categories.find(c => c.slug === randomChoice.cat)?.id || categories[0]?.id || '';
+                catId = categories.find(c => c.slug === randomChoice.cat || c.slug === 'sofasets')?.id || categories[0]?.id || '';
             }
 
             // AUTO-DISCOUNT Logic for "The Smile Factor"

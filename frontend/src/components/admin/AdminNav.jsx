@@ -1,5 +1,5 @@
 /**
- * Dan Classic Furniture - Admin Navigation Component
+ * Touch Wood - Admin Navigation Component
  * Sticky sub-navigation for admin pages
  */
 import { useEffect, useRef } from 'react';

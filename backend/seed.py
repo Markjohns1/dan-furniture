@@ -1,5 +1,5 @@
 """
-Dan Classic Furniture - Database Seeder
+Touch Wood - Database Seeder
 Seeds the database with admin user, categories, and initial professional products.
 """
 import sys
@@ -18,13 +18,13 @@ def seed_database():
     
     try:
         # 1. Create admin user if not exists
-        admin = db.query(User).filter(User.email == "admin@danfurniture.co.ke").first()
+        admin = db.query(User).filter(User.email == "admin@touchwood.co.ke").first()
         if not admin:
             admin = User(
-                email="admin@danfurniture.co.ke",
-                phone="254724426993",
+                email="admin@touchwood.co.ke",
+                phone="254799366734",
                 password_hash=get_password_hash("admin123"),
-                full_name="Dan (Admin)",
+                full_name="Touch Wood (Admin)",
                 role=UserRole.ADMIN
             )
             db.add(admin)

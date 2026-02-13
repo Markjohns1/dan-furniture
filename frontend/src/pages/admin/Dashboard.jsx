@@ -1,5 +1,5 @@
 /**
- * Daniel Furniture - Admin Dashboard
+ * Touch Wood - Admin Dashboard
  */
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';

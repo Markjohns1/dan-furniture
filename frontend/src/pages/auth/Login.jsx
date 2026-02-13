@@ -40,9 +40,11 @@ export default function Login() {
 
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-br from-primary-50 to-gray-100">
+            <SEO title="Login - Touch Wood" />
+
             {/* Header */}
             <div className="p-4">
-                <Link to="/" className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900">
+                <Link to="/" className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium">
                     <i className="fas fa-arrow-left"></i>
                     <span>Back to Shop</span>
                 </Link>
@@ -52,11 +54,11 @@ export default function Login() {
             <div className="flex-1 flex items-center justify-center p-4">
                 <div className="w-full max-w-md">
                     <div className="text-center mb-8">
-                        <div className="w-16 h-16 bg-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <i className="fas fa-couch text-white text-2xl"></i>
+                        <div className="w-16 h-16 bg-primary-950 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
+                            <span className="text-amber-500 font-display font-black text-2xl tracking-tighter">TW</span>
                         </div>
-                        <h1 className="font-display text-2xl font-bold text-gray-900">Welcome Back</h1>
-                        <p className="text-gray-500 mt-1">Sign in to continue shopping</p>
+                        <h1 className="font-display text-3xl font-bold text-gray-900">Welcome Back</h1>
+                        <p className="text-gray-500 mt-1">Manage your Touch Wood showroom</p>
                     </div>
 
                     <div className="card p-6">
