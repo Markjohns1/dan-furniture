@@ -1,5 +1,5 @@
 /**
- * Dan Classic Furniture - Products Page
+ * Touch Wood - Products Page
  * Professional catalog with premium filters
  */
 import { useState, useEffect } from 'react';
@@ -354,8 +354,8 @@ export default function Products() {
                                                             window.scrollTo({ top: 0, behavior: 'smooth' });
                                                         }}
                                                         className={`w-12 h-12 rounded-xl font-bold text-sm transition-all shadow-sm flex items-center justify-center ${page === pageNum
-                                                                ? 'bg-primary-950 text-white shadow-lg shadow-primary-950/20'
-                                                                : 'bg-white border border-gray-200 text-secondary-700 hover:bg-gray-50'
+                                                            ? 'bg-primary-950 text-white shadow-lg shadow-primary-950/20'
+                                                            : 'bg-white border border-gray-200 text-secondary-700 hover:bg-gray-50'
                                                             }`}
                                                     >
                                                         {pageNum}

@@ -36,8 +36,7 @@ def seed_database():
             {"name": "Chairs", "slug": "chairs", "description": "Comfortable chairs for every room"},
             {"name": "Dining Sets", "slug": "dining-sets", "description": "Elegant dining sets for your home"},
             {"name": "Office Chairs", "slug": "office-chairs", "description": "Ergonomic office chairs for productivity"},
-            {"name": "Home & Kitchen Appliances", "slug": "appliances", "description": "High-quality fridges, washers, and more"},
-            {"name": "Bedroom Furniture", "slug": "bedroom", "description": "Beds, wardrobes, and bedside tables"}
+            {"name": "Home & Kitchen Appliances", "slug": "appliances", "description": "High-quality fridges, washers, and more"}
         ]
         
         for cat_data in categories_data:
@@ -53,7 +52,6 @@ def seed_database():
         cat_sofas = db.query(Category).filter(Category.slug == "sofasets").first()
         cat_dining = db.query(Category).filter(Category.slug == "dining-sets").first()
         cat_office = db.query(Category).filter(Category.slug == "office-chairs").first()
-        cat_beds = db.query(Category).filter(Category.slug == "bedroom").first()
         cat_chairs = db.query(Category).filter(Category.slug == "chairs").first()
 
         products_data = [
@@ -98,20 +96,6 @@ def seed_database():
                 "colors": ["Black", "Grey"],
                 "images": ["/uploads/products/office.png"],
                 "featured": False
-            },
-            {
-                "name": "Victoria Velvet King Bed",
-                "description": "Grand king-sized bed with a tall wingback headboard in plush velvet. Includes a sturdy slatted base for ultimate support.",
-                "price": 75000,
-                "compare_price": 85000,
-                "category_id": cat_beds.id if cat_beds else 6,
-                "stock": 4,
-                "sku": "BED-VIC-01",
-                "dimensions": "180x200 cm",
-                "material": "Velvet & Engineered Wood",
-                "colors": ["Emerald Green", "Navy Blue", "Grey"],
-                "images": ["/uploads/products/bed.png"],
-                "featured": True
             },
             {
                 "name": "Azure Velvet Accent Chair",

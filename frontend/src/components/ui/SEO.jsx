@@ -1,14 +1,14 @@
 /**
- * Daniel Furniture - SEO Component
+ * Touch Wood - SEO Component
  * Handles dynamic meta tags for each page with enhanced structured data
  */
 import { Helmet } from 'react-helmet-async';
 
-const SITE_NAME = 'Daniel Furniture';
-const SITE_URL = 'https://danielfurniture.co.ke';
+const SITE_NAME = 'Touch Wood';
+const SITE_URL = 'https://touchwood.co.ke';
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
-const PHONE_NUMBER = '+254724426993';
-const ADDRESS = 'Kenyatta Road, Nairobi, Kenya';
+const PHONE_NUMBER = '+254799366734';
+const ADDRESS = 'Nairobi, Kenya';
 
 export default function SEO({
     title,

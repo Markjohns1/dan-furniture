@@ -1,5 +1,5 @@
-# Daniel Furniture - robots.txt
-# https://danielfurniture.co.ke
+# Touch Wood - robots.txt
+# https://touchwood.co.ke
 
 User-agent: *
 Allow: /
@@ -26,8 +26,7 @@ Disallow: /*?search=
 Crawl-delay: 1
 
 # Sitemaps
-Sitemap: https://danielfurniture.co.ke/sitemap.xml
-Sitemap: https://danielfurniture.co.ke/sitemap-graveyard.xml
+Sitemap: https://touchwood.co.ke/sitemap.xml
 
 # Host
-Host: https://danielfurniture.co.ke
+Host: https://touchwood.co.ke

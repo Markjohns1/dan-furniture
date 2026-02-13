@@ -35,15 +35,19 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
                     {/* Brand */}
                     <div className="col-span-1 space-y-6">
-                        <Link to="/" className="inline-block">
-                            <img
-                                src="/logo.svg"
-                                alt="Daniel Furniture"
-                                className="h-12 w-auto brightness-0 invert opacity-90 hover:opacity-100 transition-opacity"
-                            />
+                        <Link to="/" className="inline-block group">
+                            <div className="flex items-center gap-2.5">
+                                <div className="w-11 h-11 bg-white rounded-lg flex items-center justify-center shadow-lg">
+                                    <span className="text-primary-950 font-display font-black text-lg tracking-tighter">TW</span>
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-xl font-display font-black tracking-tight text-white leading-none">TOUCH</span>
+                                    <span className="text-xl font-display font-black tracking-tight text-amber-500 leading-none">WOOD</span>
+                                </div>
+                            </div>
                         </Link>
                         <p className="text-white/80 leading-relaxed font-medium text-sm">
-                            Crafting premium furniture for Kenyan homes since establishing our presence.
+                            Crafting premium furniture for Kenyan homes since 2024.
                             Where luxury, quality, and comfort unite to create your perfect living spaces.
                         </p>
 
@@ -53,7 +57,7 @@ export default function Footer() {
                                 { icon: 'fa-facebook-f', href: '#', label: 'Facebook', color: 'hover:bg-blue-500' },
                                 { icon: 'fa-instagram', href: '#', label: 'Instagram', color: 'hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500' },
                                 { icon: 'fa-twitter', href: '#', label: 'Twitter', color: 'hover:bg-sky-500' },
-                                { icon: 'fa-whatsapp', href: 'https://wa.me/254724426993', label: 'WhatsApp', color: 'hover:bg-green-500' },
+                                { icon: 'fa-whatsapp', href: 'https://wa.me/254799366734', label: 'WhatsApp', color: 'hover:bg-green-500' },
                             ].map((social) => (
                                 <a
                                     key={social.icon}
@@ -105,8 +109,8 @@ export default function Footer() {
                         <ul className="space-y-3">
                             {[
                                 { icon: 'fa-envelope', label: 'Contact Us', to: '/contact', isLink: true },
-                                { icon: 'fa-phone', label: '+254 724 426993', href: 'tel:+254724426993' },
-                                { icon: 'fa-map-marker-alt', label: 'Kenyatta Road, Nairobi', href: '#' },
+                                { icon: 'fa-phone', label: '+254 799 366734', href: 'tel:+254799366734' },
+                                { icon: 'fa-map-marker-alt', label: 'Nairobi, Kenya', href: '#' },
                                 { icon: 'fa-shield-alt', label: 'Privacy Policy', to: '/legal', isLink: true },
                                 { icon: 'fa-file-contract', label: 'Terms of Service', to: '/legal', isLink: true },
                             ].map((item, index) => (
@@ -160,19 +164,6 @@ export default function Footer() {
                                 <i className="fas fa-arrow-right text-sm"></i>
                             </button>
                         </form>
-
-                        {/* Trust Badge */}
-                        <div className="mt-6 p-4 bg-white/5 rounded-xl border border-white/10">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
-                                    <i className="fas fa-shield-check text-green-400"></i>
-                                </div>
-                                <div>
-                                    <p className="text-white font-semibold text-sm">Secure Shopping</p>
-                                    <p className="text-white/60 text-xs">Your data is protected</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -180,7 +171,7 @@ export default function Footer() {
                 <div className="border-t border-white/10 pt-8">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                         <p className="text-sm text-white/60 text-center md:text-left font-medium">
-                            © {currentYear} Daniel Furniture. All rights reserved.
+                            © {currentYear} Touch Wood. All rights reserved.
                         </p>
                         <div className="flex flex-wrap justify-center gap-6 text-sm text-white/60">
                             <span className="flex items-center gap-2 font-medium">

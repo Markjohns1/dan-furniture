@@ -43,8 +43,8 @@ export default function Home() {
     return (
         <div className="min-h-screen bg-gray-50 pb-20 lg:pb-8">
             <SEO
-                title="Daniel Furniture - World-Class Premium Furniture Store"
-                description="Explore Kenya's most massive collection of handcrafted sofasets, dining sets, accent chairs, and office furniture. Handcrafted premium furniture with doorstep delivery. Kenyatta Road, Nairobi."
+                title="Touch Wood - Premium Handcrafted Furniture"
+                description="Kenya's most massive collection of handcrafted sofasets, dining sets, accent chairs, and office furniture. Handcrafted premium furniture with doorstep delivery. Nairobi, Kenya."
                 url="/"
             />
             <Header />
@@ -53,7 +53,7 @@ export default function Home() {
             <section className="relative px-4 pt-20 pb-20 sm:py-32 lg:py-44 bg-gradient-to-br from-primary-950 via-primary-900 to-primary-800 overflow-hidden">
                 {/* Animated Decorative Pattern Background */}
                 <div className="absolute inset-0 z-0 hero-pattern opacity-60"></div>
-                
+
                 {/* Premium Ambient Glows */}
                 <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-amber-500/15 to-orange-500/5 rounded-full blur-[130px] -translate-y-1/3 translate-x-1/4 animate-pulse-soft"></div>
                 <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-primary-400/10 to-blue-500/5 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4"></div>
@@ -63,21 +63,21 @@ export default function Home() {
                     {/* Premium Badge */}
                     <span className="inline-flex items-center gap-2 py-2 px-5 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/10 backdrop-blur-md border border-amber-500/30 text-amber-300 text-[11px] font-bold tracking-[0.25em] uppercase mb-8 animate-fade-in-down shadow-lg shadow-amber-500/10">
                         <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                        World-Class Furniture Collection
+                        Premium Handcrafted Furniture
                     </span>
-                    
+
                     {/* Main Heading with Gradient */}
                     <h1 className="text-4xl sm:text-5xl lg:text-7xl font-display font-medium text-white leading-[1.1] mb-6 tracking-tight animate-fade-in-up">
-                        Timeless Design <br className="hidden sm:block" />
-                        <span className="gradient-text-premium italic font-semibold">Perfectly Crafted</span>
+                        Touch of Nature <br className="hidden sm:block" />
+                        <span className="gradient-text-premium italic font-semibold">Masterfully Crafted</span>
                     </h1>
-                    
+
                     {/* Subtitle with Enhanced Typography */}
                     <p className="text-base sm:text-lg lg:text-xl text-white/90 mb-12 max-w-2xl mx-auto font-medium leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                        Explore Kenya's most massive collection of premium sofasets, dining sets, and bespoke furniture.
+                        Explore our massive collection of premium sofasets, dining sets, and bespoke furniture.
                         <span className="hidden sm:inline"> Where world-class quality meets uncompromising comfort.</span>
                     </p>
-                    
+
                     {/* CTA Buttons with Premium Styling */}
                     <div className="flex flex-row w-full sm:w-auto items-center sm:justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
                         <Link
@@ -88,7 +88,7 @@ export default function Home() {
                             Explore Collection
                         </Link>
                         <a
-                            href="https://wa.me/254724426993"
+                            href="https://wa.me/254799366734"
                             target="_blank"
                             rel="noreferrer"
                             className="btn flex-1 sm:flex-none sm:min-w-[200px] text-sm sm:text-base py-4 sm:py-5 bg-white/10 border-white/20 text-white hover:bg-white hover:text-primary-950 backdrop-blur-md active:scale-95 transition-all flex items-center justify-center gap-2"
@@ -145,7 +145,7 @@ export default function Home() {
                             </Link>
                         ))}
                     </div>
-                    
+
                     {/* Mobile: Horizontal scroll with marquee */}
                     <div className="lg:hidden flex items-center gap-3 w-max animate-marquee">
                         {[...categories, ...categories].map((cat, index) => (
@@ -323,7 +323,7 @@ export default function Home() {
                     <div className="absolute inset-0 hero-pattern opacity-30"></div>
                     <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-[100px]"></div>
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-400/10 rounded-full blur-[80px]"></div>
-                    
+
                     <div className="relative p-8 sm:p-12 lg:p-20 text-center">
                         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-amber-300 text-[10px] font-bold tracking-widest uppercase mb-6">
                             <i className="fas fa-headset"></i>

@@ -1,5 +1,5 @@
 /**
- * Dan Classic Furniture - Main App Component
+ * Touch Wood - Main App Component
  */
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';

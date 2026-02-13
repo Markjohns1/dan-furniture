@@ -1,5 +1,5 @@
 /**
- * Dan Classic Furniture - Responsive Header with Desktop Nav
+ * Touch Wood - Responsive Header with Desktop Nav
  * Premium UI/UX Design
  */
 import { useState, useEffect } from 'react';
@@ -58,19 +58,23 @@ export default function Header({ title, showBack = false }) {
     return (
         <>
             <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled
-                    ? 'bg-white/98 backdrop-blur-xl shadow-lg shadow-black/[0.03] border-b border-gray-100'
-                    : 'bg-white/95 backdrop-blur-md border-b border-gray-100/50'
+                ? 'bg-white/98 backdrop-blur-xl shadow-lg shadow-black/[0.03] border-b border-gray-100'
+                : 'bg-white/95 backdrop-blur-md border-b border-gray-100/50'
                 }`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-20">
                         {/* Left: Logo */}
                         <div className="flex-shrink-0 flex items-center">
                             <Link to="/" className="flex items-center py-2 group">
-                                <img
-                                    src="/logo.svg"
-                                    alt="Daniel Furniture"
-                                    className="h-12 sm:h-14 w-auto object-contain transition-transform group-hover:scale-105"
-                                />
+                                <div className="flex items-center gap-2.5">
+                                    <div className="w-11 h-11 bg-primary-950 rounded-lg flex items-center justify-center shadow-lg">
+                                        <span className="text-amber-500 font-display font-black text-lg tracking-tighter">TW</span>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-xl font-display font-black tracking-tight text-primary-950 leading-none">TOUCH</span>
+                                        <span className="text-xl font-display font-black tracking-tight text-amber-600 leading-none">WOOD</span>
+                                    </div>
+                                </div>
                             </Link>
                         </div>
 
@@ -308,7 +312,15 @@ export default function Header({ title, showBack = false }) {
                     <aside className="fixed inset-y-0 left-0 w-[85%] max-w-sm bg-white shadow-2xl animate-slide-right flex flex-col">
                         <div className="pt-safe border-b border-gray-100 flex-shrink-0">
                             <div className="px-6 py-5 flex items-center justify-between">
-                                <img src="/logo.svg" alt="Daniel Furniture" className="h-11 w-auto object-contain" />
+                                <div className="flex items-center gap-2.5">
+                                    <div className="w-10 h-10 bg-primary-950 rounded-md flex items-center justify-center shadow-md">
+                                        <span className="text-amber-500 font-display font-black text-sm tracking-tighter">TW</span>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-sm font-display font-black tracking-tight text-primary-950 leading-none">TOUCH</span>
+                                        <span className="text-sm font-display font-black tracking-tight text-amber-600 leading-none">WOOD</span>
+                                    </div>
+                                </div>
                                 <button
                                     onClick={() => setMobileMenuOpen(false)}
                                     className="w-10 h-10 flex items-center justify-center rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
@@ -325,13 +337,13 @@ export default function Header({ title, showBack = false }) {
                                         to="/"
                                         onClick={() => setMobileMenuOpen(false)}
                                         className={`flex items-center p-3.5 rounded-xl transition-all ${location.pathname === '/'
-                                                ? 'bg-primary-950 text-white shadow-lg'
-                                                : 'hover:bg-gray-50'
+                                            ? 'bg-primary-950 text-white shadow-lg'
+                                            : 'hover:bg-gray-50'
                                             }`}
                                     >
                                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center mr-4 ${location.pathname === '/'
-                                                ? 'bg-white/20'
-                                                : 'bg-primary-100 text-primary-700'
+                                            ? 'bg-white/20'
+                                            : 'bg-primary-100 text-primary-700'
                                             }`}>
                                             <i className="fas fa-home text-sm"></i>
                                         </div>
@@ -342,13 +354,13 @@ export default function Header({ title, showBack = false }) {
                                         to="/products"
                                         onClick={() => setMobileMenuOpen(false)}
                                         className={`flex items-center p-3.5 rounded-xl transition-all ${location.pathname.startsWith('/products')
-                                                ? 'bg-primary-950 text-white shadow-lg'
-                                                : 'hover:bg-gray-50'
+                                            ? 'bg-primary-950 text-white shadow-lg'
+                                            : 'hover:bg-gray-50'
                                             }`}
                                     >
                                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center mr-4 ${location.pathname.startsWith('/products')
-                                                ? 'bg-white/20'
-                                                : 'bg-amber-100 text-amber-700'
+                                            ? 'bg-white/20'
+                                            : 'bg-amber-100 text-amber-700'
                                             }`}>
                                             <i className="fas fa-couch text-sm"></i>
                                         </div>

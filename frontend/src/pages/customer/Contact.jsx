@@ -10,7 +10,7 @@ export default function Contact() {
         message: ''
     });
 
-    const [waNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254724426993');
+    const [waNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254799366734');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,8 +24,8 @@ export default function Contact() {
     return (
         <div className="min-h-screen bg-gray-50 pb-20 lg:pb-8">
             <SEO
-                title="Contact Us - Daniel Furniture"
-                description="Get in touch with Daniel Furniture for custom orders, inquiries, or support."
+                title="Contact Us - Touch Wood"
+                description="Get in touch with Touch Wood for custom orders, inquiries, or support."
             />
             <Header title="Contact Us" showBack />
 
@@ -51,7 +51,7 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <p className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-1">Phone</p>
-                                            <p className="text-secondary-900 font-bold">+254 724 426993</p>
+                                            <p className="text-secondary-900 font-bold">+254 799 366734</p>
                                             <p className="text-sm text-secondary-600 font-medium">Mon-Sat 9am to 6pm</p>
                                         </div>
                                     </div>
@@ -62,7 +62,7 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <p className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-1">Email</p>
-                                            <p className="text-secondary-900 font-bold">info@danfurniture.co.ke</p>
+                                            <p className="text-secondary-900 font-bold">info@touchwood.co.ke</p>
                                         </div>
                                     </div>
 

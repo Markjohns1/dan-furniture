@@ -1,5 +1,5 @@
 /**
- * Daniel Furniture - Product Detail Page
+ * Touch Wood - Product Detail Page
  */
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';

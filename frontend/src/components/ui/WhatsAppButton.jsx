@@ -1,11 +1,11 @@
 /**
- * Dan Classic Furniture - WhatsApp Button
+ * Touch Wood - WhatsApp Button
  * Floating action button for WhatsApp - MOBILE FIRST
  */
 import { useState } from 'react';
 
 export default function WhatsAppButton({ message, className = '' }) {
-    const [waNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254724426993');
+    const [waNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254799366734');
 
     const handleClick = () => {
         const encodedMessage = encodeURIComponent(message || 'Hello! I\'m interested in your furniture.');
@@ -32,7 +32,7 @@ export default function WhatsAppButton({ message, className = '' }) {
 }
 
 export function WhatsAppOrderButton({ message, className = '', onComplete }) {
-    const [waNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254724426993');
+    const [waNumber] = useState(import.meta.env.VITE_WHATSAPP_NUMBER || '254799366734');
 
     const handleClick = () => {
         const encodedMessage = encodeURIComponent(message);
