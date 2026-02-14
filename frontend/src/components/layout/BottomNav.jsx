@@ -57,36 +57,33 @@ export default function BottomNav() {
                             key={item.to}
                             to={item.to}
                             onClick={item.onClick}
-                            className={`relative flex flex-col items-center justify-center gap-1 min-w-[70px] py-2 transition-all duration-300 ${isActive ? 'text-primary-950' : 'text-secondary-500 active:text-primary-700'
+                            className={`relative flex flex-col items-center justify-center gap-1 min-w-[70px] py-2 transition-all duration-300 ${isActive ? 'text-primary-950' : 'text-secondary-400 active:text-primary-700'
                                 }`}
                         >
-                            {/* Active Indicator Pill */}
+                            {/* Active Indicator Line */}
                             {isActive && (
-                                <span className="absolute -top-[1px] left-1/2 -translate-x-1/2 w-10 h-1 bg-gradient-to-r from-primary-800 to-primary-950 rounded-b-full animate-scale-in shadow-lg shadow-primary-950/30" />
+                                <span className="absolute -top-[1px] left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary-950 rounded-full animate-fade-in" />
                             )}
 
                             {/* Icon Container */}
-                            <div className={`relative transition-all duration-300 ${isActive ? 'scale-110 -translate-y-0.5' : ''}`}>
-                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${isActive
-                                        ? 'bg-primary-950 text-white shadow-lg shadow-primary-950/30'
-                                        : 'bg-transparent'
-                                    }`}>
-                                    <i className={`fas ${item.icon} text-lg`}></i>
+                            <div className={`relative transition-all duration-300 ${isActive ? 'scale-110' : ''}`}>
+                                <div className={`w-9 h-9 flex items-center justify-center transition-all duration-300`}>
+                                    <i className={`fas ${item.icon} ${isActive ? 'text-xl' : 'text-lg'} transition-all`}></i>
                                 </div>
 
                                 {/* Cart Badge */}
                                 {item.badge !== undefined && (
-                                    <span className={`absolute -top-1 -right-1 min-w-[20px] h-[20px] px-1.5 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white transition-all transform shadow-md ${item.badge === 0
-                                            ? 'bg-gray-400 scale-90'
-                                            : 'bg-gradient-to-br from-orange-500 to-red-500 scale-100 animate-pulse-soft'
+                                    <span className={`absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 text-white text-[9px] font-bold rounded-full flex items-center justify-center border-2 border-white shadow-sm ${item.badge === 0
+                                        ? 'bg-gray-400'
+                                        : 'bg-amber-500'
                                         }`}>
-                                        {item.badge > 9 ? '9+' : item.badge}
+                                        {item.badge}
                                     </span>
                                 )}
                             </div>
 
                             {/* Label */}
-                            <span className={`text-[10px] font-bold uppercase tracking-tight transition-all duration-300 ${isActive ? 'opacity-100 text-primary-950' : 'opacity-70'
+                            <span className={`text-[9px] font-bold uppercase tracking-[0.05em] transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-60'
                                 }`}>
                                 {item.label}
                             </span>

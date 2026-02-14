@@ -66,13 +66,13 @@ export default function Header({ title, showBack = false }) {
                         {/* Left: Logo */}
                         <div className="flex-shrink-0 flex items-center">
                             <Link to="/" className="flex items-center py-2 group">
-                                <div className="flex items-center gap-2.5">
-                                    <div className="w-11 h-11 bg-primary-950 rounded-lg flex items-center justify-center shadow-lg">
-                                        <span className="text-amber-500 font-display font-black text-lg tracking-tighter">TW</span>
+                                <div className="flex items-center gap-2 sm:gap-2.5">
+                                    <div className="w-9 h-9 sm:w-11 sm:h-11 bg-primary-950 rounded-lg flex items-center justify-center shadow-lg">
+                                        <span className="text-amber-500 font-display font-black text-base sm:text-lg tracking-tighter">TW</span>
                                     </div>
                                     <div className="flex flex-col">
-                                        <span className="text-xl font-display font-black tracking-tight text-primary-950 leading-none">TOUCH</span>
-                                        <span className="text-xl font-display font-black tracking-tight text-amber-600 leading-none">WOOD</span>
+                                        <span className="text-lg sm:text-xl font-display font-black tracking-tight text-primary-950 leading-none">TOUCH</span>
+                                        <span className="text-lg sm:text-xl font-display font-black tracking-tight text-amber-600 leading-none">WOOD</span>
                                     </div>
                                 </div>
                             </Link>

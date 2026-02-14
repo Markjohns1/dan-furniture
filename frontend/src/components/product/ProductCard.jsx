@@ -102,12 +102,12 @@ export default function ProductCard({ product }) {
                     )}
                 </div>
 
-                {/* Mobile Action Buttons - Always Visible */}
+                {/* Mobile Action Buttons - Reduced Size */}
                 <div className="lg:hidden absolute bottom-3 left-3 right-3 flex gap-2 z-20">
                     <button
                         onClick={handleMobileAdd}
                         disabled={product.stock === 0}
-                        className={`flex-1 flex items-center justify-center gap-2 h-11 rounded-xl shadow-xl transition-all duration-300 transform active:scale-95 font-bold text-[11px] uppercase tracking-wide ${isAdded
+                        className={`flex-1 flex items-center justify-center gap-1.5 h-9 rounded-lg shadow-lg transition-all duration-300 transform active:scale-95 font-bold text-[10px] uppercase tracking-wide ${isAdded
                             ? 'bg-green-500 text-white'
                             : isAdding
                                 ? 'bg-primary-800 text-white'
@@ -127,7 +127,7 @@ export default function ProductCard({ product }) {
                             'Sold Out'
                         ) : (
                             <>
-                                <i className="fas fa-plus text-[10px]"></i>
+                                <i className="fas fa-plus text-[9px]"></i>
                                 Add
                             </>
                         )}
@@ -138,9 +138,9 @@ export default function ProductCard({ product }) {
                         onClick={(e) => e.stopPropagation()}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex-1 flex items-center justify-center gap-2 h-11 rounded-xl shadow-xl bg-gradient-to-r from-green-500 to-green-600 text-white active:scale-95 transition-all font-bold text-[11px] uppercase tracking-wide"
+                        className="flex-1 flex items-center justify-center gap-1.5 h-9 rounded-lg shadow-lg bg-gradient-to-r from-green-500 to-green-600 text-white active:scale-95 transition-all font-bold text-[10px] uppercase tracking-wide"
                     >
-                        <i className="fab fa-whatsapp text-base"></i>
+                        <i className="fab fa-whatsapp text-sm"></i>
                         Order
                     </a>
                 </div>

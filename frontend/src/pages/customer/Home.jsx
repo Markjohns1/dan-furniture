@@ -61,41 +61,39 @@ export default function Home() {
 
                 <div className="relative z-10 max-w-6xl mx-auto text-left sm:text-center">
                     {/* Premium Badge */}
-                    <span className="inline-flex items-center gap-2 py-2 px-5 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/10 backdrop-blur-md border border-amber-500/30 text-amber-300 text-[11px] font-bold tracking-[0.25em] uppercase mb-8 animate-fade-in-down shadow-lg shadow-amber-500/10">
-                        <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                    <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/10 backdrop-blur-md border border-amber-500/30 text-amber-300 text-[9px] sm:text-[11px] font-bold tracking-[0.2em] uppercase mb-6 animate-fade-in-down shadow-lg shadow-amber-500/10">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
                         Premium Handcrafted Furniture
                     </span>
 
                     {/* Main Heading with Gradient */}
-                    <h1 className="text-4xl sm:text-5xl lg:text-7xl font-display font-medium text-white leading-[1.1] mb-6 tracking-tight animate-fade-in-up">
+                    <h1 className="text-3xl sm:text-5xl lg:text-7xl font-display font-medium text-white leading-[1.2] mb-5 tracking-tight animate-fade-in-up">
                         Touch of Nature <br className="hidden sm:block" />
                         <span className="gradient-text-premium italic font-semibold">Masterfully Crafted</span>
                     </h1>
 
                     {/* Subtitle with Enhanced Typography */}
-                    <p className="text-base sm:text-lg lg:text-xl text-white/90 mb-12 max-w-2xl mx-auto font-medium leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                    <p className="text-sm sm:text-lg lg:text-xl text-white/80 mb-10 max-w-2xl mx-auto font-medium leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
                         Explore our massive collection of premium sofasets, dining sets, and bespoke furniture.
                         <span className="hidden sm:inline"> Where world-class quality meets uncompromising comfort.</span>
                     </p>
 
                     {/* CTA Buttons with Premium Styling */}
-                    <div className="flex flex-row w-full sm:w-auto items-center sm:justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+                    <div className="flex flex-row w-full sm:w-auto items-center sm:justify-center gap-3 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
                         <Link
                             to="/products"
-                            className="btn-primary flex-1 sm:flex-none sm:min-w-[220px] text-sm sm:text-base py-4 sm:py-5 shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40 active:scale-95 transition-all text-center justify-center"
+                            className="btn-primary flex-1 sm:flex-none sm:min-w-[180px] text-xs sm:text-base py-3.5 sm:py-5 shadow-2xl shadow-orange-500/25 hover:shadow-orange-500/40 active:scale-95 transition-all text-center justify-center font-bold"
                         >
-                            <i className="fas fa-th-large text-sm opacity-80"></i>
-                            Explore Collection
+                            Explore
                         </Link>
                         <a
                             href="https://wa.me/254799366734"
                             target="_blank"
                             rel="noreferrer"
-                            className="btn flex-1 sm:flex-none sm:min-w-[200px] text-sm sm:text-base py-4 sm:py-5 bg-white/10 border-white/20 text-white hover:bg-white hover:text-primary-950 backdrop-blur-md active:scale-95 transition-all flex items-center justify-center gap-2"
+                            className="btn flex-1 sm:flex-none sm:min-w-[150px] text-xs sm:text-base py-3.5 sm:py-5 bg-white/10 border-white/20 text-white hover:bg-white hover:text-primary-950 backdrop-blur-md active:scale-95 transition-all flex items-center justify-center gap-2 font-bold"
                         >
-                            <i className="fab fa-whatsapp text-lg"></i>
-                            <span className="hidden sm:inline">WhatsApp Us</span>
-                            <span className="sm:hidden">Chat</span>
+                            <i className="fab fa-whatsapp text-base"></i>
+                            <span>Chat</span>
                         </a>
                     </div>
                 </div>
@@ -146,15 +144,21 @@ export default function Home() {
                         ))}
                     </div>
 
-                    {/* Mobile: Horizontal scroll with marquee */}
-                    <div className="lg:hidden flex items-center gap-3 w-max animate-marquee">
-                        {[...categories, ...categories].map((cat, index) => (
+                    {/* Mobile: Horizontal scroll - Clean icons, no marquee */}
+                    <div className="lg:hidden flex items-center gap-3 overflow-x-auto pb-1 scrollbar-hide">
+                        <Link
+                            to="/products"
+                            className="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all flex items-center gap-2 border bg-primary-950 text-white border-primary-950 flex-shrink-0"
+                        >
+                            All
+                        </Link>
+                        {categories.map((cat, index) => (
                             <Link
                                 key={`${cat.id}-${index}`}
                                 to={`/products?category=${cat.slug}`}
-                                className="px-5 py-2.5 rounded-full text-[11px] font-bold uppercase tracking-[0.12em] transition-all flex items-center gap-2.5 border bg-white text-secondary-800 border-secondary-200 active:scale-95 flex-shrink-0"
+                                className="px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all flex items-center gap-2 border bg-white text-secondary-800 border-gray-100 active:scale-95 flex-shrink-0 shadow-sm"
                             >
-                                <i className={`fas ${categoryIcons[cat.slug] || 'fa-tag'} text-[10px] text-primary-500`}></i>
+                                <i className={`fas ${categoryIcons[cat.slug] || 'fa-tag'} text-primary-500`}></i>
                                 {cat.name}
                             </Link>
                         ))}
@@ -204,9 +208,9 @@ export default function Home() {
                     ))}
                 </div>
 
-                {/* Mobile Carousel - Enhanced */}
-                <div className="lg:hidden w-full overflow-hidden -mx-4 px-4">
-                    <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
+                {/* Mobile Carousel - Refined Snapping */}
+                <div className="lg:hidden w-full overflow-x-auto pb-6 scrollbar-hide snap-x snap-mandatory scroll-smooth">
+                    <div className="flex gap-4 w-max px-4">
                         {[
                             { id: 'sofasets', icon: 'fa-couch', color: 'from-amber-700 to-amber-950', label: 'Sofasets' },
                             { id: 'dining-sets', icon: 'fa-utensils', color: 'from-emerald-700 to-emerald-950', label: 'Dining Sets' },
@@ -216,16 +220,16 @@ export default function Home() {
                             <Link
                                 key={item.id}
                                 to={`/products?category=${item.id}`}
-                                className="flex-shrink-0 w-[75vw] max-w-[280px] snap-center"
+                                className="flex-shrink-0 w-[78vw] max-w-[260px] snap-center"
                             >
-                                <div className={`relative h-56 rounded-2xl overflow-hidden shadow-xl bg-gradient-to-br ${item.color}`}>
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <i className={`fas ${item.icon} text-6xl text-white/20`}></i>
+                                <div className={`relative h-44 rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br ${item.color}`}>
+                                    <div className="absolute inset-0 flex items-center justify-center opacity-20">
+                                        <i className={`fas ${item.icon} text-6xl text-white`}></i>
                                     </div>
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
                                     <div className="absolute bottom-0 left-0 p-5 w-full">
                                         <h3 className="text-xl font-bold text-white">{item.label}</h3>
-                                        <p className="text-white/70 text-sm mt-1">View Collection →</p>
+                                        <p className="text-white/80 text-[10px] font-bold uppercase tracking-widest mt-1">Explore Style →</p>
                                     </div>
                                 </div>
                             </Link>
@@ -324,24 +328,24 @@ export default function Home() {
                     <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-[100px]"></div>
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-400/10 rounded-full blur-[80px]"></div>
 
-                    <div className="relative p-8 sm:p-12 lg:p-20 text-center">
-                        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-amber-300 text-[10px] font-bold tracking-widest uppercase mb-6">
+                    <div className="relative p-6 sm:p-12 lg:p-20 text-center">
+                        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-amber-300 text-[9px] font-bold tracking-widest uppercase mb-5">
                             <i className="fas fa-headset"></i>
-                            Personal Assistance
+                            Expert Advice
                         </span>
-                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-medium text-white mb-5">
+                        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-display font-medium text-white mb-4">
                             Need Help Choosing?
                         </h2>
-                        <p className="text-white/85 max-w-lg mx-auto mb-10 font-medium text-lg leading-relaxed">
-                            Our furniture experts are here to help you find the perfect pieces for your space. Get personalized recommendations via WhatsApp.
+                        <p className="text-white/80 max-w-lg mx-auto mb-8 font-medium text-sm sm:text-lg leading-relaxed">
+                            Get personalized furniture recommendations from our experts via WhatsApp.
                         </p>
                         <a
-                            href="https://wa.me/254724426993"
+                            href="https://wa.me/254799366734"
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-2xl hover:from-green-600 hover:to-green-700 transition-all shadow-xl shadow-green-500/30 hover:shadow-green-500/50 hover:-translate-y-1"
+                            className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-bold rounded-xl hover:from-green-600 hover:to-green-700 transition-all shadow-xl shadow-green-500/20 active:scale-95 text-sm sm:text-base"
                         >
-                            <i className="fab fa-whatsapp text-2xl"></i>
+                            <i className="fab fa-whatsapp text-xl"></i>
                             Chat on WhatsApp
                         </a>
                     </div>
