@@ -26,7 +26,7 @@ Disallow: /*?search=
 Crawl-delay: 1
 
 # Sitemaps
-Sitemap: https://touchwood.co.ke/sitemap.xml
+Sitemap: https://touchwoodfurniture.co.ke/sitemap.xml
 
 # Host
-Host: https://touchwood.co.ke
+Host: https://touchwoodfurniture.co.ke
