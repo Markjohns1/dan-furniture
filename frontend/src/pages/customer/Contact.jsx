@@ -62,7 +62,7 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <p className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-1">Email</p>
-                                            <p className="text-secondary-900 font-bold">info@touchwood.co.ke</p>
+                                            <p className="text-secondary-900 font-bold">info@touchwoodfurniture.co.ke</p>
                                         </div>
                                     </div>
 

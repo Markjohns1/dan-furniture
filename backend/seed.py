@@ -18,10 +18,10 @@ def seed_database():
     
     try:
         # 1. Create admin user if not exists
-        admin = db.query(User).filter(User.email == "admin@touchwood.co.ke").first()
+        admin = db.query(User).filter(User.email == "admin@touchwoodfurniture.co.ke").first()
         if not admin:
             admin = User(
-                email="admin@touchwood.co.ke",
+                email="admin@touchwoodfurniture.co.ke",
                 phone="254799366734",
                 password_hash=get_password_hash("admin123"),
                 full_name="Touch Wood (Admin)",

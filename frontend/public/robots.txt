@@ -1,5 +1,5 @@
 # Touch Wood - robots.txt
-# https://touchwood.co.ke
+# https://touchwoodfurniture.co.ke
 
 User-agent: *
 Allow: /

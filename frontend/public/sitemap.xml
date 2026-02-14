@@ -4,19 +4,19 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://touchwood.co.ke/</loc>
+    <loc>https://touchwoodfurniture.co.ke/</loc>
     <lastmod>2026-02-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://touchwood.co.ke/og-image.png</image:loc>
+      <image:loc>https://touchwoodfurniture.co.ke/og-image.png</image:loc>
       <image:title>Touch Wood - Premium Handcrafted Furniture Kenya</image:title>
     </image:image>
   </url>
   
   <!-- Products Listing -->
   <url>
-    <loc>https://touchwood.co.ke/products</loc>
+    <loc>https://touchwoodfurniture.co.ke/products</loc>
     <lastmod>2026-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -24,7 +24,7 @@
   
   <!-- Category: Sofasets -->
   <url>
-    <loc>https://touchwood.co.ke/products?category=sofasets</loc>
+    <loc>https://touchwoodfurniture.co.ke/products?category=sofasets</loc>
     <lastmod>2026-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -32,7 +32,7 @@
   
   <!-- Category: Dining Sets -->
   <url>
-    <loc>https://touchwood.co.ke/products?category=dining-sets</loc>
+    <loc>https://touchwoodfurniture.co.ke/products?category=dining-sets</loc>
     <lastmod>2026-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -40,7 +40,7 @@
   
   <!-- Category: Chairs -->
   <url>
-    <loc>https://touchwood.co.ke/products?category=chairs</loc>
+    <loc>https://touchwoodfurniture.co.ke/products?category=chairs</loc>
     <lastmod>2026-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -48,7 +48,7 @@
   
   <!-- Category: Office Chairs -->
   <url>
-    <loc>https://touchwood.co.ke/products?category=office-chairs</loc>
+    <loc>https://touchwoodfurniture.co.ke/products?category=office-chairs</loc>
     <lastmod>2026-02-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -56,7 +56,7 @@
   
   <!-- Featured Products -->
   <url>
-    <loc>https://touchwood.co.ke/products?featured=true</loc>
+    <loc>https://touchwoodfurniture.co.ke/products?featured=true</loc>
     <lastmod>2026-02-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -64,7 +64,7 @@
   
   <!-- Contact Page -->
   <url>
-    <loc>https://touchwood.co.ke/contact</loc>
+    <loc>https://touchwoodfurniture.co.ke/contact</loc>
     <lastmod>2026-02-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -72,7 +72,7 @@
   
   <!-- Legal/Terms Page -->
   <url>
-    <loc>https://touchwood.co.ke/legal</loc>
+    <loc>https://touchwoodfurniture.co.ke/legal</loc>
     <lastmod>2026-02-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

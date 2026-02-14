@@ -5,7 +5,7 @@
 import { Helmet } from 'react-helmet-async';
 
 const SITE_NAME = 'Touch Wood';
-const SITE_URL = 'https://touchwood.co.ke';
+const SITE_URL = 'https://touchwoodfurniture.co.ke';
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
 const PHONE_NUMBER = '+254799366734';
 const ADDRESS = 'Nairobi, Kenya';
