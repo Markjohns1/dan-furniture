@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import SEO from '../../components/ui/SEO';
 
 export default function Login() {
     const [email, setEmail] = useState('');

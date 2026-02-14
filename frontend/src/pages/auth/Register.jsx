@@ -1,9 +1,7 @@
-/**
- * Dan Classic Furniture - Register Page
- */
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import SEO from '../../components/ui/SEO';
 
 export default function Register() {
     const [formData, setFormData] = useState({
@@ -54,9 +52,11 @@ export default function Register() {
 
     return (
         <div className="min-h-screen flex flex-col bg-gradient-to-br from-primary-50 to-gray-100">
+            <SEO title="Register - Touch Wood" />
+
             {/* Header */}
             <div className="p-4">
-                <Link to="/" className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900">
+                <Link to="/" className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium">
                     <i className="fas fa-arrow-left"></i>
                     <span>Back to Shop</span>
                 </Link>
@@ -66,18 +66,18 @@ export default function Register() {
             <div className="flex-1 flex items-center justify-center p-4">
                 <div className="w-full max-w-md">
                     <div className="text-center mb-8">
-                        <div className="w-16 h-16 bg-primary-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <i className="fas fa-couch text-white text-2xl"></i>
+                        <div className="w-16 h-16 bg-primary-950 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
+                            <span className="text-amber-500 font-display font-black text-2xl tracking-tighter">TW</span>
                         </div>
-                        <h1 className="font-display text-2xl font-bold text-gray-900">Create Account</h1>
-                        <p className="text-gray-500 mt-1">Join Daniel Furniture</p>
+                        <h1 className="font-display text-3xl font-bold text-gray-900">Create Account</h1>
+                        <p className="text-gray-500 mt-1">Join the Touch Wood family</p>
                     </div>
 
                     <div className="card p-6">
                         <form onSubmit={handleSubmit} className="space-y-4">
                             {error && (
-                                <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg">
-                                    <i className="fas fa-exclamation-circle mr-2"></i>
+                                <div className="p-3 bg-red-50 text-red-600 text-sm rounded-lg flex items-center gap-2">
+                                    <i className="fas fa-exclamation-circle"></i>
                                     {error}
                                 </div>
                             )}
